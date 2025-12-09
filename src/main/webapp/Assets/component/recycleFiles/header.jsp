@@ -5,7 +5,7 @@
   Time: 6:49 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="dao.LogoDao" %>
 <%@ page import="model.Logo" %>
 <!doctype html>
@@ -33,8 +33,8 @@
 </head>
 <body>
 <%
-    LogoDao dao = new LogoDao();
-    Logo logo = dao.getLogo(1); // lấy logo có id = 1
+    LogoDao logoDao = new LogoDao();
+    Logo logo = logoDao.getLogo(1); // lấy logo có id = 1
 %>
 <header class="header">
     <div class="main-header">
