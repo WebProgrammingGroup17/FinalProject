@@ -6,11 +6,104 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="dao.InforDao" %>
+<%@ page import="model.Contact" %>
+<%@ page import="dao.IconDao" %>
+<%@ page import="model.Icon" %>
+<%@ page import="java.util.List" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Footer</title>
+    <link rel="stylesheet" href="../../css/same_style/style.css">
+    <link rel="stylesheet" href="../../css/recycleFilecss/footer.css">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Font Awesome -->
+    <script
+            src="https://kit.fontawesome.com/a076d05399.js"
+            crossorigin="anonymous"
+    ></script>
 </head>
 <body>
+<%
+    InforDao dao = new InforDao();
+    Contact contact = dao.getContact(1);
+    IconDao daoIcon = new IconDao();
+    List<Icon> icon = daoIcon.getIcon();
+%>
+<footer class="footer">
+    <div class="footer-container">
+        <!-- CONNECT WITH US -->
+        <div class="footer-section">
+            <h3>Liên Hệ Với Chúng Tôi</h3>
+            <div class="subscribe">
+                <input type="email" placeholder="Nhập Email" />
+                <button><i class="fa-solid fa-paper-plane"></i>Gửi</button>
+            </div>
+            <div class="social-icons">
+<%--                <a href="#"><i class="fab fa-facebook-f"></i></a>--%>
+<%--                <a href="#"><i class="fab fa-youtube"></i></a>--%>
+<%--                <a href="#"><i class="fab fa-tiktok"></i></a>--%>
+<%--                <a href="#"><i class="fab fa-instagram"></i></a>--%>
+<%--                <a href="#"--%>
+<%--                ><img--%>
+<%--                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"--%>
+<%--                        alt="Zalo"--%>
+<%--                        style="width: 22px; height: 22px"--%>
+<%--                /></a>--%>
+<%--                <a href="#"><i class="fab fa-twitter"></i></a>--%>
+    <% for (Icon i : icon) { %>
+    <%= i.getLink_icon() %>
+    <% } %>
 
+
+            </div>
+        </div>
+
+        <!-- USEFUL LINKS -->
+        <div class="footer-section">
+            <h3>Truy cập nhanh</h3>
+            <ul>
+                <li><a href="#">Liên Hệ</a></li>
+                <li><a href="#">Điều khoản và điều kiện</a></li>
+                <li><a href="#">Phương thức thanh toán</a></li>
+                <li><a href="#">Giao hàng và trả hàng</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+            </ul>
+        </div>
+        <!-- CONTACT -->
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>
+                <i class="fa-regular fa-envelope" style="color: #e95221"></i>
+                <%= contact.getGmail() %>
+            </p>
+            <p>
+                <i class="fa-solid fa-phone" style="color: #e95221"></i>
+                <%= contact.getPhone() %>
+            </p>
+            <p>
+                <i class="bi bi-pin-map"  style="color: #e95221"></i>
+                <%= contact.getAddress() %>
+            </p>
+        </div>
+
+        <!-- HELP -->
+        <div class="footer-section">
+            <h3>Chúng tôi luôn sẵn sàng giúp đỡ bạn</h3>
+            <p>
+                Đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng hỗ trợ bạn mọi thắc mắc,
+                đơn hàng hoặc vấn đề. Hãy liên hệ với chúng tôi. Chúng tôi rất vui
+                được hỗ trợ!
+            </p>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
