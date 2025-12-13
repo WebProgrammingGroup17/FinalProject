@@ -8,6 +8,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="dao.LogoDao" %>
 <%@ page import="model.Logo" %>
+<%@ page import="model.Contact" %>
+<%@ page import="dao.InforDao" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,6 +35,9 @@
 </head>
 <body>
 <%
+    InforDao inforNumberDao = new InforDao();
+    Contact contactNumber = inforNumberDao.getContact(2);
+
     LogoDao logoDao = new LogoDao();
     Logo logo = logoDao.getLogo(1); // lấy logo có id = 1
 %>
@@ -79,7 +84,9 @@
                     <div class="center-1 same-icon">
                         <i class="fa-solid fa-headset"></i>
                         <b style="font-size: 13px">HOTLINE:</b>
-                        <span title="hotline">0123456789</span>
+                        <span title="hotline">
+                            <%= contactNumber.getPhone()%>
+                        </span>
                     </div>
                     <div class="center-1 center2 same-icon">
                         <i class="bi bi-geo-alt-fill"></i>

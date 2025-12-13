@@ -33,7 +33,7 @@
 <body>
 <%
     InforDao inforDao = new InforDao();
-    Contact contact = inforDao.getContact(1);
+    Contact contact = inforDao.getContact(2);
     IconDao iconDao = new IconDao();
     List<Icon> icon = iconDao.getIcon();
 %>
