@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HUU DAT
-  Date: 12/6/2025
-  Time: 6:46 PM
-  To change this template use File | Settings | File Templates.
---%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
@@ -203,58 +196,31 @@
         </div>
 
 
+
+        <%--==========================================--%>
+        <%--       BRAND--%>
         <div class="title">THƯƠNG HIỆU</div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt1" name="checkbox2" value="sony"><label>Sony</label>
-        </div>
+        <ul class="brand-list">
+            <c:forEach items="${brands}" var="b">
+                 <li>
+                     <input type="checkbox" value="${b.id}">
+                         ${b.brand_name}
+                 </li>
+            </c:forEach>
+        </ul>
 
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt2" name="checkbox2" value="nintendo"><label>Nintendo</label>
-        </div>
+        <%--========================================================--%>
 
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt3" name="checkbox2" value="xbox"><label>Xbox</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt4" name="checkbox2" value="asus"><label>Asus</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt5" name="checkbox2" value="steam"><label>Steam</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt6" name="checkbox2" value="msi"><label>MSI</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt7" name="checkbox2" value="gdp"><label>GDP</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt8" name="checkbox2" value="ayaneo"><label>Ayaneo</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt9" name="checkbox2" value="anbernic"><label>Anbernic</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt10" name="checkbox2" value="retroid"><label>Retroid</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt11" name="checkbox2" value="miyoo"><label>Miyoo</label>
-        </div>
-
-        <div class="title">
-            DANH MỤC
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt8" name="checkbox2"  value="homeconsole"><label>Home Console</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt9" name="checkbox2"  value="remotehandheld"   ><label>Remote Handheld</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt9" name="checkbox2" value="handheldpc"><label>Handheld PC</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt9" name="checkbox2" value="handheldconsole"><label>Handheld Console</label>
-        </div>
+        <%-- DANH MUC  --%>
+        <div class="title">DANH MỤC</div>
+        <ul class="category-list">
+        <c:forEach items="${category}" var="c">
+            <li>
+                <input type="checkbox" value="${c.id}">
+                ${c.category_name}
+            </li>
+        </c:forEach>
+        </ul>
 
     </div>
 
@@ -288,11 +254,15 @@
         </button>
 
 
-<%--        cap nhat san pham dong--%>
+<%-- cap nhat san pham dong--%>
         <!--  San Pham -->
         <div id="product-list">
             <c:forEach items="${products}" var="p">
-                <div class="product-item ${p.brand} ${p.category}">
+
+                <a href="${pageContext.request.contextPath}/product-detail?id=${p.id}"
+                   class="product-link">
+
+                <div class="product-item ${p.brandId} ${p.categoryId}">
                     <img src="${p.image}" alt="">
                     <div class="product-info">
                         <h4>${p.name}</h4>
@@ -300,24 +270,23 @@
                             <fmt:formatNumber value="${p.price}" pattern="#,###"/>₫
                     </div>
                     </div>
+                </a>
             </c:forEach>
         </div>
 
-        <!-- pagination-->
+            <%--PAGINATION DYNAMIC        --%>
         <div class="pagination">
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">8</a>
-            <a href="#">9</a>
-            <a href="#">10</a>
-            <a href="#">&raquo;</a>
+            <c:forEach begin="1" end="${totalPages}" var="i">
+                <a href="products?page=${i}"
+                   class="${i == currentPage ? 'active' : ''}">
+                    ${i}
+                </a>
+            </c:forEach>
 
         </div>
+
+
+
         <div id="no-products-message" style="display:none; text-align: center; margin-top: 20px;">
             ❌ Không có sản phẩm nào phù hợp với tiêu chí lọc.
         </div>

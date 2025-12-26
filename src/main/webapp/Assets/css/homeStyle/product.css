@@ -359,30 +359,64 @@ body.filter-open::before {
     justify-content: center;
     margin-top: 20px;
 }
-.pagination a{
-    color: #e64a19;
-    border: 1px solid #e64a19;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;   
+/*.pagination a{*/
+/*    color: #e64a19;*/
+/*    border: 1px solid #e64a19;*/
+/*    width: 30px;*/
+/*    height: 30px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    text-decoration: none;   */
+/*    border-radius: 6px;*/
+/*    font-size: 16px;*/
+/*    transition: 0.3s;*/
+/*    box-sizing: border-box;*/
+/*}*/
+/*.pagination a:hover{*/
+/*    color: white;*/
+/*    background: #e64a19;*/
+/*}*/
+/*.pagination .active{*/
+/*    background: #e64a19;*/
+/*    color: #fff;*/
+/*}*/
+
+.pagination a {
+    padding: 6px 12px;
+    border: 1px solid #E95221;
+   color: #E95221;
+    margin: 0 3px;
+    text-decoration: none;
     border-radius: 6px;
-    font-size: 16px;
-    transition: 0.3s;
-    box-sizing: border-box;
 }
-.pagination a:hover{
+
+.pagination a.active {
+    background: #E95221;
     color: white;
-    background: #e64a19;
-}
-.pagination .active{
-    background: #e64a19;
-    color: #fff;
 }
 
 
+.brand-list {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 12px;
+}
+
+.brand-list li {
+    margin-bottom: 8px;
+    color: #000000;
+}
+.category-list{
+    list-style: none;
+    padding-left: 0;
+    margin-left: 12px;
+}
+.category-list li{
+    margin-bottom: 8px;
+    color: #000;
+
+}
 
 
 
