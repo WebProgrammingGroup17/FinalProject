@@ -176,10 +176,26 @@ CREATE TABLE history (
                          FOREIGN KEY (bill_id) REFERENCES bill(ID)
 );
 
+-- Đã insert
+INSERT INTO logo VALUES ('Logo Shop', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaVtA9aH8iRQnDsQmBTt9yyB5mCIaYp8T0Qg&s');
+INSERT INTO logo VALUES (null, 'Logo2 Shop', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNhDsdA_PWXkUZ3ijwSU_9rpenL-Dsu_wuFQ&s');
+INSERT INTO contact VALUES ('shop@gmail.com', '0123456789', 'Ho Chi Minh City');
+INSERT INTO contact VALUES (null,'shop@gmail.com', '0987654321', 'Đại Học Nông Lâm');
 
-INSERT INTO logo VALUES (1, 'Logo Shop', '/images/logo.png');
-INSERT INTO icon VALUES (1, 'Cart', '/icons/cart.svg', 1);
-INSERT INTO contact VALUES (1, 'shop@gmail.com', '0123456789', 'Ho Chi Minh');
+INSERT INTO icon VALUES (1, 'fb', '<a href="#"><i class="fab fa-facebook-f"></i></a>', 1);
+INSERT INTO icon VALUES (null, 'ytb', '<a href="#"><i class="fab fa-youtube"></i></a>', 1);
+INSERT INTO icon VALUES (null, 'tiktok', '<a href="#"><i class="fab fa-tiktok"></i></a>', 1);
+INSERT INTO icon VALUES (null, 'ins', '<a href="#"><i class="fab fa-instagram"></i></a>', 1);
+INSERT INTO icon VALUES (null, 'zalo', '<a href="#"--%>
+<%--                ><img--%>
+<%--                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"--%>
+<%--                        alt="Zalo"--%>
+<%--                        style="width: 22px; height: 22px"--%>
+<%--                /></a>', 0);
+INSERT INTO icon VALUES (null, 'x', '<a href="#"><i class="fab fa-twitter"></i></a>', 1);
+
+
+
 INSERT INTO banner (title, link, active) VALUES ('Banner Sale', '/banner/sale.png', 1);
 
 INSERT INTO blog VALUES
