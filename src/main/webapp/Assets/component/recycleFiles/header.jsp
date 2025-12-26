@@ -6,10 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="dao.LogoDao" %>
-<%@ page import="model.Logo" %>
-<%@ page import="model.Contact" %>
-<%@ page import="dao.InforDao" %>
+<%@ page import="com.example.web_console_handheld.dao.LogoDao" %>
+<%@ page import="com.example.web_console_handheld.model.Logo" %>
+<%@ page import="com.example.web_console_handheld.model.Contact" %>
+<%@ page import="com.example.web_console_handheld.dao.InforDao" %>
 <!doctype html>
 <html lang="en">
 <head>
