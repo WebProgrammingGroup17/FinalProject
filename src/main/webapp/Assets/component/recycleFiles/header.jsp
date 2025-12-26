@@ -36,7 +36,7 @@
 <body>
 <%
     InforDao inforNumberDao = new InforDao();
-    Contact contactNumber = inforNumberDao.getContact(2);
+    Contact contactNumber = inforNumberDao.getContact(1);
 
     LogoDao logoDao = new LogoDao();
     Logo logo = logoDao.getLogo(1); // lấy logo có id = 1
