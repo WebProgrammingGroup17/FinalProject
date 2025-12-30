@@ -1,66 +1,66 @@
-<%--&lt;%&ndash;--%>
-<%--  Created by IntelliJ IDEA.--%>
-<%--  User: HUU DAT--%>
-<%--  Date: 12/6/2025--%>
-<%--  Time: 6:49 PM--%>
-<%--  To change this template use File | Settings | File Templates.--%>
-<%--&ndash;%&gt;--%>
-<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
-<%--<%@ page import="dao.InforDao" %>--%>
-<%--<%@ page import="model.Contact" %>--%>
-<%--<%@ page import="dao.IconDao" %>--%>
-<%--<%@ page import="model.Icon" %>--%>
-<%--<%@ page import="java.util.List" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Footer</title>--%>
-<%--    <link rel="stylesheet" href="../../css/same_style/style.css">--%>
-<%--    <link rel="stylesheet" href="../../css/recycleFilecss/footer.css">--%>
-<%--    <link--%>
-<%--            rel="stylesheet"--%>
-<%--            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"--%>
-<%--    />--%>
-<%--    <link--%>
-<%--            rel="stylesheet"--%>
-<%--            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"--%>
-<%--    />--%>
-<%--    <!-- Font Awesome -->--%>
-<%--    <script--%>
-<%--            src="https://kit.fontawesome.com/a076d05399.js"--%>
-<%--            crossorigin="anonymous"--%>
-<%--    ></script>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<%--%>
-<%--    InforDao inforDao = new InforDao();--%>
-<%--    Contact contact = inforDao.getContact(1);--%>
-<%--    IconDao iconDao = new IconDao();--%>
-<%--    List<Icon> icon = iconDao.getIcon();--%>
-<%--%>--%>
-<%--<footer class="footer">--%>
-<%--    <div class="footer-container">--%>
-<%--        <!-- CONNECT WITH US -->--%>
-<%--        <div class="footer-section">--%>
-<%--            <h3>Liên Hệ Với Chúng Tôi</h3>--%>
-<%--            <div class="subscribe">--%>
-<%--                <input type="email" placeholder="Nhập Email" />--%>
-<%--                <button><i class="fa-solid fa-paper-plane"></i>Gửi</button>--%>
-<%--            </div>--%>
-<%--            <div class="social-icons">--%>
-<%--&lt;%&ndash;                <a href="#"><i class="fab fa-facebook-f"></i></a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                <a href="#"><i class="fab fa-youtube"></i></a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                <a href="#"><i class="fab fa-tiktok"></i></a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                <a href="#"><i class="fab fa-instagram"></i></a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                <a href="#"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                ><img&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        alt="Zalo"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        style="width: 22px; height: 22px"&ndash;%&gt;--%>
-<%--&lt;%&ndash;                /></a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                <a href="#"><i class="fab fa-twitter"></i></a>&ndash;%&gt;--%>
-<%--    <% for (Icon i : icon) { %>--%>
-<%--    <%= i.getLink_icon() %>--%>
-<%--    <% } %>--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: HUU DAT
+  Date: 12/6/2025
+  Time: 6:49 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.web_console_handheld.dao.InforDao" %>
+<%@ page import="com.example.web_console_handheld.model.Contact" %>
+<%@ page import="com.example.web_console_handheld.dao.IconDao" %>
+<%@ page import="com.example.web_console_handheld.model.Icon" %>
+<%@ page import="java.util.List" %>
+<html>
+<head>
+    <title>Footer</title>
+    <link rel="stylesheet" href="../../css/same_style/style.css">
+    <link rel="stylesheet" href="../../css/recycleFilecss/footer.css">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Font Awesome -->
+    <script
+            src="https://kit.fontawesome.com/a076d05399.js"
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+<%
+    InforDao inforDao = new InforDao();
+    Contact contact = inforDao.getContact(1);
+    IconDao iconDao = new IconDao();
+    List<Icon> icon = iconDao.getIcon();
+%>
+<footer class="footer">
+    <div class="footer-container">
+        <!-- CONNECT WITH US -->
+        <div class="footer-section">
+            <h3>Liên Hệ Với Chúng Tôi</h3>
+            <div class="subscribe">
+                <input type="email" placeholder="Nhập Email" />
+                <button><i class="fa-solid fa-paper-plane"></i>Gửi</button>
+            </div>
+            <div class="social-icons">
+<%--                <a href="#"><i class="fab fa-facebook-f"></i></a>--%>
+<%--                <a href="#"><i class="fab fa-youtube"></i></a>--%>
+<%--                <a href="#"><i class="fab fa-tiktok"></i></a>--%>
+<%--                <a href="#"><i class="fab fa-instagram"></i></a>--%>
+<%--                <a href="#"--%>
+<%--                ><img--%>
+<%--                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"--%>
+<%--                        alt="Zalo"--%>
+<%--                        style="width: 22px; height: 22px"--%>
+<%--                /></a>--%>
+<%--                <a href="#"><i class="fab fa-twitter"></i></a>--%>
+    <% for (Icon i : icon) { %>
+    <%= i.getLink_icon() %>
+    <% } %>
 
 
 <%--            </div>--%>

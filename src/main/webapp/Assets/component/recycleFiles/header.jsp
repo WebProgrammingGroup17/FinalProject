@@ -1,99 +1,106 @@
-<%--&lt;%&ndash;--%>
-<%--  Created by IntelliJ IDEA.--%>
-<%--  User: HUU DAT--%>
-<%--  Date: 12/6/2025--%>
-<%--  Time: 6:49 PM--%>
-<%--  To change this template use File | Settings | File Templates.--%>
-<%--&ndash;%&gt;--%>
-<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
-<%--<%@ page import="dao.LogoDao" %>--%>
-<%--<%@ page import="model.Logo" %>--%>
-<%--<!doctype html>--%>
-<%--<html lang="en">--%>
-<%--<head>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--    <meta name="viewport"--%>
-<%--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--%>
-<%--    <meta http-equiv="X-UA-Compatible" content="ie=edge">--%>
-<%--    <title>header</title>--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/recycleFilecss/header.css">--%>
-<%--    <link--%>
-<%--            rel="stylesheet"--%>
-<%--            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"--%>
-<%--    />--%>
-<%--    <link--%>
-<%--            rel="stylesheet"--%>
-<%--            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"--%>
-<%--    />--%>
-<%--    <!-- Font Awesome -->--%>
-<%--    <script--%>
-<%--            src="https://kit.fontawesome.com/a076d05399.js"--%>
-<%--            crossorigin="anonymous"--%>
-<%--    ></script>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<%--%>
-<%--    LogoDao logoDao = new LogoDao();--%>
-<%--    Logo logo = logoDao.getLogo(1); // lấy logo có id = 1--%>
-<%--%>--%>
-<%--<header class="header">--%>
-<%--    <div class="main-header">--%>
-<%--        <div class="container">--%>
-<%--            <div class="box-header">--%>
-<%--                <div class="hamburger">--%>
-<%--                    <i class="bi bi-list" id="menuBTN"></i>--%>
-<%--                    <i class="bi bi-search" style="font-size: 26px"></i>--%>
-<%--                </div>--%>
-<%--                <div class="menu-small-frame" style="display: none" id="menu-small">--%>
-<%--                    <div>--%>
-<%--                        <a href="index.html"><p>Trang Chủ</p></a>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <a href="products.html"><p>Sản Phẩm</p></a>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <a href="about.html"><p>Giới Thiệu</p></a>--%>
-<%--                    </div>--%>
-<%--                    <div>--%>
-<%--                        <a href="contact.html"><p>Liên Hệ</p></a>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <!-- them vao day -->--%>
-<%--                <div--%>
-<%--                        class="search-box-mobile"--%>
-<%--                        style="display: none"--%>
-<%--                        id="search-box"--%>
-<%--                >--%>
-<%--                    <input type="text" placeholder="Tìm kiếm sản phẩm..." />--%>
-<%--                </div>--%>
-<%--                <!-- ------ -->--%>
-<%--                <div class="logo">--%>
-<%--                    <a href="../../../index.jsp"--%>
-<%--                    ><img--%>
-<%--                            title="<%= logo.getTitleLogo() %>"--%>
-<%--                            src="<%= logo.getLinkLogo() %>"--%>
-<%--                            alt="logo"--%>
-<%--                    /></a>--%>
-<%--                </div>--%>
-<%--                <div class="center">--%>
-<%--                    <div class="center-1 same-icon">--%>
-<%--                        <i class="fa-solid fa-headset"></i>--%>
-<%--                        <b style="font-size: 13px">HOTLINE:</b>--%>
-<%--                        <span title="hotline">0123456789</span>--%>
-<%--                    </div>--%>
-<%--                    <div class="center-1 center2 same-icon">--%>
-<%--                        <i class="bi bi-geo-alt-fill"></i>--%>
-<%--                        <a href="https://www.google.com/maps?q=10.871309739267502, 106.79176838635757" style="color: #333;"><b style="font-size: 13px" class="map">VỊ TRÍ CỬA HÀNG</b></a>--%>
-<%--                    </div>--%>
-<%--                    <div class="center-1 center3">--%>
-<%--                        <div class="input1">--%>
-<%--                            <input type="text" placeholder="Tìm sản phẩm..." />--%>
-<%--                            <div class="search">--%>
-<%--                                <i title="tìm kiếm" class="bi bi-search"></i>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: HUU DAT
+  Date: 12/6/2025
+  Time: 6:49 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.web_console_handheld.dao.LogoDao" %>
+<%@ page import="com.example.web_console_handheld.model.Logo" %>
+<%@ page import="com.example.web_console_handheld.model.Contact" %>
+<%@ page import="com.example.web_console_handheld.dao.InforDao" %>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>header</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/recycleFilecss/header.css">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Font Awesome -->
+    <script
+            src="https://kit.fontawesome.com/a076d05399.js"
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+<%
+    InforDao inforNumberDao = new InforDao();
+    Contact contactNumber = inforNumberDao.getContact(1);
+
+    LogoDao logoDao = new LogoDao();
+    Logo logo = logoDao.getLogo(1); // lấy logo có id = 1
+%>
+<header class="header">
+    <div class="main-header">
+        <div class="container">
+            <div class="box-header">
+                <div class="hamburger">
+                    <i class="bi bi-list" id="menuBTN"></i>
+                    <i class="bi bi-search" style="font-size: 26px"></i>
+                </div>
+                <div class="menu-small-frame" style="display: none" id="menu-small">
+                    <div>
+                        <a href="index.html"><p>Trang Chủ</p></a>
+                    </div>
+                    <div>
+                        <a href="products.html"><p>Sản Phẩm</p></a>
+                    </div>
+                    <div>
+                        <a href="about.html"><p>Giới Thiệu</p></a>
+                    </div>
+                    <div>
+                        <a href="contact.html"><p>Liên Hệ</p></a>
+                    </div>
+                </div>
+                <!-- them vao day -->
+                <div
+                        class="search-box-mobile"
+                        style="display: none"
+                        id="search-box"
+                >
+                    <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                </div>
+                <!-- ------ -->
+                <div class="logo">
+                    <a href="../../../index.jsp"
+                    ><img
+                            title="<%= logo.getTitleLogo() %>"
+                            src="<%= logo.getLinkLogo() %>"
+                            alt="logo"
+                    /></a>
+                </div>
+                <div class="center">
+                    <div class="center-1 same-icon">
+                        <i class="fa-solid fa-headset"></i>
+                        <b style="font-size: 13px">HOTLINE:</b>
+                        <span title="hotline">
+                            <%= contactNumber.getPhone()%>
+                        </span>
+                    </div>
+                    <div class="center-1 center2 same-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <a href="https://www.google.com/maps?q=10.871309739267502, 106.79176838635757" style="color: #333;"><b style="font-size: 13px" class="map">VỊ TRÍ CỬA HÀNG</b></a>
+                    </div>
+                    <div class="center-1 center3">
+                        <div class="input1">
+                            <input type="text" placeholder="Tìm sản phẩm..." />
+                            <div class="search">
+                                <i title="tìm kiếm" class="bi bi-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 <%--                <div class="right1">--%>
 <%--                    <div class="icon icon2" id="icon3">--%>
