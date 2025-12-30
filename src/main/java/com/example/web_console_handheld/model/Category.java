@@ -1,35 +1,29 @@
 package com.example.web_console_handheld.model;
 
 public class Category {
-    private int ID;
-    private String name;
+    private int id;
+    private String category_name;
+    private int status;
+    private String createdAt;
     private String description;
-    private String imgLink;
-    private boolean active;
 
-    public Category(int ID, String name, String description, String imgLink, boolean active) {
-        this.ID = ID;
-        this.name = name;
+    public Category(int id, String category_name, int status, String createdAt, String description) {
+        this.id = id;
+        this.category_name = category_name;
+        this.status = status;
+        this.createdAt = createdAt;
         this.description = description;
-        this.imgLink = imgLink;
-        this.active = active;
-    }
-    public Category() {}
 
-    public int getID() {
-        return ID;
+    }
+    public Category() {
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -40,19 +34,27 @@ public class Category {
         this.description = description;
     }
 
-    public String getImgLink() {
-        return imgLink;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setImgLink(String imgLink) {
-        this.imgLink = imgLink;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public boolean isActive() {
-        return active;
+    public int getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 }
