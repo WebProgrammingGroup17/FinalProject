@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.example.web_console_handheld.dao.InforDao" %>
 <%@ page import="com.example.web_console_handheld.model.Contact" %>
 <%@ page import="com.example.web_console_handheld.dao.IconDao" %>
@@ -36,6 +37,7 @@
     Contact contact = inforDao.getContact(1);
     IconDao iconDao = new IconDao();
     List<Icon> icon = iconDao.getIcon();
+    request.setAttribute("icon", icon);
 %>
 <footer class="footer">
     <div class="footer-container">
@@ -47,22 +49,9 @@
                 <button><i class="fa-solid fa-paper-plane"></i>Gửi</button>
             </div>
             <div class="social-icons">
-<%--                <a href="#"><i class="fab fa-facebook-f"></i></a>--%>
-<%--                <a href="#"><i class="fab fa-youtube"></i></a>--%>
-<%--                <a href="#"><i class="fab fa-tiktok"></i></a>--%>
-<%--                <a href="#"><i class="fab fa-instagram"></i></a>--%>
-<%--                <a href="#"--%>
-<%--                ><img--%>
-<%--                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"--%>
-<%--                        alt="Zalo"--%>
-<%--                        style="width: 22px; height: 22px"--%>
-<%--                /></a>--%>
-<%--                <a href="#"><i class="fab fa-twitter"></i></a>--%>
-    <% for (Icon i : icon) { %>
-    <%= i.getLink_icon() %>
-    <% } %>
-
-
+                <c:forEach var="c" items="${icon}">
+                    <a src="#">${c.link_icon}</a>
+                </c:forEach>
             </div>
         </div>
 
