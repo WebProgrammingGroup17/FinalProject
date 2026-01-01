@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.example.web_console_handheld.model.*" %>
+<%@ page import="com.example.web_console_handheld.dao.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +30,28 @@
 <!--
   Header
 -->
+<%
+    CategoryDao categoryDao = new CategoryDao();
+    List<Category> categories = categoryDao.getCategory();
+    request.setAttribute("categories", categories);
+    ProductDao productDao = new ProductDao();
+    List<Product> product = productDao.getProductList();
+    request.setAttribute("products", product);
+    Product highestDiscount = productDao.getHighestDiscountProduct();
+    request.setAttribute("highest", highestDiscount);
+
+    List<Product> productSmaller = productDao.getProductSmallerThanList();
+    request.setAttribute("smaller", productSmaller);
+
+    Product smallestProduct = productDao.getSmallestProduct();
+    request.setAttribute("smallest", smallestProduct);
+
+    BlogDao blogDao = new BlogDao();
+    List<Blog> blogList = blogDao.getBlogList();
+    request.setAttribute("bloglist" , blogList);
+%>
 
 <%@ include file="Assets/component/recycleFiles/header.jsp" %>
-
 
 <div class="slider">
     <div class="slides">
@@ -174,86 +196,39 @@
     <div class="container">
         <h2 class="section-title">Danh Mục Console & Tay Cầm</h2>
         <div class="category-grid">
-            <!-- Category 1 -->
-            <div class="category-item">
-                <img src="https://m.media-amazon.com/images/I/51YXZgm0DbL._AC_SL1000_.jpg" alt="Console" />
-                <div class="category-info">
-                    <h3>Console</h3>
-                    <p>PlayStation, Xbox, Nintendo Switch</p>
+            <c:forEach var="c" items="${categories}">
+                <div class="category-item">
+                    <img src="${c.imgLink}" alt="${c.name}" />
+                    <div class="category-info">
+                        <h3>${c.name}</h3>
+                        <p>${c.description}</p>
+                    </div>
                 </div>
-            </div>
-            <!-- Category 2 -->
-            <div class="category-item">
-                <img
-                        src="https://rptech.qa/cdn/shop/files/optimize_2_2048x.png?v=1734450756"
-                        alt="Controller"
-                />
-                <div class="category-info">
-                    <h3>Tay Cầm</h3>
-                    <p>Gamepad chất lượng cao cho mọi console</p>
-                </div>
-            </div>
-            <!-- Category 3 -->
-            <div class="category-item">
-                <img src="https://bizweb.dktcdn.net/100/321/653/files/ps4-slim.jpg?v=1616142349737" alt="Accessory" />
-                <div class="category-info">
-                    <h3>Phụ Kiện</h3>
-                    <p>Ốp lưng, sạc, tai nghe, phụ kiện gaming</p>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
 
-<section class="best-prices">
-    <h2>Giá ưu đãi</h2>
-    <div class="product-grid">
-        <div class="product-card product-item" data-id="C008">
-            <div class="discount">-20%</div>
-            <img src="Assets/image/console.webp" alt="Smart TV" />
-            <div class="info">
-                <h3>Xbox Game Pass</h3>
-                <p class="price">16.520.000đ</p>
-                <div class="stars">★★★★★</div>
-                <p class="sold">Đã mua 2.7K</p>
-                <button class="buy-btn"><i>🛒</i> Mua ngay</button>
+<!--products section-->
+<section class="product-section">
+    <h2>Sản Phẩm Mới / Giá Ưu Đãi</h2>
+    <div class="container">
+        <div class="product-grid">
+            <c:forEach var="c" items="${products}">
+            <div class="product-card">
+                <div class="img-box">
+                    <img
+                            src="${c.image}"
+                            alt="${c.metatitle}"
+                    />
+                    <div class="hidden-info">
+                        <button class="add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <h3>${c.name}</h3>
+                <p class="price">${c.price}đ</p>
             </div>
-        </div>
-
-        <div class="product-card product-item" data-id="C009">
-            <div class="discount">-20%</div>
-            <img src="Assets/image/baner3.webp" alt="Laptop" />
-            <div class="info">
-                <h3>Meta Quest 3S</h3>
-                <p class="price">18.340.000đ</p>
-                <div class="stars">★★★★★</div>
-                <p class="sold">Đã mua 2K</p>
-                <button class="buy-btn"><i>🛒</i> Mua ngay</button>
-            </div>
-        </div>
-
-        <div class="product-card product-item" data-id="C0010">
-            <div class="discount">-20%</div>
-            <img src="Assets/image/baner4.webp" alt="Watch" />
-            <div class="info">
-                <h3>Xbox Game Pass2</h3>
-                <p class="price">9.020.000đ</p>
-                <div class="stars">★★★★★</div>
-                <p class="sold">Đã mua 1K</p>
-                <button class="buy-btn"><i>🛒</i> Mua ngay</button>
-            </div>
-        </div>
-
-        <div class="product-card product-item" data-id="C0011">
-            <div class="discount">-20%</div>
-            <img src="Assets/image/ps5.webp" alt="Tablet" />
-            <div class="info">
-                <h3>Play Station 5</h3>
-                <p class="price">20.230.000đ</p>
-                <div class="stars">★★★★★</div>
-                <p class="sold">Đã mua 5K</p>
-                <button class="buy-btn"><i>🛒</i> Mua ngay</button>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
@@ -261,19 +236,17 @@
 <section class="featured-product">
     <div class="featured-content">
         <div class="text">
-            <h1>BACKBONE ONE<br />Microsoft Xbox</h1>
+            <h1>${highest.name}</h1>
             <div class="line"></div>
-            <p class="subtitle">SKU: BB-02-B-XW</p>
-            <p class="details">138g &nbsp; | &nbsp; Lightning Xbox</p>
-
+            <p class="details">Weight: ${highest.weight}g &nbsp; | &nbsp; Use Time: ${highest.useTime}hours</p>
             <div class="price-box">
-                <span class="new-price">16.520.000đ</span>
-                <span class="old-price">18.540.000đ</span>
+                <span class="new-price">${highest.price}đ</span>
+                <span class="old-price">${highest.priceOld}đ</span>
             </div>
         </div>
 
         <div class="image">
-            <img src="/Assets/image/console.webp" alt="" />
+            <img src="${highest.image}" alt="" />
         </div>
     </div>
 </section>
@@ -283,7 +256,7 @@
     <div class="camera-grid">
         <!-- LEFT: Banner -->
         <div class="camera-banner">
-            <img src="/Assets/image/baner4.webp" alt="Camera Banner" />
+            <img src="${smaller[0].image}" alt="Camera Banner" />
             <div class="banner-text">
                 <p class="top">Top Handle Brands</p>
                 <h2>Tất cả sản phẩm<br />Dưới $50</h2>
@@ -303,16 +276,9 @@
                     frameborder="0"
                     allowfullscreen
             ></iframe>
-            <img src="/Assets/image/baner4.webp" alt="Camera Room" />
+            <img src="${smaller[1].image}" alt="Camera Room" />
         </div>
 
-        <!-- RIGHT: Product images -->
-        <!--
-        <div class="camera-side">
-          <img src="Assets/image/camera.webp" alt="Camera 1" />
-          <img src="Assets/image/grip.webp" alt="Camera 2" />
-        </div>
-        -->
     </div>
 </section>
 
@@ -320,23 +286,43 @@
 <section class="featured-product">
     <div class="featured-content">
         <div class="text">
-            <h1>SONY PLAYSTATION 5<br />PS5</h1>
+            <h1>${smallest.name}</h1>
             <div class="line"></div>
-            <p class="subtitle">SKU: CFI-7019</p>
-            <p class="details">Wifi 7 &nbsp; | &nbsp; Adaptive Triggers</p>
+            <p class="details">Weight: ${smallest.weight}g &nbsp; | &nbsp; Use Time: ${smallest.useTime}hours</p>
 
             <div class="price-box">
-                <span class="new-price">20.230.000đ</span>
-                <span class="old-price">22.230.000đ</span>
+                <span class="new-price">${smallest.price}đ</span>
+                <span class="old-price">${smallest.priceOld}đ</span>
             </div>
         </div>
 
         <div class="image">
-            <img src="/Assets/image/ps5.webp" alt="Ps5" />
+            <img src="${smallest.image}" alt="Ps5" />
         </div>
     </div>
 </section>
 
+<!-- section blog -->
+<section class="blog-section">
+    <h2>Tin Tức & Blog</h2>
+
+    <div class="blog-list">
+        <c:forEach var="c" items="${bloglist}">
+        <div class="blog-item">
+            <img
+                    src="${c.img}"
+                    alt="${c.metatitle}"
+            />
+            <div class="blog-content">
+                <h3>${c.title}</h3>
+                <p>
+                    ${c.description}
+                </p>
+            </div>
+        </div>
+        </c:forEach>
+    </div>
+</section>
 <!--Footer-->
 
 <%@ include file="Assets/component/recycleFiles/footer.jsp" %>

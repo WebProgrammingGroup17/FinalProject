@@ -60,9 +60,11 @@ CREATE TABLE categories (
                             ID INT PRIMARY KEY,
                             name VARCHAR(255),
                             description VARCHAR(255),
-                            imgLink BOOLEAN,
+                            imgLink varchar(255),
                             active BOOLEAN
 );
+
+
 
 CREATE TABLE brands (
                         ID INT PRIMARY KEY,
@@ -94,6 +96,7 @@ CREATE TABLE products (
                           FOREIGN KEY (categories_id) REFERENCES categories(ID),
                           FOREIGN KEY (brand_id) REFERENCES brands(ID)
 );
+
 
 CREATE TABLE endow (
                        ID INT PRIMARY KEY,
@@ -186,6 +189,63 @@ CREATE TABLE about (
                        icon VARCHAR(100),
                        sort_order INT
 );
+-- them du lieu de test hien san pham uu dai cho products emdatdepzai
+INSERT INTO brands VALUES
+                       (1, 'Sony', 1, NOW()),
+                       (null, 'Xbox', 1, NOW());
+
+
+
+select * from products
+WHERE priceOld is not NULL
+  and price is not NULL
+  and priceOld > price
+  and active = 1
+order by (priceOld - price) DESC
+    limit 1;
+
+INSERT INTO blog VALUES
+                     (null, 'https://i.ytimg.com/vi/CXMRMA9Hh-o/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAE-nfKyVbOygwsMqvVSETSmpn-Eg', 'Review tay cầm PS5 DualSense', 'review-tay-cam', 'Cảm giác rung thông minh, adaptive trigger và khả năng tương thích
+                    cực tốt...', 1, 1),
+                     (null, 'https://haloshop.vn/wp-content/uploads/2024/11/nhung_tua_game_ps5_hay_nhat_2024-1.jpg', 'Top game hay nhất 2024 trên PS5', 'top-game-hay', 'Tổng hợp những tựa game có đồ họa đẹp, gameplay cuốn và đáng chơi
+                    nhất...', 1, 2),
+                     (null, 'https://www.droidshop.vn/wp-content/uploads/2023/05/so-sanh-ps5-vs-xbox.jpg', 'So sánh PS5 và Xbox Series X', 'so-sanh', 'Đâu là chiếc máy console phù hợp cho bạn? Cùng xem phân tích chi
+                    tiết...', 1, 3),
+                     (null, 'https://bizweb.dktcdn.net/100/503/563/files/24.jpg?v=1740329584220', 'Hướng dẫn bảo quản tay cầm', 'baoquantaycam', 'Cách vệ sinh joystick, chống drift và kéo dài tuổi thọ tay cầm...', 1, 4),
+                     (null, 'https://hocviengaming.vn/wp-content/uploads/2024/02/nintendo-switch-2-se-co-man-hinh-lcd-8-inch-0.jpg', 'Tin nóng: Nintendo Switch 2 sắp ra mắt?', 'hot new', 'Tổng hợp thông tin rò rỉ mới nhất từ các nguồn uy tín...', 1, 5);
+
+
+INSERT INTO products (categories_id, brand_id, name, short_description, full_description, information, price, priceOld, image, createdAt, energy, useTime, weight, active, metatitle, ispremium, suports, connect)
+VALUES
+    (1,1,'PlayStation 5','Máy chơi game thế hệ mới của Sony','PlayStation 5 mang đến trải nghiệm chơi game 4K mượt mà.','CPU AMD Ryzen, GPU RDNA 2',3000000.00,3300000.00,'https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tay-cam-choi-game-ps5-dualsense-1.png',NOW(),350,6,4500,1,'playstation-5',1,'HDR, Ray Tracing','HDMI, USB, WiFi'),
+    (1,2,'https://nvs.tn-cdn.net/2021/01/Tay-cam-choi-game-Xbox-Series-X-Controller-den-1-1.jpg','Máy chơi game mạnh nhất của Microsoft','Xbox Series X hỗ trợ game 4K 120fps.','CPU AMD Zen 2, SSD NVMe',3100000.00,3300000.00,'xbox-series-x.jpg',NOW(),340,7,4800,1,'xbox-series-x',1,'Game Pass, HDR','HDMI, USB, Ethernet'),
+    (2,2,'Nintendo Switch','Máy chơi game lai cầm tay','Nintendo Switch có thể chơi ở TV hoặc cầm tay.','Joy-Con, Dock',7500000,8000000.00,'https://www.droidshop.vn/wp-content/uploads/2025/09/tay-cam-Nintendo-Switch-Pro-Controller-Super-Smash-Bros.jpg',NOW(),150,4,3000,1,'nintendo-switch',0,'Multiplayer','USB-C, Bluetooth');
+
+INSERT INTO products (categories_id, brand_id, name, short_description, full_description, information, price, priceOld, image, createdAt, energy, useTime, weight, active, metatitle, ispremium, suports, connect)
+VALUES
+    (1,1,'Sony PlayStation VR2','Kính thực tế ảo cho PS5','PlayStation VR2 mang đến trải nghiệm VR thế hệ mới cho PS5.','OLED HDR Display, Eye Tracking',3200000.00,3300000.00,'https://bizweb.dktcdn.net/thumb/large/100/445/365/products/sg-11134201-22120-27d835cgiykvaf-1672731786694.jpg?v=1672731803223',NOW(),90,4,560,1,'playstation-vr2',1,'VR, HDR','USB-C'),
+    (2,2,'Xbox Wireless Controller','Tay cầm không dây Xbox chính hãng','Tay cầm Xbox Wireless Controller tương thích nhiều nền tảng.','Bluetooth, Ergonomic Design',5000000.00,5500000.00,'https://bizweb.dktcdn.net/thumb/grande/100/329/122/products/tay-cam-choi-game-razer-wolverine-v2-chroma-6.jpg?v=1716652873040',NOW(),15,20,280,1,'xbox-wireless-controller',0,'Windows, Console','Bluetooth, USB');
+
+insert into products VALUES
+                         (null, 1, 1, 'Tay Cầm Chơi Game Flydigi Vader 4 Pro Controller', 'short', 'full', 'infor', 2599000, 3300000, 'https://shoptaycam.com/wp-content/uploads/2024/06/Flydigi-Vader-4-Pro-Wireless-Controller.jpg', NOW(), 330, 3, 2800, 1, 'flydigi-vaper4', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 2, 1, 'Tay Cầm Chơi Game Flydigi Nova 3 Controller', 'short', 'full', 'infor', 890000, 1200000, 'https://shoptaycam.com/wp-content/uploads/2024/11/tay-c%E1%BA%A7m-flydigi-direwolf-3.jpg', NOW(), 300, 2, 1500, 1, 'flydigi-nova3', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 2, 1, 'Tay Cầm Chơi Game Flydigi Orion 2 Controller', 'short', 'full', 'infor', 1290000, 1550000, 'https://shoptaycam.com/wp-content/uploads/2024/07/bandicam-2025-06-21-17-32-42-547.jpg', NOW(), 320, 2, 1800, 1, 'flydigi-orion2', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 1, 1, 'Tay Cầm Chơi Game Flydigi Galaxy 4 Pro Controller', 'short', 'full', 'infor', 1550000, 1750000, 'https://masta.vn/wp-content/uploads/2024/12/tay-cam-flydigi-apex-4-elite-controller-masta-5.jpg', NOW(), 340, 2, 2000, 1, 'flydigi-galaxy4', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 1, 1, 'Máy Game Retro Mini Q8 – 3.5 Inch – 10.000+ Games', 'short', 'full', 'infor', 720000, 950000, 'https://product.hstatic.net/200000272737/product/retro_mini_ver.2_fbadae7882574321a62e148776d01c38_master.jpg', NOW(), 280, 2, 1400, 1, 'retro-mini-q8', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 2, 1, 'Máy Game Retro Pixel X2 – 3.0 Inch – 8.000+ Games', 'short', 'full', 'infor', 980000, 1200000, 'https://izzygame.com/wp-content/uploads/2025/03/gkd-pixel-2-kim-loai-cao-cap-2-300x300.jpg', NOW(), 290, 2, 1600, 1, 'retro-pixel-x2', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 1, 1, 'Máy Game Retro Turbo G5 – 3.2 Inch – 15.000+ Games', 'short', 'full', 'infor', 1450000, 1700000, 'https://vhost53003.vhostcdn.com/wp-content/uploads/2025/05/g5_retro_1.jpg', NOW(), 310, 2, 1900, 1, 'retro-turbo-g5', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 1, 1, 'Tay Cầm Chơi Game Nitro V3 Controller', 'short', 'full', 'infor', 1640000, 1900000, 'https://cohotech.vn/wp-content/uploads/2025/04/Acer-Nitro-NGR300-1.jpg', NOW(), 330, 2, 2100, 1, 'nitro-v3', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 2, 1, 'Tay Cầm Chơi Game Apex Nova 5 Controller', 'short', 'full', 'infor', 1750000, 2000000, 'https://shoptaycam.com/wp-content/uploads/2025/06/bandicam-2025-06-27-19-46-47-772.jpg', NOW(), 340, 2, 2200, 1, 'apex-nova5', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 1, 1, 'Tay Cầm Chơi Game Direwolf 4 Controller', 'short', 'full', 'infor', 1340000, 1600000, 'https://shoptaycam.com/wp-content/uploads/2025/09/bandicam-2025-12-11-17-26-18-713.jpg', NOW(), 320, 2, 2000, 1, 'direwolf4', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi'),
+                         (null, 2, 1, 'Máy Game Retro Mini Z3 – 3.0 Inch – 12.000+ Games', 'short', 'full', 'infor', 920000, 1200000, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_4GQsT7Y5BNbYrhu4ioMWa4SQgsGe6dGfEQ&s', NOW(), 300, 2, 1500, 1, 'retro-mini-z3', 0, 'HDR, Ray Tracing', 'HDMI, USB, WiFi');
+
+
+-- them du lieu cho bang category 27/12/2025 (emdatdepzai)
+insert into categories ( name, description, imgLink, active)
+values ('console', 'PlayStation, Xbox, Nintendo Switch', 'https://m.media-amazon.com/images/I/51YXZgm0DbL._AC_SL1000_.jpg', 1),
+       ('hanheld', 'Gamepad chất lượng cao cho mọi console', 'https://rptech.qa/cdn/shop/files/optimize_2_2048x.png?v=1734450756', 1),
+       ('hanheld', 'Gamepad chất lượng cao cho mọi console', 'https://rptech.qa/cdn/shop/files/optimize_2_2048x.png?v=1734450756', 0);
+
 -- thêm dữ liệu cho trang giới thiệu (about) 27/12/2025
 INSERT INTO about (section, image, sort_order)
 VALUES ('INFO_IMAGE', 'Assets/image/aboutUs_info.png', 1);
@@ -218,24 +278,29 @@ INSERT INTO logo VALUES (null, 'Logo2 Shop', 'https://encrypted-tbn0.gstatic.com
 INSERT INTO contact VALUES ('shop@gmail.com', '0123456789', 'Ho Chi Minh City');
 INSERT INTO contact VALUES (null,'shop@gmail.com', '0987654321', 'Đại Học Nông Lâm');
 
-INSERT INTO icon VALUES (1, 'fb', '<a href="#"><i class="fab fa-facebook-f"></i></a>', 1);
-INSERT INTO icon VALUES (null, 'ytb', '<a href="#"><i class="fab fa-youtube"></i></a>', 1);
-INSERT INTO icon VALUES (null, 'tiktok', '<a href="#"><i class="fab fa-tiktok"></i></a>', 1);
-INSERT INTO icon VALUES (null, 'ins', '<a href="#"><i class="fab fa-instagram"></i></a>', 1);
+INSERT INTO icon VALUES (1, 'fb', '<i class="fab fa-facebook-f"></i>', 1);
+INSERT INTO icon VALUES (null, 'ytb', '<i class="fab fa-youtube"></i>', 1);
+INSERT INTO icon VALUES (null, 'tiktok', '<i class="fab fa-tiktok"></i>', 1);
+INSERT INTO icon VALUES (null, 'ins', '<i class="fab fa-instagram"></i>', 1);
 INSERT INTO icon VALUES (null, 'zalo', '<a href="#"--%>
 <%--                ><img--%>
 <%--                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"--%>
 <%--                        alt="Zalo"--%>
 <%--                        style="width: 22px; height: 22px"--%>
 <%--                /></a>', 0);
-INSERT INTO icon VALUES (null, 'x', '<a href="#"><i class="fab fa-twitter"></i></a>', 1);
+INSERT INTO icon VALUES (null, 'x', '<i class="fab fa-twitter"></i>', 1);
+
+
+
+
+
+
 
 
 
 INSERT INTO banner (title, link, active) VALUES ('Banner Sale', '/banner/sale.png', 1);
 
-INSERT INTO blog VALUES
-    (1, '/blog/img.png', 'Bài viết 1', 'bai-viet-1', 'Mô tả', 1, 1);
+
 
 INSERT INTO users VALUES
     (1, 'datpham', '123456', 'dat@gmail.com', 'Dat Pham',
@@ -245,15 +310,11 @@ INSERT INTO users VALUES
 INSERT INTO categories VALUES
     (1, 'Điện tử', 'Sản phẩm điện tử', 1, 1);
 
-INSERT INTO brands VALUES
-    (1, 'Samsung', 1, NOW());
 
-INSERT INTO products VALUES
-    (1, 1, 1, 'Tai nghe Bluetooth', 'Tai nghe xịn',
-     'Mô tả đầy đủ', 'Thông tin kỹ thuật',
-     500000, 600000, '/product/p1.png',
-     NOW(), 100, 10, 200, 1,
-     'tai-nghe', 0, 'Bluetooth', 'Bluetooth');
+
+
+
+
 
 INSERT INTO endow VALUES
     (1, 'Tặng hộp đựng', 1, 1);
@@ -280,4 +341,3 @@ INSERT INTO bill VALUES
 
 INSERT INTO history VALUES
     (1, 1, 1, NOW(), 'Hoàn thành', 500000);
-

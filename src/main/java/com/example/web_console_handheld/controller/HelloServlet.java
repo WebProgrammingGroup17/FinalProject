@@ -1,4 +1,4 @@
-package com.example.web_console_handheld;
+package com.example.web_console_handheld.controller;
 
 import java.io.*;
 

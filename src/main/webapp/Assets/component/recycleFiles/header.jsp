@@ -50,18 +50,14 @@
                     <i class="bi bi-search" style="font-size: 26px"></i>
                 </div>
                 <div class="menu-small-frame" style="display: none" id="menu-small">
-                    <div>
-                        <a href="index.html"><p>Trang Chủ</p></a>
-                    </div>
-                    <div>
-                        <a href="products.html"><p>Sản Phẩm</p></a>
-                    </div>
-                    <div>
-                        <a href="about.html"><p>Giới Thiệu</p></a>
-                    </div>
-                    <div>
-                        <a href="contact.html"><p>Liên Hệ</p></a>
-                    </div>
+                    <div title="menu" class="menu3" onclick="goHome()">TRANG CHỦ</div>
+
+                    <div title="menu" class="menu3" onclick="goProducts()">SẢN PHẨM</div>
+
+
+                    <div title="menu" class="menu3" onclick="goAbout()">GIỚI THIỆU</div>
+
+                    <div title="menu" class="menu3" onclick="goContact()">LIÊN HỆ</div>
                 </div>
                 <!-- them vao day -->
                 <div
@@ -72,14 +68,13 @@
                     <input type="text" placeholder="Tìm kiếm sản phẩm..." />
                 </div>
                 <!-- ------ -->
-                <div class="logo">
-                    <a href="../../../index.jsp"
-                    ><img
+                <div class="logo" onclick="goHome()" style="cursor:pointer">
+                    <img
                             title="<%= logo.getTitleLogo() %>"
                             src="<%= logo.getLinkLogo() %>"
-                            alt="logo"
-                    /></a>
+                    />
                 </div>
+
                 <div class="center">
                     <div class="center-1 same-icon">
                         <i class="fa-solid fa-headset"></i>
@@ -108,11 +103,8 @@
                         <p style="margin: 0">TÀI KHOẢN</p>
                     </div>
 
-                    <div class="register-login" id="loginForm">
-                        <a
-                                href="./Assets/component/login_logout/login.html"
-                                class="a-same-nodecoration"
-                        ><div class="no-margin">
+                    <div class="register-login" id="loginForm" class="a-same-nodecoration"
+                        ><div style="cursor: pointer" class="no-margin" onclick="goLogin()">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"
@@ -131,12 +123,10 @@
                                 />
                             </svg>
                             <p>Đăng nhập</p>
-                        </div></a
-                        >
-                        <a
-                                href="./Assets/component/login_logout/register.html"
-                                class="a-same-nodecoration"
-                        ><div class="no-margin">
+                        </div>
+
+
+                        <div class="no-margin" onclick="goRegister()" style="cursor: pointer">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"
@@ -154,8 +144,7 @@
                                 />
                             </svg>
                             <p>Đăng ký</p>
-                        </div></a
-                        >
+                        </div>
                     </div>
 
                     <div class="personal_logout" id="personal_logout">
@@ -171,8 +160,8 @@
                         </div>
                     </div>
 
-                    <a href="./Assets/component/cart_payment/cart.html"
-                    ><div class="icon">
+
+                    <div class="icon" style="cursor: pointer" onclick="goCart()">
                         <div class="cart">
                             <i class="bi bi-cart2" title="cart"></i>
                             <div class="num">
@@ -191,7 +180,7 @@
                         </div>
                         <p class="cart3">GIỎ HÀNG</p>
                     </div>
-                    </a>
+
                 </div>
             </div>
         </div>
@@ -199,24 +188,42 @@
         <div class="menu">
             <div class="container">
                 <div class="menu2">
-                    <a href="index.html"
-                    ><div title="menu" class="menu3">TRANG CHỦ</div></a
-                    >
-                    <a href="products.html"
-                    ><div title="menu" class="menu3">SẢN PHẨM</div></a
-                    >
+                    <div title="menu" class="menu3" onclick="goHome()">TRANG CHỦ</div>
 
-                    <a href="about.html"
-                    ><div title="menu" class="menu3">GIỚI THIỆU</div></a
-                    >
-                    <a href="contact.html"
-                    ><div title="menu" class="menu3">LIÊN HỆ</div></a
-                    >
+                    <div title="menu" class="menu3" onclick="goProducts()">SẢN PHẨM</div>
+
+
+                    <div title="menu" class="menu3" onclick="goAbout()">GIỚI THIỆU</div>
+
+                    <div title="menu" class="menu3" onclick="goContact()">LIÊN HỆ</div>
+
                 </div>
             </div>
         </div>
     </div>
 </header>
+<script>
+    function goHome() {
+        window.location.href = "<%= request.getContextPath() %>/index.jsp";
+    }
+    function goLogin(){
+        window.location.href = "<%= request.getContextPath() %>/Assets/component/login_logout/login.jsp";
+    }
+    function goRegister(){
+        window.location.href = "<%= request.getContextPath() %>/Assets/component/login_logout/register.jsp";
+    }
+    function goProducts(){
+        window.location.href = "<%= request.getContextPath() %>/products.jsp";
+    }
+    function goAbout(){
+        window.location.href = "<%= request.getContextPath() %>/about.jsp";
+    }
+    function goContact(){
+        window.location.href = "<%= request.getContextPath() %>/contact.jsp";
+    }function goCart(){
+        window.location.href = "<%= request.getContextPath() %>/Assets/component/cart_payment/cart.jsp";
+    }
+</script>
 </body>
 </html>
 
