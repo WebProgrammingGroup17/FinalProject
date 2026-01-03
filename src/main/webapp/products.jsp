@@ -1,11 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HUU DAT
-  Date: 12/6/2025
-  Time: 6:46 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%-- Created by IntelliJ IDEA.--%>
+<%--  User: HUU DAT--%>
+<%--  Date: 12/6/2025--%>
+<%--  Time: 6:46 PM--%>
+<%--  To change this template use File | Settings | File Templates.--%>
+
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,13 +28,21 @@
 </head>
 <body>
 <!-- <div id="header"></div> -->
-
-<%@ include file="Assets/component/recycleFiles/header.jsp" %>
+<jsp:include page="/Assets/component/recycleFiles/header.jsp" />
 
 
 <main id="content">
+
     <!--  loc san pham          -->
     <div class="filter" id="filter-panel">
+
+        <div class="title">LOẠI SẢN PHẨM</div>
+        <c:forEach var="c" items="${categories}">
+            <div class="choice">
+                <input type="checkbox" class="check filter-brand" value="${c.name}"><label>${c.name}</label>
+            </div>
+        </c:forEach>
+
         <div class="title">CHỌN MỨC GIÁ</div>
         <div class="choice">
             <input type="checkbox" class="check filter-price" id="check1" name="checkbox1" value="under500"><label>Giá dưới 500.000đ </label>
@@ -55,57 +63,21 @@
 
 
         <div class="title">THƯƠNG HIỆU</div>
+        <c:forEach var="c" items="${brands}">
         <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt1" name="checkbox2" value="sony"><label>Sony</label>
+            <input type="checkbox" class="check filter-brand" id="${c.ID}" name="checkbox2" value="${c.brand_name}"><label>${c.brand_name}</label>
         </div>
+        </c:forEach>
 
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt2" name="checkbox2" value="nintendo"><label>Nintendo</label>
-        </div>
-
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt3" name="checkbox2" value="xbox"><label>Xbox</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt4" name="checkbox2" value="asus"><label>Asus</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt5" name="checkbox2" value="steam"><label>Steam</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt6" name="checkbox2" value="msi"><label>MSI</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt7" name="checkbox2" value="gdp"><label>GDP</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt8" name="checkbox2" value="ayaneo"><label>Ayaneo</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt9" name="checkbox2" value="anbernic"><label>Anbernic</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt10" name="checkbox2" value="retroid"><label>Retroid</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="checkt11" name="checkbox2" value="miyoo"><label>Miyoo</label>
-        </div>
 
         <div class="title">
-            DANH MỤC
+            Pin
         </div>
+        <c:forEach var="c" items="${energy}">
         <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt8" name="checkbox2"  value="homeconsole"><label>Home Console</label>
+            <input type="checkbox" class="check filter-category" value="${c.useTime}"><label>${c.useTime}hours</label>
         </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt9" name="checkbox2"  value="remotehandheld"   ><label>Remote Handheld</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt9" name="checkbox2" value="handheldpc"><label>Handheld PC</label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" id="checkt9" name="checkbox2" value="handheldconsole"><label>Handheld Console</label>
-        </div>
+        </c:forEach>
 
     </div>
 
@@ -139,257 +111,33 @@
         </button>
 
 
-        <div id="product-list"></div>
         <!--  San Pham -->
         <div id="product-list">
             <!--SP1 -->
+            <c:forEach var="c" items="${premium}">
             <div class="product-item sony remotehandheld" data-id="C001">
-                <img src="Assets/image/products1.png" alt="">
+                <img src="${c.image}" alt="">
                 <div class="tag">Premium</div>
 
                 <div class="product-info">
-                    <h4>Tay Cầm Chơi Game Flydigi Vader 4 Pro Controller</h4>
-                    <p class="price">2.599.000 ₫</p>
+                    <h4>${c.name}</h4>
+                    <p class="price">${c.price}</p>
                 </div>
             </div>
+            </c:forEach>
 
-            <!-- SP 2 -->
-            <div class="product-item sony remotehandheld" data-id="C002">
-                <img src="Assets/image/products2.png" alt="">
-                <div class="tag">Premium</div>
-
-                <div class="product-info">
-                    <h4>Tay Cầm Chơi Game Flydigi Apex 5 Elite Controller</h4>
-                    <p class="price">2.149.000 ₫</p>
-                </div>
-            </div>
-
-            <!-- SP 3 -->
-            <div class="product-item sony remotehandheld" data-id="C003">
-                <img src="Assets/image/products3.png" alt="">
-                <div class="tag">Premium</div>
-
-                <div class="product-info">
-                    <h4>Tay Cầm Chơi Game Flydigi Apex 5 Wuchang Controller</h4>
-                    <p class="price">2.349.000 ₫</p>
-                </div>
-            </div>
-
-            <!-- SP 4 -->
-            <div class="product-item sony remotehandheld" data-id="C004">
-                <img src="Assets/image/products4.png" alt="">
-                <div class="tag">Premium</div>
-
-                <div class="product-info">
-                    <h4>Tay Cầm Chơi Game Flydigi Direwolf 3 Controller</h4>
-                    <p class="price">2.239.000 ₫</p>
-                </div>
-            </div>
 
             <!--SP2.1 -->
+            <c:forEach var="c" items="${products}">
             <div class="product-item sony handheldpc" data-id="C005">
-                <img src="Assets/image/products2_1.png" alt="">
+                <img src="${c.image}" alt="">
 
                 <div class="product-info">
-                    <h4>Máy Game Retro SJGAM M17 128GB – 4.3 Inch – 30.000+ Games</h4>
-                    <p class="price">999.000 ₫</p>
+                    <h4>${c.name}</h4>
+                    <p class="price">${c.price}</p>
                 </div>
             </div>
-            <!-- SP 2.2 --->
-            <div class="product-item sony handheldpc" data-id="C006">
-                <img src="Assets/image/products2_2.png" alt="">
-
-                <div class="product-info">
-                    <h4>Nitro Deck White Edition</h4>
-                    <p class="price">938.000 ₫</p>
-                </div>
-            </div>
-
-            <!-- 2.3-->
-            <div class="product-item sony homeconsole" data-id="C007">
-                <img src="Assets/image/products2_3.png" alt="">
-
-                <div class="product-info">
-                    <h4>Nitro Deck Black Edition</h4>
-                    <p class="price">929.000 ₫</p>
-                </div>
-            </div>
-            <!-- 2.4 -->
-            <div class="product-item sony homeconsole" data-id="C008">
-                <img src="Assets/image/products2_4.png" alt="">
-
-                <div class="product-info">
-                    <h4>Máy Game Retro TrimUI Smart Pro – 4.96 Inch – 20.000+ Games</h4>
-                    <p class="price">1.849.000 ₫</p>
-                </div>
-            </div>
-
-            <!--   3.1      -->
-            <div class="product-item sony homeconsole" data-id="C009">
-                <img src="Assets/image/products3_1.png" alt="">
-
-                <div class="product-info">
-                    <h4>Máy Game Retro G5 – 3.0 Inch – 500+ Games</h4>
-                    <p class="price">189.000 ₫</p>
-                </div>
-            </div>
-
-            <!-- 3.2-->
-            <div class="product-item sony homeconsole" data-id="C0010">
-                <img src="Assets/image/products3_2.png" alt="">
-
-                <div class="product-info">
-                    <h4>Máy Game Retro R36S Real – 3.5 Inch – 20.000+ Games</h4>
-                    <p class="price">749.000 ₫</p>
-                </div>
-            </div>
-
-
-            <!--3.3-->
-            <div class="product-item sony homeconsole" data-id="C0011">
-                <img src="Assets/image/products3_3.png" alt="">
-
-                <div class="product-info">
-                    <h4>Máy Game Retro SJGAM M19 – 3.5 Inch – 17.000+ Games</h4>
-                    <p class="price">1.199.000 ₫</p>
-                </div>
-            </div>
-
-            <!--3.4-->
-            <div class="product-item sony homeconsole" data-id="C0012">
-                <img src="Assets/image/products3_4.png" alt="">
-
-
-                <div class="product-info">
-                    <h4>Máy Game Retro TrimUI Brick – 3.2 Inch – 20.000+ Games</h4>
-                    <p class="price">1.649.000 ₫</p>
-                </div>
-            </div>
-
-            <!--4.1-->
-            <div class="product-item sony homeconsole" data-id="C0013">
-                <img src="Assets/image/products4_1.png" alt="">
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Ghost Cipher Special Edition</h4>
-                    <p class="price">1.499.000 ₫</p>
-                </div>
-            </div>
-
-            <!-- 4.2-->
-            <div class="product-item sony homeconsole" data-id="C0014">
-                <img src="Assets/image/products4_2.png" alt="">
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Fire Vapor Special Edition</h4>
-                    <p class="price">1.499.000 ₫</p>
-                </div>
-            </div>
-
-
-            <!-- 4.3-->
-            <div class="product-item sony remotehandheld" data-id="C0015">
-                <img src="Assets/image/products4_3.png" alt="">
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Velocity Green</h4>
-                    <p class="price">1.249.000 ₫</p>
-                </div>
-            </div>
-
-            <!--4.4-->
-            <div class="product-item miyoo homeconsole" data-id="C0016">
-                <img src="Assets/image/products4_4.png" alt="">
-
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Sky Cipher Special Edition</h4>
-                    <p class="price">1.449.000 ₫</p>
-                </div>
-            </div>
-
-            <div class="product-item sony homeconsole" data-id="C009">
-                <img src="Assets/image/products3_1.png" alt="">
-
-                <div class="product-info">
-                    <h4>Máy Game Retro G5 – 3.0 Inch – 500+ Games</h4>
-                    <p class="price">189.000 ₫</p>
-                </div>
-            </div>
-
-            <!-- 3.2-->
-            <div class="product-item sony homeconsole" data-id="C0010">
-                <img src="Assets/image/products3_2.png" alt="">
-
-                <div class="product-info">
-                    <h4>Máy Game Retro R36S Real – 3.5 Inch – 20.000+ Games</h4>
-                    <p class="price">749.000 ₫</p>
-                </div>
-            </div>
-
-
-            <!--3.3-->
-            <div class="product-item sony homeconsole" data-id="C0011">
-                <img src="Assets/image/products3_3.png" alt="">
-
-                <div class="product-info">
-                    <h4>Máy Game Retro SJGAM M19 – 3.5 Inch – 17.000+ Games</h4>
-                    <p class="price">1.199.000 ₫</p>
-                </div>
-            </div>
-
-            <!--3.4-->
-            <div class="product-item sony homeconsole" data-id="C0012">
-                <img src="Assets/image/products3_4.png" alt="">
-
-
-                <div class="product-info">
-                    <h4>Máy Game Retro TrimUI Brick – 3.2 Inch – 20.000+ Games</h4>
-                    <p class="price">1.649.000 ₫</p>
-                </div>
-            </div>
-
-            <!--4.1-->
-            <div class="product-item sony homeconsole" data-id="C0013">
-                <img src="Assets/image/products4_1.png" alt="">
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Ghost Cipher Special Edition</h4>
-                    <p class="price">1.499.000 ₫</p>
-                </div>
-            </div>
-
-            <!-- 4.2-->
-            <div class="product-item sony homeconsole" data-id="C0014">
-                <img src="Assets/image/products4_2.png" alt="">
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Fire Vapor Special Edition</h4>
-                    <p class="price">1.499.000 ₫</p>
-                </div>
-            </div>
-
-
-            <!-- 4.3-->
-            <div class="product-item sony remotehandheld" data-id="C0015">
-                <img src="Assets/image/products4_3.png" alt="">
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Velocity Green</h4>
-                    <p class="price">1.249.000 ₫</p>
-                </div>
-            </div>
-
-            <!--4.4-->
-            <div class="product-item miyoo homeconsole" data-id="C0016">
-                <img src="Assets/image/products4_4.png" alt="">
-
-
-                <div class="product-info">
-                    <h4>Microsoft Xbox Wireless Controller – Xbox Series X, Xbox Series S – Sky Cipher Special Edition</h4>
-                    <p class="price">1.449.000 ₫</p>
-                </div>
-            </div>
+            </c:forEach>
 
 
         </div>
@@ -424,6 +172,6 @@
 <!--    <script src="./Assets/js/logic_main/products.js"></script> -->
 
 
-<%@ include file="Assets/component/recycleFiles/footer.jsp" %>
+<jsp:include page="/Assets/component/recycleFiles/footer.jsp" />
 </body>
 </html>

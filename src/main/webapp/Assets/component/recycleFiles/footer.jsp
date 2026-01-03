@@ -7,11 +7,6 @@
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.example.web_console_handheld.dao.InforDao" %>
-<%@ page import="com.example.web_console_handheld.model.Contact" %>
-<%@ page import="com.example.web_console_handheld.dao.IconDao" %>
-<%@ page import="com.example.web_console_handheld.model.Icon" %>
-<%@ page import="java.util.List" %>
 <html>
 <head>
     <title>Footer</title>
@@ -32,13 +27,6 @@
     ></script>
 </head>
 <body>
-<%
-    InforDao inforDao = new InforDao();
-    Contact contact = inforDao.getContact(1);
-    IconDao iconDao = new IconDao();
-    List<Icon> icon = iconDao.getIcon();
-    request.setAttribute("icon", icon);
-%>
 <footer class="footer">
     <div class="footer-container">
         <!-- CONNECT WITH US -->
@@ -71,15 +59,15 @@
             <h3>Liên hệ</h3>
             <p>
                 <i class="fa-regular fa-envelope" style="color: #e95221"></i>
-                <%= contact.getGmail() %>
+                ${infor.gmail}
             </p>
             <p>
                 <i class="fa-solid fa-phone" style="color: #e95221"></i>
-                <%= contact.getPhone() %>
+                ${infor.phone}
             </p>
             <p>
                 <i class="bi bi-pin-map"  style="color: #e95221"></i>
-                <%= contact.getAddress() %>
+                ${infor.address}
             </p>
         </div>
 

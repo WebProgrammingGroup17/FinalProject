@@ -5,7 +5,27 @@ import com.example.web_console_handheld.model.Product;
 import java.util.List;
 
 public class ProductDao extends BaseDao{
-    public List<Product> getProductList() {
+    public List<Product> getEnergyProductList() {
+        return get().withHandle(handle ->
+                handle.createQuery(
+                                "SELECT DISTINCT useTime FROM products ORDER BY useTime ASC"
+                        )
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public List<Product> getPremiumProductList() {
+        return get().withHandle(handle ->
+                handle.createQuery(
+                                "SELECT * from products where ispremium = 1 and active = 1"
+                        )
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public List<Product> getProductListForHome() {
         return get().withHandle(handle ->
                 handle.createQuery(
                                 "SELECT * FROM products " +
@@ -15,6 +35,16 @@ public class ProductDao extends BaseDao{
                                         "AND active = 1 " +
                                         "ORDER BY (priceOld - price) DESC " +
                                         "LIMIT 4"
+                        )
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public List<Product> getProductList() {
+        return get().withHandle(handle ->
+                handle.createQuery(
+                                "select * from products where active = 1"
                         )
                         .mapToBean(Product.class)
                         .list()
