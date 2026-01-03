@@ -6,10 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.example.web_console_handheld.dao.LogoDao" %>
-<%@ page import="com.example.web_console_handheld.model.Logo" %>
-<%@ page import="com.example.web_console_handheld.model.Contact" %>
-<%@ page import="com.example.web_console_handheld.dao.InforDao" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,13 +30,6 @@
     ></script>
 </head>
 <body>
-<%
-    InforDao inforNumberDao = new InforDao();
-    Contact contactNumber = inforNumberDao.getContact(1);
-
-    LogoDao logoDao = new LogoDao();
-    Logo logo = logoDao.getLogo(1); // lấy logo có id = 1
-%>
 <header class="header">
     <div class="main-header">
         <div class="container">
@@ -70,8 +59,8 @@
                 <!-- ------ -->
                 <div class="logo" onclick="goHome()" style="cursor:pointer">
                     <img
-                            title="<%= logo.getTitleLogo() %>"
-                            src="<%= logo.getLinkLogo() %>"
+                            title="${logo.titleLogo}"
+                            src="${logo.linkLogo}"
                     />
                 </div>
 
@@ -80,7 +69,7 @@
                         <i class="fa-solid fa-headset"></i>
                         <b style="font-size: 13px">HOTLINE:</b>
                         <span title="hotline">
-                            <%= contactNumber.getPhone()%>
+                            ${contactNumber.phone}
                         </span>
                     </div>
                     <div class="center-1 center2 same-icon">

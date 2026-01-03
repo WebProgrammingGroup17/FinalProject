@@ -1,14 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.example.web_console_handheld.model.*" %>
-<%@ page import="com.example.web_console_handheld.dao.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InfinityTech</title>
-    <link rel="stylesheet" href="Assets/css/same_style/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/same_style/style.css" />
     <link rel="stylesheet" href="Assets/css/homeStyle/home.css">
     <link rel="stylesheet" href="Assets/css/recycleFilecss/header.css" />
     <link rel="stylesheet" href="Assets/css/recycleFilecss/footer.css" />
@@ -30,28 +28,7 @@
 <!--
   Header
 -->
-<%
-    CategoryDao categoryDao = new CategoryDao();
-    List<Category> categories = categoryDao.getCategory();
-    request.setAttribute("categories", categories);
-    ProductDao productDao = new ProductDao();
-    List<Product> product = productDao.getProductList();
-    request.setAttribute("products", product);
-    Product highestDiscount = productDao.getHighestDiscountProduct();
-    request.setAttribute("highest", highestDiscount);
-
-    List<Product> productSmaller = productDao.getProductSmallerThanList();
-    request.setAttribute("smaller", productSmaller);
-
-    Product smallestProduct = productDao.getSmallestProduct();
-    request.setAttribute("smallest", smallestProduct);
-
-    BlogDao blogDao = new BlogDao();
-    List<Blog> blogList = blogDao.getBlogList();
-    request.setAttribute("bloglist" , blogList);
-%>
-
-<%@ include file="Assets/component/recycleFiles/header.jsp" %>
+<jsp:include page="/Assets/component/recycleFiles/header.jsp" />
 
 <div class="slider">
     <div class="slides">
@@ -324,7 +301,6 @@
     </div>
 </section>
 <!--Footer-->
-
-<%@ include file="Assets/component/recycleFiles/footer.jsp" %>
+<jsp:include page="/Assets/component/recycleFiles/footer.jsp" />
 </body>
 </html>
