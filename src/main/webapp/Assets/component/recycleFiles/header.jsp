@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -87,67 +89,118 @@
                 </div>
 
                 <div class="right1">
-                    <div class="icon icon2" id="icon3">
+<%--                    <div class="icon icon2" id="icon3">--%>
+<%--                        <i class="bi bi-person-circle"></i>--%>
+<%--                        <p style="margin: 0">TÀI KHOẢN</p>--%>
+<%--                    </div>--%>
+
+<%--                    <div class="register-login" id="loginForm" class="a-same-nodecoration"--%>
+<%--                        ><div style="cursor: pointer" class="no-margin" onclick="goLogin()">--%>
+<%--                            <svg--%>
+<%--                                    xmlns="http://www.w3.org/2000/svg"--%>
+<%--                                    width="16"--%>
+<%--                                    height="16"--%>
+<%--                                    fill="currentColor"--%>
+<%--                                    class="bi bi-box-arrow-in-right"--%>
+<%--                                    viewBox="0 0 16 16"--%>
+<%--                            >--%>
+<%--                                <path--%>
+<%--                                        fill-rule="evenodd"--%>
+<%--                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"--%>
+<%--                                />--%>
+<%--                                <path--%>
+<%--                                        fill-rule="evenodd"--%>
+<%--                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"--%>
+<%--                                />--%>
+<%--                            </svg>--%>
+<%--                            <p>Đăng nhập</p>--%>
+<%--                        </div>--%>
+
+
+<%--                        <div class="no-margin" onclick="goRegister()" style="cursor: pointer">--%>
+<%--                            <svg--%>
+<%--                                    xmlns="http://www.w3.org/2000/svg"--%>
+<%--                                    width="16"--%>
+<%--                                    height="16"--%>
+<%--                                    fill="currentColor"--%>
+<%--                                    class="bi bi-person-plus"--%>
+<%--                                    viewBox="0 0 16 16"--%>
+<%--                            >--%>
+<%--                                <path--%>
+<%--                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"--%>
+<%--                                />--%>
+<%--                                <path--%>
+<%--                                        fill-rule="evenodd"--%>
+<%--                                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"--%>
+<%--                                />--%>
+<%--                            </svg>--%>
+<%--                            <p>Đăng ký</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+
+
+    <%--                    <div class="personal_logout" id="personal_logout">--%>
+    <%--                        <a--%>
+    <%--                                href="./Assets/component/cart_payment/Order.html"--%>
+    <%--                                class="a-same-nodecoration1"--%>
+    <%--                        ><div class="no-margin1">--%>
+    <%--                            <p>Trang cá nhân</p>--%>
+    <%--                        </div></a--%>
+    <%--                        >--%>
+    <%--                        <div class="no-margin1 no-margin2">--%>
+    <%--                            <span class="logoutbtn" id="logoutbtn">Đăng xuất</span>--%>
+    <%--                        </div>--%>
+    <%--                    </div>--%>
+
+
+
+    <%--  ====================================================--%>
+
+            <%--Sửa để xử lý đăng nhập--%>
+                <div class="account-wrapper">
+
+                    <!-- ICON -->
+                    <div class="icon icon2">
                         <i class="bi bi-person-circle"></i>
-                        <p style="margin: 0">TÀI KHOẢN</p>
+                        <p style="margin:0">TÀI KHOẢN</p>
                     </div>
 
-                    <div class="register-login" id="loginForm" class="a-same-nodecoration"
-                        ><div style="cursor: pointer" class="no-margin" onclick="goLogin()">
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-box-arrow-in-right"
-                                    viewBox="0 0 16 16"
-                            >
-                                <path
-                                        fill-rule="evenodd"
-                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"
-                                />
-                                <path
-                                        fill-rule="evenodd"
-                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"
-                                />
-                            </svg>
-                            <p>Đăng nhập</p>
-                        </div>
 
+                    <div class="account-dropdown">
 
-                        <div class="no-margin" onclick="goRegister()" style="cursor: pointer">
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-person-plus"
-                                    viewBox="0 0 16 16"
-                            >
-                                <path
-                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
-                                />
-                                <path
-                                        fill-rule="evenodd"
-                                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"
-                                />
-                            </svg>
-                            <p>Đăng ký</p>
-                        </div>
+                        <c:choose>
+                            <c:when test="${empty sessionScope.auth}">
+                                <div class="dropdown-item" onclick="goLogin()">Đăng nhập</div>
+                                <div class="dropdown-item" onclick="goRegister()">Đăng ký</div>
+                            </c:when>
+
+                            <c:otherwise>
+                                <div class="dropdown-item">
+                                    Xin chào, <b>${sessionScope.auth.username}</b>
+                                </div>
+
+                                <div class="dropdown-item"
+                                     onclick="window.location.href='${pageContext.request.contextPath}/profile.jsp'">
+                                    Trang cá nhân
+                                </div>
+
+                                <div class="dropdown-item logout"
+                                     onclick="window.location.href='${pageContext.request.contextPath}/logout'">
+                                    Đăng xuất
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
+                </div>
 
-                    <div class="personal_logout" id="personal_logout">
-                        <a
-                                href="./Assets/component/cart_payment/Order.html"
-                                class="a-same-nodecoration1"
-                        ><div class="no-margin1">
-                            <p>Trang cá nhân</p>
-                        </div></a
-                        >
-                        <div class="no-margin1 no-margin2">
-                            <span class="logoutbtn" id="logoutbtn">Đăng xuất</span>
-                        </div>
-                    </div>
+
+<%--==========================================================================--%>
+
+
+
+
+
 
 
                     <div class="icon" style="cursor: pointer" onclick="goCart()">
