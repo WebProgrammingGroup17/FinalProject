@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/same_style/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/login_logout/register.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/recycleFilecss/header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/recycleFilecss/footer.css">
     <link
