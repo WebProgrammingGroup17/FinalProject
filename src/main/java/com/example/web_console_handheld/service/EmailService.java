@@ -8,9 +8,9 @@ import java.util.Properties;
 public class EmailService {
 
     private static final String SMTP_HOST = "sandbox.smtp.mailtrap.io";
-    private static final int SMTP_PORT = 587;
-    private static final String SMTP_USER = "c66c7eda2b47ed";
-    private static final String SMTP_PASS = "7718002bc97683";
+    private static final int SMTP_PORT = 2525;
+    private static final String SMTP_USER = "29ae3e3508a181";
+    private static final String SMTP_PASS = "03aaa67eb30225";
 
     public static void sendOtp(String toEmail, String otp) throws MessagingException {
 

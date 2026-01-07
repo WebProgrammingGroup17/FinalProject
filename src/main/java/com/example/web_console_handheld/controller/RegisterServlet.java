@@ -7,6 +7,7 @@ import com.example.web_console_handheld.utils.ValidationUtil;
 import com.example.web_console_handheld.utils.PasswordUtil;
 import com.example.web_console_handheld.utils.OtpUtil;
 import com.example.web_console_handheld.service.EmailService;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
@@ -15,6 +16,10 @@ import java.time.LocalDateTime;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/Assets/component/login_logout/register.jsp").forward(req,resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -108,9 +113,4 @@ public class RegisterServlet extends HttpServlet {
 
     private boolean isEmpty(String str) {
         return str == null || str.trim().isEmpty();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/Assets/component/login_logout/register.jsp").forward(req,resp);
-    }
-}
+}}

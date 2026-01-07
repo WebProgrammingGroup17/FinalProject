@@ -8,6 +8,7 @@ body {
 .container1{
     width: 400px;
     border-radius: 10px;
+    margin: auto;
     padding: 30px;
     background-color: #fffbfb;
     text-align: center;
