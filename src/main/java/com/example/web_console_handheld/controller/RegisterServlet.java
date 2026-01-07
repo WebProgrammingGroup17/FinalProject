@@ -1,13 +1,11 @@
 package com.example.web_console_handheld.controller;
 
 import com.example.web_console_handheld.model.User;
-import com.example.web_console_handheld.dao.UserDao;
-import com.example.web_console_handheld.dao.OtpDao;
 import com.example.web_console_handheld.utils.ValidationUtil;
 import com.example.web_console_handheld.utils.PasswordUtil;
 import com.example.web_console_handheld.utils.OtpUtil;
 import com.example.web_console_handheld.service.EmailService;
-import jakarta.servlet.ServletException;
+import com.example.web_console_handheld.dao.UserDao;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
@@ -16,11 +14,14 @@ import java.time.LocalDateTime;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
+
+    // GET: redirect tới trang đăng ký
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/Assets/component/login_logout/register.jsp").forward(req,resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.sendRedirect(req.getContextPath() + "/Assets/component/login_logout/register.jsp");
     }
 
+    // POST: xử lý đăng ký, tạo OTP tạm thời
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
@@ -34,9 +35,9 @@ public class RegisterServlet extends HttpServlet {
             String password = req.getParameter("password");
             String confirmPassword = req.getParameter("confirm_password");
 
-            // 1. kiểm tra các trương bắt buộc
+            // 1. kiểm tra thông tin bắt buộc
             if (isEmpty(username) || isEmpty(email) || isEmpty(password)) {
-                session.setAttribute("msg", "Vui lòng điền đầy đủ các thông tin bắt buộc.");
+                session.setAttribute("msg", "Vui lòng điền đầy đủ thông tin bắt buộc.");
                 resp.sendRedirect(req.getContextPath() + "/Assets/component/login_logout/register.jsp");
                 return;
             }
@@ -48,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            // 3. xác thực
+            // 3. validate dữ liệu
             if (!ValidationUtil.isValidUsername(username)) {
                 session.setAttribute("msg", "Tên đăng nhập không hợp lệ.");
                 resp.sendRedirect(req.getContextPath() + "/Assets/component/login_logout/register.jsp");
@@ -65,9 +66,8 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
+            // 4. kiểm tra trùng lặp trong DB
             UserDao userDao = new UserDao();
-
-            // 4. kiểm tra trùng lặp
             if (userDao.existsUsername(username)) {
                 session.setAttribute("msg", "Tên đăng nhập đã tồn tại.");
                 resp.sendRedirect(req.getContextPath() + "/Assets/component/login_logout/register.jsp");
@@ -79,30 +79,28 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            // 5. lưu user
-            User user = new User();
-            user.setUsername(username.trim());
-            user.setPassword(PasswordUtil.hash(password));
-            user.setEmail(email.trim());
-            user.setPhoneNum(phoneNum);
-            user.setActive(false);
+            // 5. tạo user tạm thời, chưa lưu DB
+            User tempUser = new User();
+            tempUser.setUsername(username.trim());
+            tempUser.setPassword(PasswordUtil.hash(password));
+            tempUser.setEmail(email.trim());
+            tempUser.setPhoneNum(phoneNum);
 
-            int userId = userDao.insert(user);
+            session.setAttribute("tempUser", tempUser);
 
-            // 6. tạo OTP
+            // 6. tạo OTP tạm
             String rawOtp = OtpUtil.generateOtp();
             String hashedOtp = PasswordUtil.hash(rawOtp);
-            LocalDateTime expiry = LocalDateTime.now().plusSeconds(60);
+            LocalDateTime expiry = LocalDateTime.now().plusSeconds(60); // 60 giây
 
-            new OtpDao().saveOtp(userId, hashedOtp, expiry);
+            session.setAttribute("otpHash", hashedOtp);
+            session.setAttribute("otpExpiry", expiry);
 
-            // 7. gửi email
+            // 7. gửi email OTP
             EmailService.sendOtp(email, rawOtp);
 
             session.setAttribute("msg", "Đăng ký thành công! Vui lòng kiểm tra email để nhập OTP.");
-
-            resp.sendRedirect(req.getContextPath()
-                    + "/Assets/component/login_logout/verify.jsp?uid=" + userId);
+            resp.sendRedirect(req.getContextPath() + "/Assets/component/login_logout/verify.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,4 +111,5 @@ public class RegisterServlet extends HttpServlet {
 
     private boolean isEmpty(String str) {
         return str == null || str.trim().isEmpty();
-}}
+    }
+}
