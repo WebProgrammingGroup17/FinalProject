@@ -290,6 +290,18 @@ INSERT INTO about(section, description, title, sort_order) VALUES
                                                                ('FINAL','Đội ngũ luôn sẵn sàng hỗ trợ bạn bất cứ khi nào.','Nhóm 17',2),
                                                                ('FINAL','Cửa hàng luôn vui vẻ phục vụ bạn, đừng ngần ngại ghé thăm khi có nhu cầu.','Nhóm 17',3);
 
+-- bảng cho mã OTP (7/1 Châu)
+CREATE TABLE otp_tokens (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            user_id INT NOT NULL,
+                            otp_hash VARCHAR(255) NOT NULL,
+                            expired_at DATETIME NOT NULL,
+                            used BOOLEAN DEFAULT FALSE,
+                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+ALTER TABLE otp_tokens
+    MODIFY used BOOLEAN NOT NULL DEFAULT FALSE;
+UPDATE otp_tokens SET used = FALSE WHERE used IS NULL;
+
 -- Đã insert
 INSERT INTO logo VALUES ('Logo Shop', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaVtA9aH8iRQnDsQmBTt9yyB5mCIaYp8T0Qg&s');
 INSERT INTO logo VALUES (null, 'Logo2 Shop', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNhDsdA_PWXkUZ3ijwSU_9rpenL-Dsu_wuFQ&s');
@@ -359,3 +371,4 @@ INSERT INTO bill VALUES
 
 INSERT INTO history VALUES
     (1, 1, 1, NOW(), 'Hoàn thành', 500000);
+
