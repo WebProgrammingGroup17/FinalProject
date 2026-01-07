@@ -36,6 +36,22 @@ public class UserDao {
             return false;
         }
     }
+    //kiểm tra sđt đã tồn tại chưa
+    public boolean existsPhoneNum(String phoneNum) {
+        String sql = "SELECT 1 FROM users WHERE phoneNum = ? LIMIT 1";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, phoneNum.trim());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     // Thêm user mới, trả về ID
     public int insert(User u) throws SQLException {

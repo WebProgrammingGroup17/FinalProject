@@ -30,6 +30,12 @@
         <button class="button" type="submit">Xác thực</button>
     </form>
 
+    <form action="${pageContext.request.contextPath}/resend-otp" method="post">
+        <button type="submit" class="btn-resend">
+            Gửi lại mã OTP
+        </button>
+    </form>
+
     <p>Nếu bạn không nhận được email OTP, vui lòng kiểm tra hộp thư spam hoặc thử đăng ký lại.</p>
 </div>
 

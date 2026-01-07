@@ -78,6 +78,7 @@ public class VerifyOtpServlet extends HttpServlet {
             e.printStackTrace();
             session.setAttribute("msg", "Lỗi hệ thống: " + e.getMessage());
             resp.sendRedirect(req.getContextPath() + "/Assets/component/login_logout/register.jsp");
+
         }
     }
 }
