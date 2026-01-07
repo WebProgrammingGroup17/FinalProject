@@ -2,8 +2,9 @@ package com.example.web_console_handheld.model;
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Product {
     @ColumnName("ID")
@@ -25,10 +26,10 @@ public class Product {
 
     private String information;
 
-    private float price;
+    private long price;
 
     @ColumnName("priceOld")
-    private float priceOld;
+    private long priceOld;
 
     private String image;
 
@@ -51,8 +52,10 @@ public class Product {
     private String suports;
 
     private String connect;
-
-    public Product(int ID, int categories_id, int brand_id, String name, String short_description, String full_description, String information, float price, float priceOld, String image, LocalDateTime createdAt, int energy, int useTime, int weight, boolean active, String metatitle, boolean ispremium, String suports, String connect) {
+    public Product(long price){
+        this.price = price;
+    }
+    public Product(int ID, int categories_id, int brand_id, String name, String short_description, String full_description, String information, long price, long priceOld, String image, LocalDateTime createdAt, int energy, int useTime, int weight, boolean active, String metatitle, boolean ispremium, String suports, String connect) {
         this.ID = ID;
         this.categories_id = categories_id;
         this.brand_id = brand_id;
@@ -131,20 +134,33 @@ public class Product {
         this.information = information;
     }
 
-    public float getPrice() {
-        return price;
+    public  String getPrice() {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        DecimalFormat df = new DecimalFormat("#,###", symbols);
+        return df.format(this.price);
     }
 
-    public void setPrice(float price) {
+
+    public void setPrice(long price) {
         this.price = price;
     }
-
-    public float getPriceOld() {
-        return priceOld;
+    public void setPrice(String price) {
+        this.price = Long.parseLong(price);
     }
 
-    public void setPriceOld(float priceOld) {
+    public String getPriceOld() {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+        DecimalFormat df = new DecimalFormat("#,###", symbols);
+        return df.format(this.priceOld);
+    }
+
+    public void setPriceOld(long priceOld) {
         this.priceOld = priceOld;
+    }
+    public void setPriceOld(String priceOld){
+        this.priceOld = Long.parseLong(priceOld);
     }
 
     public String getImage() {

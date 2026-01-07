@@ -57,11 +57,13 @@
                     <input type="text" placeholder="Tìm kiếm sản phẩm..." />
                 </div>
                 <!-- ------ -->
-                <div class="logo" onclick="goHome()" style="cursor:pointer">
+                <div class="logo" style="cursor:pointer">
+                    <a href="${pageContext.request.contextPath}/home">
                     <img
                             title="${logo.titleLogo}"
                             src="${logo.linkLogo}"
                     />
+                    </a>
                 </div>
 
                 <div class="center">
@@ -93,7 +95,9 @@
                     </div>
 
                     <div class="register-login" id="loginForm" class="a-same-nodecoration"
-                        ><div style="cursor: pointer" class="no-margin" onclick="goLogin()">
+                        >
+                        <a href="${pageContext.request.contextPath}/login" class="a-same-nodecoration">
+                        <div style="cursor: pointer" class="no-margin">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"
@@ -113,8 +117,9 @@
                             </svg>
                             <p>Đăng nhập</p>
                         </div>
+                        </a>
 
-
+                        <a href="${pageContext.request.contextPath}/register" class="a-same-nodecoration">
                         <div class="no-margin" onclick="goRegister()" style="cursor: pointer">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -134,6 +139,7 @@
                             </svg>
                             <p>Đăng ký</p>
                         </div>
+                        </a>
                     </div>
 
                     <div class="personal_logout" id="personal_logout">
@@ -149,7 +155,7 @@
                         </div>
                     </div>
 
-
+                    <a href="${pageContext.request.contextPath}/cart">
                     <div class="icon" style="cursor: pointer" onclick="goCart()">
                         <div class="cart">
                             <i class="bi bi-cart2" title="cart"></i>
@@ -169,7 +175,7 @@
                         </div>
                         <p class="cart3">GIỎ HÀNG</p>
                     </div>
-
+                    </a>
                 </div>
             </div>
         </div>
@@ -177,42 +183,21 @@
         <div class="menu">
             <div class="container">
                 <div class="menu2">
-                    <div title="menu" class="menu3" onclick="goHome()">TRANG CHỦ</div>
 
-                    <div title="menu" class="menu3" onclick="goProducts()">SẢN PHẨM</div>
+                    <a href="${pageContext.request.contextPath}/home"><div title="menu" class="menu3" >TRANG CHỦ</div></a>
+
+                    <a href="${pageContext.request.contextPath}/product"><div title="menu" class="menu3" >SẢN PHẨM</div></a>
 
 
-                    <div title="menu" class="menu3" onclick="goAbout()">GIỚI THIỆU</div>
+                    <a href="${pageContext.request.contextPath}/about"><div title="menu" class="menu3" >GIỚI THIỆU</div></a>
 
-                    <div title="menu" class="menu3" onclick="goContact()">LIÊN HỆ</div>
+                    <a href="${pageContext.request.contextPath}/#"><div title="menu" class="menu3" >LIÊN HỆ</div></a>
 
                 </div>
             </div>
         </div>
     </div>
 </header>
-<script>
-    function goHome() {
-        window.location.href = "<%= request.getContextPath() %>/index.jsp";
-    }
-    function goLogin(){
-        window.location.href = "<%= request.getContextPath() %>/Assets/component/login_logout/login.jsp";
-    }
-    function goRegister(){
-        window.location.href = "<%= request.getContextPath() %>/Assets/component/login_logout/register.jsp";
-    }
-    function goProducts(){
-        window.location.href = "<%= request.getContextPath() %>/products.jsp";
-    }
-    function goAbout(){
-        window.location.href = "<%= request.getContextPath() %>/about.jsp";
-    }
-    function goContact(){
-        window.location.href = "<%= request.getContextPath() %>/contact.jsp";
-    }function goCart(){
-        window.location.href = "<%= request.getContextPath() %>/Assets/component/cart_payment/cart.jsp";
-    }
-</script>
 </body>
 </html>
 
