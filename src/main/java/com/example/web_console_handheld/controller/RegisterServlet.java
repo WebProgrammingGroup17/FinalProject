@@ -108,5 +108,9 @@ public class RegisterServlet extends HttpServlet {
 
     private boolean isEmpty(String str) {
         return str == null || str.trim().isEmpty();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/Assets/component/login_logout/register.jsp").forward(req,resp);
     }
 }

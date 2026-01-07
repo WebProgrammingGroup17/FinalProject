@@ -121,7 +121,7 @@
 
                 <div class="product-info">
                     <h4>${c.name}</h4>
-                    <p class="price">${c.price}</p>
+                    <p class="price">${c.price}đ</p>
                 </div>
             </div>
             </c:forEach>
@@ -134,7 +134,7 @@
 
                 <div class="product-info">
                     <h4>${c.name}</h4>
-                    <p class="price">${c.price}</p>
+                    <p class="price">${c.price}đ</p>
                 </div>
             </div>
             </c:forEach>
