@@ -26,8 +26,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("auth",user);
 
-            response.sendRedirect( request.getContextPath() + "/index.jsp");
-
+            response.sendRedirect(request.getContextPath() + "/home");
         } else {
             request.setAttribute("error", "Bạn nhập sai tên hoặc mật khẩu");
             request.getRequestDispatcher("/Assets/component/login_logout/login.jsp").forward(request, response);
