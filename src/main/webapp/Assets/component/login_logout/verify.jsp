@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="jakarta.servlet.http.*, jakarta.servlet.*" %>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -25,19 +24,17 @@
     <% session.removeAttribute("msg"); %>
     <% } %>
 
-    <%
-        String uidParam = request.getParameter("uid");
-        if (uidParam == null || uidParam.isEmpty()) {
-    %>
-    <div class="alert alert-danger">ID người dùng không hợp lệ. Vui lòng đăng ký lại.</div>
-    <% } else { %>
-    <!-- Form OTP nằm trong container -->
+    <%-- Form OTP --%>
     <form action="<%= request.getContextPath() %>/verify-otp" method="post" class="form-register">
-        <input type="hidden" name="uid" value="<%= uidParam %>">
         <input class="input" type="text" name="otp" placeholder="Nhập mã OTP" required maxlength="6"><br>
         <button class="button" type="submit">Xác thực</button>
     </form>
-    <% } %>
+
+    <form action="${pageContext.request.contextPath}/resend-otp" method="post">
+        <button type="submit" class="btn-resend">
+            Gửi lại mã OTP
+        </button>
+    </form>
 
     <p>Nếu bạn không nhận được email OTP, vui lòng kiểm tra hộp thư spam hoặc thử đăng ký lại.</p>
 </div>
