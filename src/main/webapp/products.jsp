@@ -28,7 +28,7 @@
 </head>
 <body>
 <!-- <div id="header"></div> -->
-<jsp:include page="/Assets/component/recycleFiles/header.jsp" />
+<jsp:include page="/Assets/component/recycleFiles/header.jsp"/>
 
 
 <main id="content">
@@ -45,28 +45,33 @@
 
         <div class="title">CHỌN MỨC GIÁ</div>
         <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check1" name="checkbox1" value="under500"><label>Giá dưới 500.000đ </label>
+            <input type="checkbox" class="check filter-price" id="check1" name="checkbox1" value="under500"><label>Giá
+            dưới 500.000đ </label>
         </div>
         <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check2" name="checkbox1" value="500-1000"><label>500.000đ - 1 triệu </label>
+            <input type="checkbox" class="check filter-price" id="check2" name="checkbox1" value="500-1000"><label>500.000đ
+            - 1 triệu </label>
         </div>
 
         <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check3" name="checkbox1" value="1000-2000"><label>1 - 2 triệu </label>
+            <input type="checkbox" class="check filter-price" id="check3" name="checkbox1" value="1000-2000"><label>1 -
+            2 triệu </label>
         </div>
         <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check4" name="checkbox1" value="2000-3000"><label>2 - 3 triệu </label>
+            <input type="checkbox" class="check filter-price" id="check4" name="checkbox1" value="2000-3000"><label>2 -
+            3 triệu </label>
         </div>
         <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check5" name="checkbox1" value="higher3000"><label>Trên 3 triệu </label>
+            <input type="checkbox" class="check filter-price" id="check5" name="checkbox1" value="higher3000"><label>Trên
+            3 triệu </label>
         </div>
 
 
         <div class="title">THƯƠNG HIỆU</div>
         <c:forEach var="c" items="${brands}">
-        <div class="choice">
-            <input type="checkbox" class="check filter-brand" id="${c.ID}" name="checkbox2" value="${c.brand_name}"><label>${c.brand_name}</label>
-        </div>
+            <div class="choice">
+                <input type="checkbox" class="check filter-brand" id="${c.ID}" name="checkbox2" value="${c.brand_name}"><label>${c.brand_name}</label>
+            </div>
         </c:forEach>
 
 
@@ -74,9 +79,10 @@
             Pin
         </div>
         <c:forEach var="c" items="${energy}">
-        <div class="choice">
-            <input type="checkbox" class="check filter-category" value="${c.useTime}"><label>${c.useTime}hours</label>
-        </div>
+            <div class="choice">
+                <input type="checkbox" class="check filter-category"
+                       value="${c.useTime}"><label>${c.useTime}hours</label>
+            </div>
         </c:forEach>
 
     </div>
@@ -115,28 +121,32 @@
         <div id="product-list">
             <!--SP1 -->
             <c:forEach var="c" items="${premium}">
-            <div class="product-item sony remotehandheld" data-id="C001">
-                <img src="${c.image}" alt="">
-                <div class="tag">Premium</div>
+                <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}">
+                    <div class="product-item sony remotehandheld">
+                        <img src="${c.image}" alt="">
+                        <div class="tag">Premium</div>
 
-                <div class="product-info">
-                    <h4>${c.name}</h4>
-                    <p class="price">${c.price}đ</p>
-                </div>
-            </div>
+                        <div class="product-info">
+                            <h4>${c.name}</h4>
+                            <p class="price">${c.price}đ</p>
+                        </div>
+                    </div>
+                </a>
             </c:forEach>
 
 
             <!--SP2.1 -->
             <c:forEach var="c" items="${products}">
-            <div class="product-item sony handheldpc" data-id="C005">
-                <img src="${c.image}" alt="">
+                <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}">
+                    <div class="product-item sony handheldpc">
+                        <img src="${c.image}" alt="">
 
-                <div class="product-info">
-                    <h4>${c.name}</h4>
-                    <p class="price">${c.price}đ</p>
-                </div>
-            </div>
+                        <div class="product-info">
+                            <h4>${c.name}</h4>
+                            <p class="price">${c.price}đ</p>
+                        </div>
+                    </div>
+                </a>
             </c:forEach>
 
 
@@ -165,13 +175,6 @@
 
 
 </main>
-<div id="main-content"></div>
-
-<!-- <div id="footer"></div>
-<script src="/Assets/js/main.js"></script>-->
-<!--    <script src="./Assets/js/logic_main/products.js"></script> -->
-
-
-<jsp:include page="/Assets/component/recycleFiles/footer.jsp" />
+<jsp:include page="/Assets/component/recycleFiles/footer.jsp"/>
 </body>
 </html>
