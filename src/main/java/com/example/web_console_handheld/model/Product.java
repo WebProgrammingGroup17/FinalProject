@@ -52,10 +52,12 @@ public class Product {
     private String suports;
 
     private String connect;
+    @ColumnName("endow")
+    private String endow;
     public Product(long price){
         this.price = price;
     }
-    public Product(int ID, int categories_id, int brand_id, String name, String short_description, String full_description, String information, long price, long priceOld, String image, LocalDateTime createdAt, int energy, int useTime, int weight, boolean active, String metatitle, boolean ispremium, String suports, String connect) {
+    public Product(int ID, int categories_id, int brand_id, String name, String short_description, String full_description, String information, long price, long priceOld, String image, LocalDateTime createdAt, int energy, int useTime, int weight, boolean active, String metatitle, boolean ispremium, String suports, String connect, String endow) {
         this.ID = ID;
         this.categories_id = categories_id;
         this.brand_id = brand_id;
@@ -75,6 +77,7 @@ public class Product {
         this.ispremium = ispremium;
         this.suports = suports;
         this.connect = connect;
+        this.endow = endow;
     }
     public Product() {}
 
@@ -241,5 +244,13 @@ public class Product {
 
     public void setConnect(String connect) {
         this.connect = connect;
+    }
+
+    public String getEndow() {
+        return endow;
+    }
+
+    public void setEndow(String endow) {
+        this.endow = endow;
     }
 }
