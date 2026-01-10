@@ -140,4 +140,33 @@ public class ProductDao extends BaseDao{
                         .orElse(null)
         );
     }
+
+    //chức năng sắp xếp sản phẩm theo giá tăng, giảm dần và mới nhất
+    public List<Product> getProductListForSort(String sort){
+        String sql = "select * from products where active = 1 AND ispremium = 0 ";
+
+
+        if (sort != null){
+            switch (sort){
+                case "price_asc":
+                    sql += " ORDER BY price ASC";
+                    break;
+                case "price_desc":
+                    sql += " ORDER BY price DESC";
+                    break;
+                case "newest":
+                    sql += " ORDER BY createdAt DESC";
+                    break;
+                default:
+                     sql += " ORDER BY ID ASC";
+
+            }
+        }else{
+            sql += " ORDER BY ID ASC";
+        }
+        String finalSql = sql;
+        return get().withHandle(handle ->
+                handle.createQuery(finalSql).mapToBean(Product.class).list()
+        );
+    }
 }
