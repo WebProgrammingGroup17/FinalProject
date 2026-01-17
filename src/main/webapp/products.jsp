@@ -93,24 +93,39 @@
 
         <div class="contain-header">
             <div class="Loai">Console</div>
-
+                <%--Chức năng sắp xếp theo giá tăng/giảm dần và mới nhất--%>
+            <form method="get" id="sortForm">
             <div class="sort">
                 <i class="fa-solid fa-arrow-down-wide-short"></i></i>
                 <label>Sắp xếp:</label>
 
-                <div class="sort-box">
-                    <span class="sort-selected">Mặc định</span>
+                <div class="sort-box" onclick="toggleSortMenu()">
+                    <span class="sort-selected">
+                        <c:choose>
+                            <c:when test="${param.sort == 'price_asc'}">Giá tăng dần</c:when>
+                            <c:when test="${param.sort == 'price_desc'}">Giá giảm dần</c:when>
+                            <c:when test="${param.sort == 'newest'}">Hàng mới nhất</c:when>
+                            <c:otherwise>Mặc định</c:otherwise>
+                        </c:choose>
+                    </span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
+                    <%--hidden input gui len servlet--%>
+                    <input type="hidden" name="sort" id="sortInput" value="${param.sort}">
 
-                <ul class="sort-menu">
-                    <li>Giá tăng dần</li>
-                    <li>Giá giảm dần</li>
-                    <li>Hàng mới nhất</li>
-                </ul>
-
-            </div>
+                    <ul class="sort-menu" id="sortMenu">
+                        <li onclick="selectSort('')">Mặc định</li>
+                        <li onclick="selectSort('price_asc')">Giá tăng dần</li>
+                        <li onclick="selectSort('price_desc')">Giá giảm dần</li>
+                        <li onclick="selectSort('newest')">Hàng mới nhất</li>
+                    </ul>
+                </div>
+            </form>
         </div>
+
+
+
+
 
         <button id="filter-btn" class="filter-toggle">
             <i class="fa-solid fa-sliders"></i> Bộ lọc
@@ -175,6 +190,26 @@
 
 
 </main>
+
+<%-- chức năng sắp xếp sản phẩm theo giá tăng, giảm dần--%>
+<script>
+    function toggleSortMenu(){
+        document.getElementById("sortMenu").classList.toggle("active");
+    }
+
+    function selectSort(value){
+        document.getElementById("sortInput").value = value;
+        document.getElementById("sortForm").submit();
+    }
+
+    // đóng menu khi click ra ngoài
+    document.addEventListener("click", function (e){
+        if (!e.target.closest(".sort")){
+            document.getElementById("sortMenu").classList.remove("active");
+
+        }
+    });
+</script>
 <jsp:include page="/Assets/component/recycleFiles/footer.jsp"/>
 </body>
 </html>
