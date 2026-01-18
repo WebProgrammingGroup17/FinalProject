@@ -149,14 +149,14 @@ CREATE TABLE payments (
 );
 
 CREATE TABLE reviews (
-                         ID VARCHAR(50) PRIMARY KEY,
+                         ID int PRIMARY KEY AUTO_INCREMENT,
                          products_id INT,
                          users_id INT,
                          rating INT,
                          review_text VARCHAR(255),
                          imgReviews VARCHAR(255),
                          reviewDate DATETIME,
-                         status VARCHAR(50),
+                         status boolean,
                          FOREIGN KEY (products_id) REFERENCES products(ID),
                          FOREIGN KEY (users_id) REFERENCES users(ID)
 );
@@ -195,6 +195,16 @@ create table gallary(
                         metatitle varchar(255),
                         img varchar(255)
 );
+
+
+-- 18/1 (emdatdepzai)
+INSERT INTO reviews VALUES
+                        (null, 1, 1, 5, 'Rất tốt', '/review/r1.png', NOW(), 1),
+                        (null, 1, 1, 5, 'Rất tốt', '/review/r1.png', NOW(), 1),
+                        (null, 1, 1, 5, 'Rất tốt', '/review/r1.png', NOW(), 1),
+                        (null, 1, 1, 4, 'Rất ok', '/review/r1.png', NOW(), 1),
+                        (null, 1, 1, 1, 'Rat te', '/review/r1.png', NOW(), 1);
+
 
 insert into gallary VALUES(null, 1, 'https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tay-cam-choi-game-ps5-dualsense-1.png'),
                           (null, 1, 'https://cdn2.cellphones.com.vn/x/media/catalog/product/t/a/tay-cam-choi-game-ps5-dualsense-1.png'),
@@ -628,8 +638,7 @@ INSERT INTO orders VALUES
 INSERT INTO payments VALUES
     (1, 1, 'COD', 'Chua thanh toan');
 
-INSERT INTO reviews VALUES
-    ('RV01', 1, 1, 5, 'Rất tốt', '/review/r1.png', NOW(), 'active');
+
 
 INSERT INTO bill VALUES
     (1, 1, NOW());
