@@ -32,31 +32,15 @@
 
 <div class="slider">
     <div class="slides">
-        <a href="./products.html" data-id="C0017"
-        ><img
-                title="ps5"
-                src="Assets/image/newps5_2.png"
-                class="active"
-                alt=""
-        /></a>
-        <a href="./products.html" data-id="C0018"
-        ><img title="ps4" src="Assets/image/newps4_3.png" alt=""
-        /></a>
-        <a href="./products.html" data-id="C0019"
-        ><img
-                title="flydigi apex 5 elite"
-                src="Assets/image/NewFlidigi.png"
-                alt=""
-        /></a>
-        <a href="./products.html" data-id="C0020"
-        ><img title="elite series 2" src="Assets/image/elite2.png" alt=""
-        /></a>
-        <a href="./products.html" data-id="C0021"
-        ><img
-                title="three new version"
-                src="Assets/image/threeversion.png"
-                alt=""
-        /></a>
+        <c:forEach var="b" items="${banners}" varStatus="st">
+            <a href="${pageContext.request.contextPath}/product">
+                <img
+                        src="${b.link}"
+                        class="${st.index == 0 ? 'active' : ''}"
+                        alt=""
+                />
+            </a>
+        </c:forEach>
     </div>
 
     <!-- Mũi tên -->
@@ -67,15 +51,12 @@
 
     <!-- Dấu chấm -->
     <div class="dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+        <c:forEach var="b" items="${banners}" varStatus="st">
+            <span class="dot ${st.index == 0 ? 'active' : ''}"></span>
+        </c:forEach>
     </div>
 </div>
 
-<!---->
 
 <div class="features" style="margin-top: 60px">
     <div class="feature-box">
@@ -192,23 +173,26 @@
     <div class="container">
         <div class="product-grid">
             <c:forEach var="c" items="${products}">
-            <div class="product-card">
-                <div class="img-box">
-                    <img
-                            src="${c.image}"
-                            alt="${c.metatitle}"
-                    />
-                    <div class="hidden-info">
-                        <button class="add-cart">Add to Cart</button>
+                <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}" style="color: black">
+                    <div class="product-card" style="cursor: pointer">
+                        <div class="img-box">
+                            <img
+                                    src="${c.image}"
+                                    alt="${c.metatitle}"
+                            />
+                            <div class="hidden-info">
+                                <button class="add-cart">Thêm vào giỏ hàng</button>
+                            </div>
+                        </div>
+                        <h3>${c.name}</h3>
+                        <p class="price">${c.price}đ</p>
                     </div>
-                </div>
-                <h3>${c.name}</h3>
-                <p class="price">${c.price}đ</p>
-            </div>
+                </a>
             </c:forEach>
         </div>
     </div>
 </section>
+
 <!-- MACBOOK SECTION -->
 <section class="featured-product">
     <div class="featured-content">
@@ -303,4 +287,39 @@
 <!--Footer-->
 <jsp:include page="/Assets/component/recycleFiles/footer.jsp" />
 </body>
+<script>
+    const slides = document.querySelectorAll(".slides img");
+    const dots = document.querySelectorAll(".dot");
+    let index = 0;
+
+    function showSlide(i) {
+        slides.forEach(s => s.classList.remove("active"));
+        dots.forEach(d => d.classList.remove("active"));
+
+        slides[i].classList.add("active");
+        dots[i].classList.add("active");
+    }
+
+    document.querySelector(".next").onclick = () => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    };
+
+    document.querySelector(".prev").onclick = () => {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
+    };
+
+    dots.forEach((dot, i) => {
+        dot.onclick = () => {
+            index = i;
+            showSlide(index);
+        };
+    });
+
+    setInterval(() => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    }, 4000);
+</script>
 </html>
