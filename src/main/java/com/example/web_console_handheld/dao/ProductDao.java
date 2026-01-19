@@ -100,7 +100,7 @@ public class ProductDao extends BaseDao {
     public List<Product> getProductList() {
         return get().withHandle(handle ->
                 handle.createQuery(
-                                "select * from products where active = 1 and ispremium = 0"
+                                "select * from products where active = 1 ORDER BY ispremium DESC"
                         )
                         .mapToBean(Product.class)
                         .list()
@@ -154,31 +154,50 @@ public class ProductDao extends BaseDao {
     }
 
     //chức năng sắp xếp sản phẩm theo giá tăng, giảm dần và mới nhất
-    public List<Product> getProductListForSort(String sort){
-        String sql = "select * from products where active = 1 AND ispremium = 0 ";
+    public List<Product> getProductByPageAndSort(int offset, int limit, String sort) {
 
+        String orderBy;
 
-        if (sort != null){
-            switch (sort){
+        if (sort == null || sort.isEmpty()) {
+            orderBy = "ispremium DESC, ID ASC";
+        } else {
+            switch (sort) {
                 case "price_asc":
-                    sql += " ORDER BY price ASC";
+                    orderBy = "ispremium DESC, price ASC";
                     break;
                 case "price_desc":
-                    sql += " ORDER BY price DESC";
+                    orderBy = "ispremium DESC, price DESC";
                     break;
                 case "newest":
-                    sql += " ORDER BY createdAt DESC";
+                    orderBy = "ispremium DESC, createdAt DESC";
                     break;
                 default:
-                     sql += " ORDER BY ID ASC";
-
+                    orderBy = "ispremium DESC, ID ASC";
             }
-        }else{
-            sql += " ORDER BY ID ASC";
         }
-        String finalSql = sql;
+
+        String sql =
+                "SELECT * FROM products " +
+                        "WHERE active = 1 " +
+                        "ORDER BY " + orderBy +
+                        " LIMIT :limit OFFSET :offset";
+
         return get().withHandle(handle ->
-                handle.createQuery(finalSql).mapToBean(Product.class).list()
+                handle.createQuery(sql)
+                        .bind("limit", limit)
+                        .bind("offset", offset)
+                        .mapToBean(Product.class)
+                        .list()
         );
     }
+    public int countAllProduct() {
+        return get().withHandle(handle ->
+                handle.createQuery(
+                                "SELECT COUNT(*) FROM products WHERE active = 1"
+                        )
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
 }

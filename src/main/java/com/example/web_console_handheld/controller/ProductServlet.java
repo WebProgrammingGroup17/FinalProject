@@ -2,13 +2,8 @@ package com.example.web_console_handheld.controller;
 
 
 import com.example.web_console_handheld.dao.BrandDao;
-
 import com.example.web_console_handheld.dao.CategoryDao;
 import com.example.web_console_handheld.dao.ProductDao;
-
-import com.example.web_console_handheld.model.Brand;
-
-import com.example.web_console_handheld.model.Category;
 import com.example.web_console_handheld.model.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,37 +16,50 @@ import java.util.List;
 
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
+    private static final int PAGE_SIZE = 12;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp)
             throws ServletException, IOException {
-        CategoryDao categoryDao = new CategoryDao();
-        List<Category> categories = categoryDao.getCategory();
-        request.setAttribute("categories", categories);
-
-        BrandDao brandDao = new BrandDao();
-        List<Brand> brandList = brandDao.getBrands();
-        request.setAttribute("brands", brandList);
 
         ProductDao productDao = new ProductDao();
-        List<Product> productEnergyList = productDao.getEnergyProductList();
-        List<Product> premiumproductList = productDao.getPremiumProductList();
 
-        // chức năng sắp xếp sản phẩm theo giá tăng, giảm dần
-        String sort = request.getParameter("sort");
-        List<Product> products;
-
-        if (sort == null || sort.isEmpty()){
-            products = productDao.getProductList();//ds mặc định
-        }else{
-            products = productDao.getProductListForSort(sort);// đã sort
+        int page = 1;
+        String pageParam = request.getParameter("page");
+        if (pageParam != null) {
+            try {
+                page = Integer.parseInt(pageParam);
+            } catch (NumberFormatException ignored) {}
         }
 
+        int offset = (page - 1) * PAGE_SIZE;
 
-        request.setAttribute("energy", productEnergyList);
-        request.setAttribute("premium", premiumproductList);
+        String sort = request.getParameter("sort");
 
+        // ✅ DUY NHẤT 1 DÒNG LẤY PRODUCT
+        List<Product> products =
+                productDao.getProductByPageAndSort(offset, PAGE_SIZE, sort);
+
+        int totalProduct = productDao.countAllProduct();
+        int totalPage = (int) Math.ceil((double) totalProduct / PAGE_SIZE);
+
+        // ==== dữ liệu phụ ====
+        CategoryDao categoryDao = new CategoryDao();
+        request.setAttribute("categories", categoryDao.getCategory());
+
+        BrandDao brandDao = new BrandDao();
+        request.setAttribute("brands", brandDao.getBrands());
+
+        request.setAttribute("energy", productDao.getEnergyProductList());
+        request.setAttribute("premium", productDao.getPremiumProductList());
+
+        // ==== pagination ====
         request.setAttribute("products", products);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPage", totalPage);
+
         request.getRequestDispatcher("/products.jsp").forward(request, resp);
     }
 }
+
 

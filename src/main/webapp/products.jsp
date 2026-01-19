@@ -134,28 +134,15 @@
 
         <!--  San Pham -->
         <div id="product-list">
-            <!--SP1 -->
-            <c:forEach var="c" items="${premium}">
-                <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}">
-                    <div class="product-item sony remotehandheld">
-                        <img src="${c.image}" alt="">
-                        <div class="tag">Premium</div>
 
-                        <div class="product-info">
-                            <h4>${c.name}</h4>
-                            <p class="price">${c.price}đ</p>
-                        </div>
-                    </div>
-                </a>
-            </c:forEach>
-
-
-            <!--SP2.1 -->
             <c:forEach var="c" items="${products}">
                 <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}">
                     <div class="product-item sony handheldpc">
                         <img src="${c.image}" alt="">
 
+                        <c:if test="${c.ispremium}">
+                            <div class="tag">Premium</div>
+                        </c:if>
                         <div class="product-info">
                             <h4>${c.name}</h4>
                             <p class="price">${c.price}đ</p>
@@ -169,19 +156,20 @@
 
         <!-- pagination-->
         <div class="pagination">
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">8</a>
-            <a href="#">9</a>
-            <a href="#">10</a>
-            <a href="#">&raquo;</a>
+            <c:forEach begin="1" end="${totalPage}" var="i">
+                <a href="${pageContext.request.contextPath}/product?page=${i}&sort=${param.sort}"
+                   class="${i == currentPage ? 'active' : ''}">
+                        ${i}
+                </a>
+            </c:forEach>
 
+            <c:if test="${currentPage < totalPage}">
+                <a href="${pageContext.request.contextPath}/product?page=${currentPage + 1}&sort=${param.sort}">
+                    &raquo;
+                </a>
+            </c:if>
         </div>
+
         <div id="no-products-message" style="display:none; text-align: center; margin-top: 20px;">
             ❌ Không có sản phẩm nào phù hợp với tiêu chí lọc.
         </div>

@@ -25,7 +25,8 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
 <!-- <div id="header"></div> -->
@@ -189,20 +190,33 @@
 <div class="related-section">
     <div class="container">
         <h3>Sản phẩm liên quan</h3>
-        <div class="related-grid">
-            <span class="position-same position-left"><i class="bi bi-arrow-left"></i></span>
-            <span class="position-same position-right"><i class="bi bi-arrow-right"></i></span>
-            <c:forEach var="c" items="${relateProductList}">
-                <div class="related-card">
-                    <img src="${c.image}"
-                         alt="${c.metatitle}">
-                    <div class="related-name">${c.name}</div>
-                    <div class="related-price">${c.price}</div>
-                </div>
-            </c:forEach>
+
+        <div class="swiper related-swiper">
+            <div class="swiper-wrapper">
+
+                <c:forEach var="c" items="${relateProductList}">
+                    <div class="swiper-slide">
+                        <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}" class="related-link">
+                            <div class="related-card">
+                                <img src="${c.image}" alt="${c.metatitle}">
+                                <div class="related-name">${c.name}</div>
+                                <div class="related-price">${c.price}</div>
+                            </div>
+                        </a>
+                    </div>
+                </c:forEach>
+
+            </div>
+
+
+            <!-- Nút điều hướng -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
+
     </div>
 </div>
+
 
 <!--
   reviews
@@ -285,4 +299,26 @@
 
 <jsp:include page="/Assets/component/recycleFiles/footer.jsp"/>
 </body>
+<script>
+    new Swiper('.related-swiper', {
+        slidesPerView: 4,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false
+        },
+        breakpoints: {
+            0: { slidesPerView: 1 },
+            576: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            992: { slidesPerView: 4 }
+        }
+    });
+</script>
+
 </html>
