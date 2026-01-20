@@ -89,22 +89,36 @@
                     </div>
                 </div>
 
-                <div class="quantity-row">
-                    <div class="quantity-control">
-                        <button>−</button>
-                        <span>1</span>
-                        <button>+</button>
-                    </div>
-                </div>
 
-                <div class="action-row">
-                    <a href="./notification.html">
-                        <button for="notify-toggle" class="btn-add">Thêm vào giỏ hàng</button>
-                    </a>
-                    <a href="../cart_payment/payment.html">
-                        <button>Mua ngay</button>
-                    </a>
-                </div>
+
+                <form action="${pageContext.request.contextPath}/AddCart" method="post">
+
+                    <input type="hidden" name="productId" value="${product.ID}">
+                    <input type="hidden" name="name" value="${product.name}">
+                    <input type="hidden" name="price" value="${product.price}">
+                    <input type="hidden" name="image" value="${product.image}">
+                    <input type="hidden" name="quantity" id="quantity" value="1">
+
+                    <div class="quantity-control">
+                        <button type="button" onclick="decrease()">−</button>
+                        <span id="qty-display">1</span>
+                        <button type="button" onclick="increase()">+</button>
+                    </div>
+
+                    <div class="action-row">
+                        <button type="submit" class="btn-add">
+                            <i class="fa fa-cart-plus"></i> Thêm vào giỏ hàng
+                        </button>
+
+                        <button type="submit" formaction="${pageContext.request.contextPath}/buy-now">
+                            Mua ngay
+                        </button>
+                    </div>
+
+                </form>
+
+
+
 
                 <div class="back-row">
                     <a href="../../../products_afterupdate.html">
@@ -284,5 +298,27 @@
 </div>
 
 <jsp:include page="/Assets/component/recycleFiles/footer.jsp"/>
+
+<script>
+    let qty = 1;
+
+    function increase() {
+        qty++;
+        updateQty();
+    }
+
+    function decrease() {
+        if (qty > 1) {
+            qty--;
+            updateQty();
+        }
+    }
+
+    function updateQty() {
+        document.getElementById("qty-display").innerText = qty;
+        document.getElementById("quantity").value = qty;
+    }
+</script>
+
 </body>
 </html>

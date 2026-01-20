@@ -225,18 +225,26 @@
                     <a href="${pageContext.request.contextPath}/cart">
                     <div class="icon" style="cursor: pointer" onclick="goCart()">
                         <div class="cart">
+
+                            <%--CẬP NHẬT GIỎ HÀNG SAU KHI THÊM SP --%>
+                            <c:set var="cart" value="${sessionScope.cart}" />
+                            <c:set var="cartCount" value="0" />
+
+                            <c:if test="${cart != null}">
+                                <c:forEach items="${cart.cartItems.values()}" var="item">
+                                    <c:set var="cartCount" value="${cartCount + item.quantity}" />
+                                </c:forEach>
+                            </c:if>
+
                             <i class="bi bi-cart2" title="cart"></i>
                             <div class="num">
-                                <p
-                                        id="cart_num"
+                                <p id="cart_num"
                                         style="
-                          border-radius: 8px;
-                          padding: 2px;
-                          background-color: #e85221;
-                          color: white;
-                        "
-                                >
-                                    0
+                                        border-radius: 8px;
+                                        padding: 2px;
+                                        background-color: #e85221;
+                                        color: white;">
+                                    <c:out value="${cartCount}" default="0"/>
                                 </p>
                             </div>
                         </div>
