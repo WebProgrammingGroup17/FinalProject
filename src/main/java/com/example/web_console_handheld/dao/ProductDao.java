@@ -1,5 +1,7 @@
 package com.example.web_console_handheld.dao;
 
+import com.example.web_console_handheld.model.Brand;
+import com.example.web_console_handheld.model.Category;
 import com.example.web_console_handheld.model.Product;
 
 import java.util.List;
@@ -198,6 +200,79 @@ public class ProductDao extends BaseDao {
                         .mapTo(Integer.class)
                         .one()
         );
+    }
+    public List<Category> getCategoryList() {
+        return get().withHandle(handle ->
+                handle.createQuery(
+                                "SELECT * FROM categories ORDER BY name ASC"
+                        )
+                        .mapToBean(Category.class)
+                        .list()
+        );
+    }
+
+    public List<Brand> getBrandList() {
+        return get().withHandle(handle ->
+                handle.createQuery(
+                                "SELECT * FROM brands ORDER BY brand_name ASC"
+                        )
+                        .mapToBean(Brand.class)
+                        .list()
+        );
+    }
+
+    // lọc sản phẩm
+    public List<Product> filterProducts(
+            Integer categoryId,
+            String priceRange,
+            List<Integer> brandIds,
+            List<Integer> useTimes) {
+
+        StringBuilder sql = new StringBuilder(
+                "SELECT * FROM products WHERE active = 1 AND ispremium = 0"
+        );
+
+        if (categoryId != null) {
+            sql.append(" AND categories_id = :categoryId");
+        }
+
+        if (priceRange != null) {
+            switch (priceRange) {
+                case "under500" -> sql.append(" AND price < 500000");
+                case "500-1m" -> sql.append(" AND price BETWEEN 500000 AND 1000000");
+                case "1-2m" -> sql.append(" AND price BETWEEN 1000000 AND 2000000");
+                case "2-3m" -> sql.append(" AND price BETWEEN 2000000 AND 3000000");
+                case "over3m" -> sql.append(" AND price > 3000000");
+            }
+        }
+
+        // chỉ append in khi list > 0
+        if (brandIds != null && !brandIds.isEmpty()) {
+            sql.append(" AND brand_id IN (<brandIds>)");
+        }
+
+        if (useTimes != null && !useTimes.isEmpty()) {
+            sql.append(" AND useTime IN (<useTimes>)");
+        }
+
+        return get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            if (categoryId != null) {
+                query.bind("categoryId", categoryId);
+            }
+
+            // chỉ bindList khi list > 0
+            if (brandIds != null && !brandIds.isEmpty()) {
+                query.bindList("brandIds", brandIds);
+            }
+
+            if (useTimes != null && !useTimes.isEmpty()) {
+                query.bindList("useTimes", useTimes);
+            }
+
+            return query.mapToBean(Product.class).list();
+        });
     }
 
 }
