@@ -17,8 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cart</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/cart_payment/cart.css">
-    <link rel="stylesheet" href="/Assets/css/same_style/style.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/recycleFilecss/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/same_style/style.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Assets/css/recycleFilecss/footer.css">
     <link
             rel="stylesheet"
@@ -28,9 +27,158 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
+    <style>
+        .container {
+            width: 1200px;
+            margin: auto;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .cart-table td {
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f7f8f9;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #cbcbcb;
+            margin: 10px 0;
+        }
+
+        .title p {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .product-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .product-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .product-price {
+            min-width: 120px;
+            text-align: right;
+            font-weight: bold;
+            color: #e95221;
+            white-space: nowrap;
+        }
+        .select-item {
+            margin: 0 20px;
+            transform: scale(1.2);
+        }
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+        .qty-form {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #e95221;
+            background: white;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            border-radius: 5px;
+            color: #e95221;
+        }
+        .qty-number {
+            min-width: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .fa-trash {
+            font-size: 18px;
+            color: #666;
+            cursor: pointer;
+        }
+        .summary-row td {
+            text-align: right;
+            font-size: 18px;
+            border-bottom: none;
+        }
+        .total-amount {
+            color: #e95221;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .cart-action {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .btn-order {
+            width: 300px;
+            height: 50px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #e95221;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+
+        }
+        .btn-order:hover {
+            opacity: 0.9;
+        }
+        #editBtn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #e95221;
+            cursor: pointer;
+        }
+
+        #deleteAllBtn {
+            display: none;
+            margin-top: 6px;
+            background: none;
+            border: none;
+            font-size: 14px;
+            color: red;
+            cursor: pointer;
+        }
+
+        #deleteAllBtn:hover {
+            text-decoration: underline;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #e95221;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
-<!-- <div id="header"></div> -->
+
 <jsp:include page="/Assets/component/recycleFiles/header.jsp" />
 
 <a href="${pageContext.request.contextPath}/product"
