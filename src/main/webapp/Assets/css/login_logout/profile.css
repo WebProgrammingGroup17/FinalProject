@@ -19,8 +19,6 @@ body {
 .sidebar {
     width: 260px;
     background: #ffffff;
-    border: 1px solid #000;
-    border-radius: 10px;
     padding: 20px;
 }
 
@@ -43,6 +41,7 @@ body {
     list-style: none;
     margin-top: 25px;
     padding: 0;
+    border-radius: 7px;
 }
 
 .menu li {
@@ -53,10 +52,9 @@ body {
     display: block;
     width: 100%;
     padding: 14px 12px;
-
     background: #e95221;
     border-radius: 14px;
-
+    box-sizing: border-box;
     text-decoration: none;
     text-align: center;
     font-weight: bold;
