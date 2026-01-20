@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +33,25 @@
 <!-- <div id="header"></div> -->
 <jsp:include page="/Assets/component/recycleFiles/header.jsp" />
 
+<a href="${pageContext.request.contextPath}/product"
+   class="back-btn">
+    ← Tiếp tục mua sắm
+</a>
+
 <div class="container" id="cart-item">
     <div class="title">
-        <p>Giỏ hàng của bạn: <span id="for_you">Khách</span></p>
+        <p>Giỏ hàng của bạn: <span id="for_you">${sessionScope.auth.username}</span></p>
+        <div class="edit-area">
+            <button type="button" id="editBtn">Sửa</button>
+
+            <!-- Xóa tất cả sản phẩm trong cart -->
+            <form id="deleteAllForm"
+                  action="${pageContext.request.contextPath}/cartAction"
+                  method="post">
+                <input type="hidden" name="action" value="clear">
+                <button type="submit" id="deleteAllBtn">Xóa tất cả</button>
+            </form>
+        </div>
     </div>
 
     <c:set var="cart" value="${sessionScope.cart}" />
@@ -42,7 +60,6 @@
         <tbody id="cart-items">
 
         <c:choose>
-<%--            GIO TRONG --%>
             <c:when test="${cart == null || empty cart.cartItems}">
 
             <tr>
@@ -67,25 +84,65 @@
 
 
             <c:otherwise>
+                <c:set var="total" value="0" />
+
                 <c:forEach items="${cart.cartItems.values()}" var="item">
+                    <c:set var="total"
+                           value="${total + item.product.priceValue * item.quantity}" />
+
                     <tr>
-                        <td>
-                            <img src="${item.product.image}" width="80">
-                        </td>
-                        <td>
-                            <p>${item.product.name}</p>
-                        </td>
-                        <td>
-                                ${item.product.price}đ
-                        </td>
-                        <td>
-                                ${item.quantity}
+                            <%--CHECKBOX--%>
+                        <td class="select-col">
+                            <input type="checkbox"
+                                   name="selectedItems"
+                                   form="mainForm"
+                                    value="${item.product.ID}"
+                                    class="select-item"
+                                    data-price="${item.product.priceValue}"
+                                    data-id="${item.product.ID}">
                         </td>
 
                         <td>
-                            <a href="${pageContext.request.contextPath}/remove-from-cart?id=${item.product.ID}">
+                            <img src="${item.product.image}" width="80">
+                        </td>
+
+                                <td class="product-cell">
+                                    <div class="product-row">
+                                        <span class="product-name">${item.product.name}</span>
+                                        <span class="product-price">${item.product.price}đ</span>
+
+                                    <%--Tang/giam so luong san pham trng gio--%>
+                        <div class="quantity">
+                            <form action="${pageContext.request.contextPath}/cartAction" method="post" class="qty-form">
+                                <button type="submit"
+                                        name="action"
+                                        value="decrease_${item.product.ID}"
+                                        class="qty-btn">−</button>
+
+                            <span class="qty-number"
+                                    data-id="${item.product.ID}">
+                                    ${item.quantity}
+                            </span>
+
+
+                                <button type="submit"
+                                        name="action"
+                                        value="increase_${item.product.ID}"
+                                        class="qty-btn">+</button>
+                            </form>
+                        </div>
+                                    </div>
+                                </td>
+
+                        <%-- XÓA từng SP --%>
+                        <td>
+                            <form action="${pageContext.request.contextPath}/cartAction" method="post">
+                                <input type="hidden" name="action" value="remove_${item.product.ID}">
+                                <button type="submit"
+                                        style="border:none;background:none;cursor:pointer;">
                                 <i class="fa fa-trash"></i>
-                            </a>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
@@ -98,14 +155,88 @@
         <tr class="summary-row">
             <td colspan="3" style="border-bottom: none">TỔNG TIỀN:</td>
             <td class="total-amount" style="border-bottom: none">
-                <span id="total-price">0</span>
+                <span id="total-price">0đ</span>
             </td>
         </tr>
     </table>
 
-    <a href=""><button class="checkout-btn">ĐẶT HÀNG</button></a>
+
+    <form id="mainForm"
+          action="${pageContext.request.contextPath}/cartAction"
+          method="post"
+            class="cart-action">
+
+        <input type="hidden" name="action" id="mainAction">
+
+        <button type="submit"
+                onclick="document.getElementById('mainAction').value='checkout'"
+                class="btn-order">
+            ĐẶT HÀNG
+        </button>
+
+    </form>
+
 </div>
 <jsp:include page="/Assets/component/recycleFiles/footer.jsp" />
+
+
+<script>
+
+    const editBtn = document.getElementById("editBtn");
+    const deleteAllBtn = document.getElementById("deleteAllBtn");
+
+    let editing = false;
+
+    deleteAllBtn.style.display = "none";
+
+    editBtn.addEventListener("click", () => {
+        editing = !editing;
+
+        deleteAllBtn.style.display = editing ? "block" : "none";
+
+        editBtn.innerText = editing ? "Xong" : "Sửa";
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const checkboxes = document.querySelectorAll(".select-item");
+        const totalPriceEl = document.getElementById("total-price");
+
+        function formatVND(number) {
+            return number.toLocaleString("vi-VN") + "đ";
+        }
+
+        function calculateTotal() {
+            let total = 0;
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    const price = Number(cb.dataset.price);
+                    const id = cb.dataset.id;
+
+                    const qtyEl = document.querySelector(
+                        ".qty-number[data-id='" + id + "']"
+                    );
+
+                    if (!qtyEl) return;
+
+                    const qty = Number(qtyEl.innerText.trim());
+                    total += price * qty;
+                }
+            });
+
+            totalPriceEl.innerText = formatVND(total);
+        }
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener("change", calculateTotal);
+        });
+
+    });
+</script>
+
 </body>
 </html>
 
