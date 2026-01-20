@@ -153,10 +153,12 @@
 <section class="product-category">
     <div class="container">
         <h2 class="section-title">Danh Mục Console & Tay Cầm</h2>
+
         <div class="category-grid">
             <c:forEach var="c" items="${categories}">
-                <div class="category-item">
-                    <img src="${c.imgLink}" alt="${c.name}" />
+                <div class="category-item"
+                     data-url="${pageContext.request.contextPath}/filter-products?categoryId=${c.ID}">
+                    <img src="${c.imgLink}" alt="${c.name}">
                     <div class="category-info">
                         <h3>${c.name}</h3>
                         <p>${c.description}</p>
@@ -164,6 +166,8 @@
                 </div>
             </c:forEach>
         </div>
+
+
     </div>
 </section>
 
@@ -173,20 +177,30 @@
     <div class="container">
         <div class="product-grid">
             <c:forEach var="c" items="${products}">
-                <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}" style="color: black">
-                    <div class="product-card" style="cursor: pointer">
+                <a href="${pageContext.request.contextPath}/product-detail?id=${c.ID}" style="color: black"
+                   class="product-link">
+
+                    <div class="product-card">
                         <div class="img-box">
-                            <img
-                                    src="${c.image}"
-                                    alt="${c.metatitle}"
-                            />
+                            <img src="${c.image}" alt="${c.metatitle}"/>
+
                             <div class="hidden-info">
-                                <button class="add-cart">Thêm vào giỏ hàng</button>
+                                <button
+                                        type="button"
+                                        class="add-cart"
+                                        data-id="${c.ID}"
+                                        data-name="${c.name}"
+                                        data-image="${c.image}"
+                                        data-price="${c.price}">
+                                    Thêm vào giỏ hàng
+                                </button>
                             </div>
                         </div>
+
                         <h3>${c.name}</h3>
                         <p class="price">${c.price}đ</p>
                     </div>
+
                 </a>
             </c:forEach>
         </div>
@@ -321,5 +335,38 @@
         index = (index + 1) % slides.length;
         showSlide(index);
     }, 4000);
+    document.querySelectorAll('.category-item').forEach(item => {
+        item.addEventListener('click', () => {
+            window.location.href = item.dataset.url;
+        });
+    });
+
+        document.querySelectorAll('.add-cart').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();    // chặn submit
+            e.stopPropagation();   // chặn click lan lên <a>
+
+            const data = new URLSearchParams();
+            data.append('productId', this.dataset.id);
+            data.append('quantity', 1);
+            data.append('name', this.dataset.name);
+            data.append('image', this.dataset.image);
+            data.append('price', this.dataset.price);
+
+            fetch('${pageContext.request.contextPath}/AddCart', {
+                method: 'POST',
+                body: data
+            })
+                .then(res => {
+                    if (res.redirected) {
+                        window.location.href = res.url; // chưa login
+                        return;
+                    }
+                    alert('Đã thêm vào giỏ hàng');
+                });
+        });
+    });
+
+
 </script>
 </html>
