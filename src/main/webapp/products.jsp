@@ -6,6 +6,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,60 +33,88 @@
 
 
 <main id="content">
+    <!--  lọc sản phẩm  -->
+    <form id="filterForm"
+          action="${pageContext.request.contextPath}/filter-products"
+          method="get">
 
-    <!--  loc san pham          -->
-    <div class="filter" id="filter-panel">
+        <div class="filter" id="filter-panel">
 
-        <div class="title">LOẠI SẢN PHẨM</div>
-        <c:forEach var="c" items="${categories}">
+            <!-- phân loại -->
+            <div class="title">LOẠI SẢN PHẨM</div>
+            <c:forEach var="c" items="${categories}">
+                <div class="choice">
+                    <input type="radio"
+                           name="categoryId"
+                           value="${c.ID}"
+                           <c:if test="${param.categoryId == c.ID}">checked</c:if>>
+                    <label>${c.name}</label>
+                </div>
+            </c:forEach>
+
+            <!-- giá -->
+            <div class="title">CHỌN MỨC GIÁ</div>
+
             <div class="choice">
-                <input type="checkbox" class="check filter-brand" value="${c.name}"><label>${c.name}</label>
+                <input type="radio" name="priceRange" value="under500"
+                       <c:if test="${param.priceRange == 'under500'}">checked</c:if>>
+                <label>Giá dưới 500.000đ</label>
             </div>
-        </c:forEach>
 
-        <div class="title">CHỌN MỨC GIÁ</div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check1" name="checkbox1" value="under500"><label>Giá
-            dưới 500.000đ </label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check2" name="checkbox1" value="500-1000"><label>500.000đ
-            - 1 triệu </label>
-        </div>
-
-        <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check3" name="checkbox1" value="1000-2000"><label>1 -
-            2 triệu </label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check4" name="checkbox1" value="2000-3000"><label>2 -
-            3 triệu </label>
-        </div>
-        <div class="choice">
-            <input type="checkbox" class="check filter-price" id="check5" name="checkbox1" value="higher3000"><label>Trên
-            3 triệu </label>
-        </div>
-
-
-        <div class="title">THƯƠNG HIỆU</div>
-        <c:forEach var="c" items="${brands}">
             <div class="choice">
-                <input type="checkbox" class="check filter-brand" id="${c.ID}" name="checkbox2" value="${c.brand_name}"><label>${c.brand_name}</label>
+                <input type="radio" name="priceRange" value="500-1m"
+                       <c:if test="${param.priceRange == '500-1m'}">checked</c:if>>
+                <label>500.000đ - 1 triệu</label>
             </div>
-        </c:forEach>
 
-
-        <div class="title">
-            Pin
-        </div>
-        <c:forEach var="c" items="${energy}">
             <div class="choice">
-                <input type="checkbox" class="check filter-category"
-                       value="${c.useTime}"><label>${c.useTime}hours</label>
+                <input type="radio" name="priceRange" value="1-2m"
+                       <c:if test="${param.priceRange == '1-2m'}">checked</c:if>>
+                <label>1 - 2 triệu</label>
             </div>
-        </c:forEach>
 
-    </div>
+            <div class="choice">
+                <input type="radio" name="priceRange" value="2-3m"
+                       <c:if test="${param.priceRange == '2-3m'}">checked</c:if>>
+                <label>2 - 3 triệu</label>
+            </div>
+
+            <div class="choice">
+                <input type="radio" name="priceRange" value="over3m"
+                       <c:if test="${param.priceRange == 'over3m'}">checked</c:if>>
+                <label>Trên 3 triệu</label>
+            </div>
+
+            <!-- thương hiệu -->
+            <div class="title">THƯƠNG HIỆU</div>
+            <c:forEach var="b" items="${brands}">
+                <div class="choice">
+                    <input type="checkbox"
+                           name="brandId"
+                           value="${b.ID}"
+                    <c:if test="${fn:contains(fn:join(paramValues.brandId, ','), b.ID)}">
+                           checked
+                    </c:if>>
+                    <label>${b.brand_name}</label>
+                </div>
+            </c:forEach>
+
+            <!-- pin -->
+            <div class="title">Pin</div>
+            <c:forEach var="e" items="${energy}">
+                <div class="choice">
+                    <input type="checkbox"
+                           name="useTime"
+                           value="${e.useTime}"
+                    <c:if test="${fn:contains(fn:join(paramValues.useTime, ','), e.useTime)}">
+                           checked
+                    </c:if>>
+                    <label>${e.useTime} hours</label>
+                </div>
+            </c:forEach>
+
+        </div>
+    </form>
 
 
     <!-- san pham           -->
@@ -210,6 +239,50 @@
         }
     });
 </script>
+
+
+<script>
+    let filterTimeout;
+
+    document.querySelectorAll(
+        '#filter-panel input[type="checkbox"], #filter-panel input[type="radio"]'
+    ).forEach(input => {
+        input.addEventListener('change', () => {
+            clearTimeout(filterTimeout);
+            filterTimeout = setTimeout(() => {
+                document.getElementById('filterForm').submit();
+            }, 500); // 0.5 giây
+        });
+    });
+</script>
+
+<script>
+    document.querySelectorAll('#filter-panel input[type="radio"]').forEach(function (radio) {
+
+        radio.addEventListener('click', function () {
+
+            var name = this.name;
+
+            // nếu radio đã được check từ trước -> bỏ check
+            if (this.wasChecked) {
+                this.checked = false;
+            }
+
+            // reset trạng thái cho tất cả radio cùng name
+            document.querySelectorAll('input[name="' + name + '"]')
+                .forEach(function (r) {
+                    r.wasChecked = false;
+                });
+
+            // lưu trạng thái hiện tại
+            this.wasChecked = this.checked;
+
+            // submit form
+            document.getElementById('filterForm').submit();
+        });
+    });
+</script>
+
 <jsp:include page="/Assets/component/recycleFiles/footer.jsp"/>
 </body>
 </html>

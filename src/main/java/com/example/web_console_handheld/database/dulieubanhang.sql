@@ -590,6 +590,16 @@ INSERT INTO contact (gmail, phone, address)
 VALUES
     ('nhom17@gmail.com', '0987654321', 'Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP. Hồ Chí Minh');
 
+-- lọc sản phẩm 20/1 Châu
+SELECT *
+FROM products
+WHERE active = true
+  AND (:categoryId IS NULL OR categories_id = :categoryId)
+  AND (:brandIds IS NULL OR brand_id IN (:brandIds))
+  AND (:priceMin IS NULL
+    OR :priceMax IS NULL
+    OR price BETWEEN :priceMin AND :priceMax)
+  AND (:useTimes IS NULL OR useTime IN (:useTimes));
 
 -- Đã insert
 INSERT INTO logo VALUES ('Logo Shop', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaVtA9aH8iRQnDsQmBTt9yyB5mCIaYp8T0Qg&s');
