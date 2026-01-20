@@ -82,4 +82,58 @@ public class UserDao {
             ps.executeUpdate();
         }
     }
+
+    public User getUserById(int id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString("username"));
+                u.setEmail(rs.getString("email"));
+                u.setFullname(rs.getString("fullname"));
+                u.setPhoneNum(rs.getString("phoneNum"));
+                u.setLocation(rs.getString("location"));
+                u.setActive(rs.getBoolean("active"));
+                return u;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // cập nhật thông tin người dùng
+    public boolean updateProfile(User u) {
+        String sql = """
+        UPDATE users
+        SET email = ?,
+            phoneNum = ?,
+            location = ?,
+            updated_at = NOW()
+        WHERE id = ?
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, u.getEmail());
+            ps.setString(2, u.getPhoneNum());
+            ps.setString(3, u.getLocation());
+            ps.setInt(4, u.getId());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

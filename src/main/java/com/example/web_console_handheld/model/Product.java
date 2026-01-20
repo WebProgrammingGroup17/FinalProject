@@ -253,4 +253,9 @@ public class Product {
     public void setEndow(String endow) {
         this.endow = endow;
     }
+
+    //thêm để tính giá trong cart
+    public long getPriceValue() {
+        return this.price;
+    }
 }
