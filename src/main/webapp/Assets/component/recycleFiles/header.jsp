@@ -81,82 +81,23 @@
                         <a href="https://www.google.com/maps?q=10.871309739267502, 106.79176838635757" style="color: #333;"><b style="font-size: 13px" class="map">VỊ TRÍ CỬA HÀNG</b></a>
                     </div>
                     <div class="center-1 center3">
-                        <div class="input1">
-                            <input type="text" placeholder="Tìm sản phẩm..." />
-                            <div class="search">
-                                <i title="tìm kiếm" class="bi bi-search"></i>
+                            <div class="input1" style="position: relative;">
+                                <form action="${pageContext.request.contextPath}/search" method="get" class="search-form">
+                                    <input id="searchInput"
+                                           type="text"
+                                           name="q"
+                                           placeholder="Tìm sản phẩm...">
+
+                                    <button type="submit" class="search-btn">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </form>
+                                <div id="suggestBox" class="suggest-box"></div>
                             </div>
-                        </div>
                     </div>
                 </div>
 
                 <div class="right1">
-<%--                    <div class="icon icon2" id="icon3">--%>
-<%--                        <i class="bi bi-person-circle"></i>--%>
-<%--                        <p style="margin: 0">TÀI KHOẢN</p>--%>
-<%--                    </div>--%>
-
-<%--                    <div class="register-login" id="loginForm" class="a-same-nodecoration"--%>
-<%--                        ><div style="cursor: pointer" class="no-margin" onclick="goLogin()">--%>
-<%--                            <svg--%>
-<%--                                    xmlns="http://www.w3.org/2000/svg"--%>
-<%--                                    width="16"--%>
-<%--                                    height="16"--%>
-<%--                                    fill="currentColor"--%>
-<%--                                    class="bi bi-box-arrow-in-right"--%>
-<%--                                    viewBox="0 0 16 16"--%>
-<%--                            >--%>
-<%--                                <path--%>
-<%--                                        fill-rule="evenodd"--%>
-<%--                                        d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"--%>
-<%--                                />--%>
-<%--                                <path--%>
-<%--                                        fill-rule="evenodd"--%>
-<%--                                        d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"--%>
-<%--                                />--%>
-<%--                            </svg>--%>
-<%--                            <p>Đăng nhập</p>--%>
-<%--                        </div>--%>
-
-
-<%--                        <div class="no-margin" onclick="goRegister()" style="cursor: pointer">--%>
-<%--                            <svg--%>
-<%--                                    xmlns="http://www.w3.org/2000/svg"--%>
-<%--                                    width="16"--%>
-<%--                                    height="16"--%>
-<%--                                    fill="currentColor"--%>
-<%--                                    class="bi bi-person-plus"--%>
-<%--                                    viewBox="0 0 16 16"--%>
-<%--                            >--%>
-<%--                                <path--%>
-<%--                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"--%>
-<%--                                />--%>
-<%--                                <path--%>
-<%--                                        fill-rule="evenodd"--%>
-<%--                                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"--%>
-<%--                                />--%>
-<%--                            </svg>--%>
-<%--                            <p>Đăng ký</p>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-
-
-    <%--                    <div class="personal_logout" id="personal_logout">--%>
-    <%--                        <a--%>
-    <%--                                href="./Assets/component/cart_payment/Order.html"--%>
-    <%--                                class="a-same-nodecoration1"--%>
-    <%--                        ><div class="no-margin1">--%>
-    <%--                            <p>Trang cá nhân</p>--%>
-    <%--                        </div></a--%>
-    <%--                        >--%>
-    <%--                        <div class="no-margin1 no-margin2">--%>
-    <%--                            <span class="logoutbtn" id="logoutbtn">Đăng xuất</span>--%>
-    <%--                        </div>--%>
-    <%--                    </div>--%>
-
-
-
-    <%--  ====================================================--%>
 
             <%--Sửa để xử lý đăng nhập--%>
                 <div class="account-wrapper">
@@ -193,34 +134,8 @@
                             </c:otherwise>
                         </c:choose>
 
-
-<%--                    <div class="register-login" id="loginForm" class="a-same-nodecoration"--%>
-<%--                        >--%>
-<%--                        <a href="${pageContext.request.contextPath}/login" class="a-same-nodecoration">--%>
-<%--                        <div style="cursor: pointer" class="no-margin">--%>
-<%--                            <i class="bi bi-door-open"></i>--%>
-<%--                            <p>Đăng nhập</p>--%>
-<%--                        </div>--%>
-<%--                        </a>--%>
-
-<%--                        <a href="${pageContext.request.contextPath}/register" class="a-same-nodecoration">--%>
-<%--                        <div class="no-margin" onclick="goRegister()" style="cursor: pointer">--%>
-<%--                            <i class="bi bi-person-plus"></i>--%>
-<%--                            <p>Đăng ký</p>--%>
-<%--                        </div>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
-
                     </div>
                 </div>
-
-
-<%--==========================================================================--%>
-
-
-
-
-
 
                     <a href="${pageContext.request.contextPath}/cart">
                     <div class="icon" style="cursor: pointer" onclick="goCart()">
@@ -273,6 +188,36 @@
         </div>
     </div>
 </header>
+
+<script>
+    const input = document.getElementById("searchInput");
+    const box = document.getElementById("suggestBox");
+
+    input.addEventListener("keyup", function (e) {
+        const keyword = this.value.trim();
+
+        if (keyword.length < 2) {
+            box.innerHTML = "";
+            return;
+        }
+
+        fetch("${pageContext.request.contextPath}/search-suggest?q=" + encodeURIComponent(keyword))
+                .then(res => res.json())
+            .then(data => {
+                box.innerHTML = "";
+                data.forEach(p => {
+                    box.innerHTML += `
+                    <div class="suggest-item"
+                         onclick="window.location.href='product-detail?slug=${p.metatitle}'">
+                        <img src="${p.image}" width="40">
+                        <span>${p.name}</span>
+                    </div>
+                `;
+                });
+            });
+    });
+</script>
+
 </body>
 </html>
 

@@ -20,41 +20,42 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+
     //lay san pham theo id trang productDetails
     public Product getProductDetailByID(int id) {
         return get().withHandle(handle ->
                 handle.createQuery("""
-            SELECT
-                p.ID,
-                p.name,
-                p.image,
-                p.price,
-                p.priceOld,
-                p.short_description,
-                p.full_description,
-                p.information,
-                p.energy,
-                p.useTime,
-                p.weight,
-                p.active,
-                p.metatitle,
-                p.ispremium AS isPremium,
-                p.suports,
-                p.connect,
-                p.endow,
-                p.createdAt,
-
-                p.categories_id AS categoriesId,
-                c.name AS categoryName,
-
-                p.brand_id AS brandId,
-                b.brand_name AS brandName
-
-            FROM products p
-            JOIN categories c ON p.categories_id = c.ID
-            JOIN brands b ON p.brand_id = b.ID
-            WHERE p.ID = :id
-        """)
+                                    SELECT
+                                        p.ID,
+                                        p.name,
+                                        p.image,
+                                        p.price,
+                                        p.priceOld,
+                                        p.short_description,
+                                        p.full_description,
+                                        p.information,
+                                        p.energy,
+                                        p.useTime,
+                                        p.weight,
+                                        p.active,
+                                        p.metatitle,
+                                        p.ispremium AS isPremium,
+                                        p.suports,
+                                        p.connect,
+                                        p.endow,
+                                        p.createdAt,
+                                
+                                        p.categories_id AS categoriesId,
+                                        c.name AS categoryName,
+                                
+                                        p.brand_id AS brandId,
+                                        b.brand_name AS brandName
+                                
+                                    FROM products p
+                                    JOIN categories c ON p.categories_id = c.ID
+                                    JOIN brands b ON p.brand_id = b.ID
+                                    WHERE p.ID = :id
+                                """)
                         .bind("id", id)
                         .mapToBean(Product.class)
                         .findOne()
@@ -192,6 +193,7 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+
     public int countAllProduct() {
         return get().withHandle(handle ->
                 handle.createQuery(
@@ -201,6 +203,7 @@ public class ProductDao extends BaseDao {
                         .one()
         );
     }
+
     public List<Category> getCategoryList() {
         return get().withHandle(handle ->
                 handle.createQuery(
@@ -275,4 +278,34 @@ public class ProductDao extends BaseDao {
         });
     }
 
+    //Gợi ý tìm kiếm
+    public List<Product> suggestByName(String keyword) {
+        return get().withHandle(handle ->
+                handle.createQuery("""
+                                    SELECT ID, name, image, metatitle
+                                    FROM products
+                                    WHERE active = 1
+                                      AND name LIKE :kw
+                                    LIMIT 5
+                                """)
+                        .bind("kw", "%" + keyword + "%")
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    // Tìm kiếm sản phẩm
+    public List<Product> searchByName(String keyword) {
+        return get().withHandle(handle ->
+                handle.createQuery("""
+                                    SELECT *
+                                    FROM products
+                                    WHERE active = 1
+                                      AND name LIKE :kw
+                                """)
+                        .bind("kw", "%" + keyword + "%")
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
 }
