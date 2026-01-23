@@ -33,7 +33,7 @@ public class ProductServlet extends HttpServlet {
         } catch (Exception ignored) {}
         int offset = (page - 1) * PAGE_SIZE;
 
-        // ===== FILTER PARAMS =====
+        // ===== PARAMS =====
         Integer categoryId = null;
         try {
             categoryId = Integer.parseInt(request.getParameter("categoryId"));
@@ -41,8 +41,7 @@ public class ProductServlet extends HttpServlet {
 
         String priceRange = request.getParameter("priceRange");
         String sort = request.getParameter("sort");
-
-        String keyword = request.getParameter("q"); // 🔥 ĐÚNG VỚI FORM SEARCH
+        String keyword = request.getParameter("q");
 
         List<Integer> brandIds = null;
         String[] brandArr = request.getParameterValues("brandId");
@@ -65,8 +64,12 @@ public class ProductServlet extends HttpServlet {
         int totalProduct;
 
         if (keyword != null && !keyword.trim().isEmpty()) {
-            products = productDao.searchByName(keyword.trim());
-            totalProduct = products.size();
+            products = productDao.searchByNamePage(
+                    keyword.trim(),
+                    offset,
+                    PAGE_SIZE
+            );
+            totalProduct = productDao.countSearchByName(keyword.trim());
             request.setAttribute("keyword", keyword);
         } else {
             products = productDao.filterSortPage(
@@ -94,7 +97,7 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("selectedCategoryId", categoryId);
 
-        // ===== LOAD FILTER =====
+        // ===== LOAD FILTER DATA =====
         request.setAttribute("categories", new CategoryDao().getCategory());
         request.setAttribute("brands", new BrandDao().getBrands());
         request.setAttribute("energy", productDao.getEnergyProductList());

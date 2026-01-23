@@ -34,81 +34,66 @@
 
 <main id="content">
     <!--  lọc sản phẩm  -->
-    <form id="filterForm"
-          action="${pageContext.request.contextPath}/product"
-          method="get">
+    <form id="filterForm" action="${pageContext.request.contextPath}/product" method="get">
+        <!-- GIỮ SEARCH -->
+        <c:if test="${not empty param.q}">
+            <input type="hidden" name="q" value="${fn:escapeXml(param.q)}" />
+        </c:if>
+
 
         <div class="filter" id="filter-panel">
 
-            <!-- phân loại -->
+
+            <!-- CATEGORY -->
             <div class="title">LOẠI SẢN PHẨM</div>
-            <c:forEach var="c" items="${categories}">
+            <c:forEach var="cat" items="${categories}">
                 <div class="choice">
-                    <input type="radio"
-                           name="categoryId"
-                           value="${c.ID}"
-                           <c:if test="${selectedCategoryId == c.ID}">checked</c:if>>
-                    <label>${c.name}</label>
+                    <input type="radio" name="categoryId" value="${cat.ID}"
+                        ${param.categoryId == cat.ID ? 'checked' : ''} />
+                    <label>${cat.name}</label>
                 </div>
             </c:forEach>
 
-            <!-- giá -->
+
+            <!-- PRICE -->
             <div class="title">CHỌN MỨC GIÁ</div>
+            <c:set var="price" value="${param.priceRange}" />
+            <c:forEach var="p" items="under500,500-1m,1-2m,2-3m,over3m" varStatus="st">
+                <div class="choice">
+                    <input type="radio" name="priceRange" value="${p}" ${price == p ? 'checked' : ''} />
+                    <label>
+                        <c:choose>
+                            <c:when test="${p=='under500'}">Dưới 500.000đ</c:when>
+                            <c:when test="${p=='500-1m'}">500.000đ - 1 triệu</c:when>
+                            <c:when test="${p=='1-2m'}">1 - 2 triệu</c:when>
+                            <c:when test="${p=='2-3m'}">2 - 3 triệu</c:when>
+                            <c:otherwise>Trên 3 triệu</c:otherwise>
+                        </c:choose>
+                    </label>
+                </div>
+            </c:forEach>
 
-            <div class="choice">
-                <input type="radio" name="priceRange" value="under500"
-                       <c:if test="${param.priceRange == 'under500'}">checked</c:if>>
-                <label>Giá dưới 500.000đ</label>
-            </div>
 
-            <div class="choice">
-                <input type="radio" name="priceRange" value="500-1m"
-                       <c:if test="${param.priceRange == '500-1m'}">checked</c:if>>
-                <label>500.000đ - 1 triệu</label>
-            </div>
-
-            <div class="choice">
-                <input type="radio" name="priceRange" value="1-2m"
-                       <c:if test="${param.priceRange == '1-2m'}">checked</c:if>>
-                <label>1 - 2 triệu</label>
-            </div>
-
-            <div class="choice">
-                <input type="radio" name="priceRange" value="2-3m"
-                       <c:if test="${param.priceRange == '2-3m'}">checked</c:if>>
-                <label>2 - 3 triệu</label>
-            </div>
-
-            <div class="choice">
-                <input type="radio" name="priceRange" value="over3m"
-                       <c:if test="${param.priceRange == 'over3m'}">checked</c:if>>
-                <label>Trên 3 triệu</label>
-            </div>
-
-            <!-- thương hiệu -->
+            <!-- BRAND -->
             <div class="title">THƯƠNG HIỆU</div>
             <c:forEach var="b" items="${brands}">
                 <div class="choice">
-                    <input type="checkbox"
-                           name="brandId"
-                           value="${b.ID}"
-                        ${fn:contains(',' += fn:join(paramValues.brandId, ',') += ',', ',' += b.ID += ',') ? 'checked' : ''}>
+                    <input type="checkbox" name="brandId" value="${b.ID}"
+                        ${fn:contains(fn:join(paramValues.brandId, ','), b.ID) ? 'checked' : ''} />
                     <label>${b.brand_name}</label>
                 </div>
             </c:forEach>
 
-            <!-- pin -->
-            <div class="title">Pin</div>
+
+            <!-- BATTERY -->
+            <div class="title">PIN</div>
             <c:forEach var="e" items="${energy}">
                 <div class="choice">
-                    <input type="checkbox"
-                           name="useTime"
-                           value="${e.useTime}"
-                        ${fn:contains(',' += fn:join(paramValues.useTime, ',') += ',', ',' += e.useTime += ',') ? 'checked' : ''}>
-                    <label>${e.useTime} hours</label>
+                    <input type="checkbox" name="useTime" value="${e.useTime}"
+                        ${fn:contains(fn:join(paramValues.useTime, ','), e.useTime) ? 'checked' : ''} />
+                    <label>${e.useTime} giờ</label>
                 </div>
             </c:forEach>
-
         </div>
     </form>
 
@@ -120,6 +105,9 @@
             <div class="Loai">Sản phẩm</div>
             <%--Chức năng sắp xếp theo giá tăng/giảm dần và mới nhất--%>
             <form method="get" id="sortForm" action="${pageContext.request.contextPath}/product">
+                <c:if test="${not empty keyword}">
+                    <input type="hidden" name="q" value="${keyword}">
+                </c:if>
                 <!-- category -->
                 <input type="hidden" name="categoryId" value="${param.categoryId}">
 
@@ -135,6 +123,7 @@
                 <c:forEach var="u" items="${paramValues.useTime}">
                     <input type="hidden" name="useTime" value="${u}">
                 </c:forEach>
+                <input type="hidden" name="sort" id="sortInput" value="${param.sort}">
                 <div class="sort">
                     <i class="fa-solid fa-arrow-down-wide-short"></i>
                     <label>Sắp xếp:</label>
@@ -194,36 +183,18 @@
         <!-- pagination-->
         <div class="pagination">
             <c:forEach begin="1" end="${totalPage}" var="i">
-
-                <c:url var="pageUrl" value="/product">
-                    <c:param name="page" value="${i}"/>
-
-                    <c:if test="${not empty param.sort}">
-                        <c:param name="sort" value="${param.sort}"/>
-                    </c:if>
-
-                    <c:if test="${not empty selectedCategoryId}">
-                        <c:param name="categoryId" value="${selectedCategoryId}"/>
-                    </c:if>
-
-                    <c:if test="${not empty param.priceRange}">
-                        <c:param name="priceRange" value="${param.priceRange}"/>
-                    </c:if>
-
-                    <c:forEach var="b" items="${paramValues.brandId}">
-                        <c:param name="brandId" value="${b}"/>
-                    </c:forEach>
-
-                    <c:forEach var="u" items="${paramValues.useTime}">
-                        <c:param name="useTime" value="${u}"/>
-                    </c:forEach>
-                </c:url>
-
-                <a href="${pageUrl}" class="${i == currentPage ? 'active' : ''}">
+                <a class="${i == currentPage ? 'active' : ''}"
+                   href="${pageContext.request.contextPath}/product?page=${i}
+           <c:if test='${not empty keyword}'> &q=${fn:escapeXml(keyword)}</c:if>
+           <c:if test='${not empty param.categoryId}'> &categoryId=${param.categoryId}</c:if>
+           <c:if test='${not empty param.priceRange}'> &priceRange=${param.priceRange}</c:if>
+           <c:if test='${not empty param.sort}'> &sort=${param.sort}</c:if>
+           <c:forEach var='b' items='${paramValues.brandId}'> &brandId=${b}</c:forEach>
+           <c:forEach var='u' items='${paramValues.useTime}'> &useTime=${u}</c:forEach>
+           ">
                         ${i}
                 </a>
             </c:forEach>
-
         </div>
 
         <div id="no-products-message" style="display:none; text-align: center; margin-top: 20px;">
