@@ -26,14 +26,14 @@ public class ProductServlet extends HttpServlet {
 
         ProductDao productDao = new ProductDao();
 
-        // ===== page =====
+        // ===== PAGE =====
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (Exception ignored) {}
         int offset = (page - 1) * PAGE_SIZE;
 
-        // ===== filter params =====
+        // ===== FILTER PARAMS =====
         Integer categoryId = null;
         try {
             categoryId = Integer.parseInt(request.getParameter("categoryId"));
@@ -41,6 +41,8 @@ public class ProductServlet extends HttpServlet {
 
         String priceRange = request.getParameter("priceRange");
         String sort = request.getParameter("sort");
+
+        String keyword = request.getParameter("q"); // 🔥 ĐÚNG VỚI FORM SEARCH
 
         List<Integer> brandIds = null;
         String[] brandArr = request.getParameterValues("brandId");
@@ -59,55 +61,47 @@ public class ProductServlet extends HttpServlet {
         }
 
         // ===== DATA =====
-        List<Product> products = productDao.filterSortPage(
-                categoryId,
-                priceRange,
-                brandIds,
-                useTimes,
-                sort,
-                offset,
-                PAGE_SIZE
-        );
+        List<Product> products;
+        int totalProduct;
 
-        int totalProduct = productDao.countFilter(
-                categoryId,
-                priceRange,
-                brandIds,
-                useTimes
-        );
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            products = productDao.searchByName(keyword.trim());
+            totalProduct = products.size();
+            request.setAttribute("keyword", keyword);
+        } else {
+            products = productDao.filterSortPage(
+                    categoryId,
+                    priceRange,
+                    brandIds,
+                    useTimes,
+                    sort,
+                    offset,
+                    PAGE_SIZE
+            );
+            totalProduct = productDao.countFilter(
+                    categoryId,
+                    priceRange,
+                    brandIds,
+                    useTimes
+            );
+        }
 
         int totalPage = (int) Math.ceil((double) totalProduct / PAGE_SIZE);
 
-        // ===== attributes =====
+        // ===== ATTRIBUTES =====
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPage", totalPage);
+        request.setAttribute("selectedCategoryId", categoryId);
 
-
-        String keyword = request.getParameter("keyword");
-
-        List<Product> p;
-
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            p = productDao.searchByName(keyword.trim());
-            request.setAttribute("keyword", keyword);
-        } else {
-            p = productDao.getProductList();
-        }
-
-        request.setAttribute("products", p);
-
-        // load thanh lọc
-        request.setAttribute("categories", productDao.getCategoryList());
-        request.setAttribute("brands", productDao.getBrandList());
-        request.setAttribute("energy", productDao.getEnergyProductList());
-
+        // ===== LOAD FILTER =====
         request.setAttribute("categories", new CategoryDao().getCategory());
         request.setAttribute("brands", new BrandDao().getBrands());
         request.setAttribute("energy", productDao.getEnergyProductList());
-        request.setAttribute("selectedCategoryId", categoryId);
+
         request.getRequestDispatcher("/products.jsp").forward(request, response);
     }
 }
+
 
 
