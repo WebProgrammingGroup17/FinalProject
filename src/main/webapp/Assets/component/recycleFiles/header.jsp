@@ -91,10 +91,10 @@
                 <!-- ------ -->
                 <div class="logo" style="cursor:pointer">
                     <a href="${pageContext.request.contextPath}/home">
-                    <img
-                            title="${logo.titleLogo}"
-                            src="${logo.linkLogo}"
-                    />
+                        <img
+                                title="${logo.titleLogo}"
+                                src="${logo.linkLogo}"
+                        />
                     </a>
                 </div>
 
@@ -111,7 +111,7 @@
                         <a href="https://www.google.com/maps?q=10.871309739267502, 106.79176838635757" style="color: #333;"><b style="font-size: 13px" class="map">VỊ TRÍ CỬA HÀNG</b></a>
                     </div>
                     <div class="center-1 center3">
-                        <div class="input1" style="position: relative;">
+                        <div class="input1">
                             <form action="${pageContext.request.contextPath}/search" method="get" class="search-form">
                                 <input id="searchInput"
                                        type="text"
@@ -123,106 +123,78 @@
                                 </button>
                             </form>
                             <div id="suggestBox" class="suggest-box"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="right1">
 
+                    <%--Sửa để xử lý đăng nhập--%>
+                    <div class="account-wrapper">
 
-            <%--Sửa để xử lý đăng nhập--%>
-                <div class="account-wrapper">
+                        <!-- ICON -->
+                        <div class="icon icon2">
+                            <i class="bi bi-person-circle"></i>
+                            <p style="margin:0">TÀI KHOẢN</p>
+                        </div>
 
-                    <!-- ICON -->
-                    <div class="icon icon2">
-                        <i class="bi bi-person-circle"></i>
-                        <p style="margin:0">TÀI KHOẢN</p>
+
+                        <div class="account-dropdown">
+
+                            <c:choose>
+                                <c:when test="${empty sessionScope.auth}">
+                                    <a href="${pageContext.request.contextPath}/login" class="a-same-nodecoration"><div class="dropdown-item" onclick="goLogin()">Đăng nhập</div></a>
+                                    <a href="${pageContext.request.contextPath}/register" class="a-same-nodecoration"><div class="dropdown-item" onclick="goRegister()">Đăng ký</div></a>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <div class="dropdown-item">
+                                        Xin chào, <b>${sessionScope.auth.username}</b>
+                                    </div>
+
+                                    <div class="dropdown-item"
+                                         onclick="window.location.href='${pageContext.request.contextPath}/profile'">
+                                        Trang cá nhân
+                                    </div>
+
+                                    <div class="dropdown-item logout"
+                                         onclick="window.location.href='${pageContext.request.contextPath}/logout'">
+                                        Đăng xuất
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+
+                        </div>
                     </div>
-
-
-                    <div class="account-dropdown">
-
-                        <c:choose>
-                            <c:when test="${empty sessionScope.auth}">
-                                <a href="${pageContext.request.contextPath}/login" class="a-same-nodecoration"><div class="dropdown-item" onclick="goLogin()">Đăng nhập</div></a>
-                                <a href="${pageContext.request.contextPath}/register" class="a-same-nodecoration"><div class="dropdown-item" onclick="goRegister()">Đăng ký</div></a>
-                            </c:when>
-
-                            <c:otherwise>
-                                <div class="dropdown-item">
-                                    Xin chào, <b>${sessionScope.auth.username}</b>
-                                </div>
-
-                                <div class="dropdown-item"
-                                     onclick="window.location.href='${pageContext.request.contextPath}/profile'">
-                                    Trang cá nhân
-                                </div>
-
-                                <div class="dropdown-item logout"
-                                     onclick="window.location.href='${pageContext.request.contextPath}/logout'">
-                                    Đăng xuất
-                                </div>
-                            </c:otherwise>
-                        </c:choose>
-
-
-<%--                    <div class="register-login" id="loginForm" class="a-same-nodecoration"--%>
-<%--                        >--%>
-<%--                        <a href="${pageContext.request.contextPath}/login" class="a-same-nodecoration">--%>
-<%--                        <div style="cursor: pointer" class="no-margin">--%>
-<%--                            <i class="bi bi-door-open"></i>--%>
-<%--                            <p>Đăng nhập</p>--%>
-<%--                        </div>--%>
-<%--                        </a>--%>
-
-<%--                        <a href="${pageContext.request.contextPath}/register" class="a-same-nodecoration">--%>
-<%--                        <div class="no-margin" onclick="goRegister()" style="cursor: pointer">--%>
-<%--                            <i class="bi bi-person-plus"></i>--%>
-<%--                            <p>Đăng ký</p>--%>
-<%--                        </div>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
-
-                    </div>
-                </div>
-
-
-<%--==========================================================================--%>
-
-
-
-
-
 
                     <a href="${pageContext.request.contextPath}/cart">
-                    <div class="icon" style="cursor: pointer" onclick="goCart()">
-                        <div class="cart">
+                        <div class="icon" style="cursor: pointer" onclick="goCart()">
+                            <div class="cart">
 
-                            <%--CẬP NHẬT GIỎ HÀNG SAU KHI THÊM SP --%>
-                            <c:set var="cart" value="${sessionScope.cart}" />
-                            <c:set var="cartCount" value="0" />
+                                <%--CẬP NHẬT GIỎ HÀNG SAU KHI THÊM SP --%>
+                                <c:set var="cart" value="${sessionScope.cart}" />
+                                <c:set var="cartCount" value="0" />
 
-                            <c:if test="${cart != null}">
-                                <c:forEach items="${cart.cartItems.values()}" var="item">
-                                    <c:set var="cartCount" value="${cartCount + item.quantity}" />
-                                </c:forEach>
-                            </c:if>
+                                <c:if test="${cart != null}">
+                                    <c:forEach items="${cart.cartItems.values()}" var="item">
+                                        <c:set var="cartCount" value="${cartCount + item.quantity}" />
+                                    </c:forEach>
+                                </c:if>
 
-                            <i class="bi bi-cart2" title="cart"></i>
-                            <div class="num">
-                                <p id="cart_num"
-                                        style="
+                                <i class="bi bi-cart2" title="cart"></i>
+                                <div class="num">
+                                    <p id="cart_num"
+                                       style="
                                         border-radius: 8px;
                                         padding: 2px;
                                         background-color: #e85221;
                                         color: white;">
-                                    <c:out value="${cartCount}" default="0"/>
-                                </p>
+                                        <c:out value="${cartCount}" default="0"/>
+                                    </p>
+                                </div>
                             </div>
+                            <p class="cart3">GIỎ HÀNG</p>
                         </div>
-                        <p class="cart3">GIỎ HÀNG</p>
-                    </div>
                     </a>
                 </div>
             </div>
