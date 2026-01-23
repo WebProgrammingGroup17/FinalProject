@@ -30,6 +30,32 @@
             src="https://kit.fontawesome.com/a076d05399.js"
             crossorigin="anonymous"
     ></script>
+    <style>
+        #searchInput{
+            position: relative;
+        }
+        .input1 input {
+            padding-right: 35px;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .search-btn i {
+            font-size: 19px;
+            color: #e85221;
+            margin-top: 7px;
+        }
+
+        .search-btn:hover i {
+            color: #ae2c00;
+        }
+    </style>
 </head>
 <body>
 <header class="header">
@@ -81,7 +107,7 @@
                         <a href="https://www.google.com/maps?q=10.871309739267502, 106.79176838635757" style="color: #333;"><b style="font-size: 13px" class="map">VỊ TRÍ CỬA HÀNG</b></a>
                     </div>
                     <div class="center-1 center3">
-                            <div class="input1" style="position: relative;">
+                            <div class="input1">
                                 <form action="${pageContext.request.contextPath}/search" method="get" class="search-form">
                                     <input id="searchInput"
                                            type="text"

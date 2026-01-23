@@ -142,9 +142,6 @@ body{
 .center3{
     padding-top: 13px;
 }
-.input1{
-    position: relative;
-}
 .search{
     position: absolute;
     right: -20px;
@@ -494,30 +491,3 @@ body{
     border-radius: 10px;
 }
 
-.input1 form {
-    position: relative;
-}
-
-.input1 input {
-    padding-right: 35px;
-}
-
-.search-btn {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.search-btn i {
-    font-size: 16px;
-    color: #e85221;
-    margin-top: 35px;
-}
-
-.search-btn:hover i {
-    color: #ae2c00;
-}
