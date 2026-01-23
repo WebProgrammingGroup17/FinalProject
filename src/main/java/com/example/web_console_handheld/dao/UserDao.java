@@ -5,7 +5,7 @@ import com.example.web_console_handheld.utils.DBConnection;
 
 import java.sql.*;
 
-public class UserDao {
+public class UserDao extends BaseDao{
 
     // Kiểm tra username đã tồn tại chưa
     public boolean existsUsername(String username) {
@@ -134,6 +134,16 @@ public class UserDao {
             e.printStackTrace();
         }
         return false;
+    }
+    public void updateAddress(int userId, String address) {
+        get().useHandle(handle ->
+                handle.createUpdate(
+                                "UPDATE users SET location = :address WHERE id = :id"
+                        )
+                        .bind("address", address)
+                        .bind("id", userId)
+                        .execute()
+        );
     }
 
 }

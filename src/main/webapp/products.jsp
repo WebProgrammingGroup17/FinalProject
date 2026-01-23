@@ -35,7 +35,7 @@
 <main id="content">
     <!--  lọc sản phẩm  -->
     <form id="filterForm"
-          action="${pageContext.request.contextPath}/filter-products"
+          action="${pageContext.request.contextPath}/product"
           method="get">
 
         <div class="filter" id="filter-panel">
@@ -47,7 +47,7 @@
                     <input type="radio"
                            name="categoryId"
                            value="${c.ID}"
-                           <c:if test="${param.categoryId == c.ID}">checked</c:if>>
+                           <c:if test="${selectedCategoryId == c.ID}">checked</c:if>>
                     <label>${c.name}</label>
                 </div>
             </c:forEach>
@@ -92,9 +92,7 @@
                     <input type="checkbox"
                            name="brandId"
                            value="${b.ID}"
-                    <c:if test="${fn:contains(fn:join(paramValues.brandId, ','), b.ID)}">
-                           checked
-                    </c:if>>
+                        ${fn:contains(',' += fn:join(paramValues.brandId, ',') += ',', ',' += b.ID += ',') ? 'checked' : ''}>
                     <label>${b.brand_name}</label>
                 </div>
             </c:forEach>
@@ -106,9 +104,7 @@
                     <input type="checkbox"
                            name="useTime"
                            value="${e.useTime}"
-                    <c:if test="${fn:contains(fn:join(paramValues.useTime, ','), e.useTime)}">
-                           checked
-                    </c:if>>
+                        ${fn:contains(',' += fn:join(paramValues.useTime, ',') += ',', ',' += e.useTime += ',') ? 'checked' : ''}>
                     <label>${e.useTime} hours</label>
                 </div>
             </c:forEach>
@@ -121,14 +117,29 @@
     <div class="contain">
 
         <div class="contain-header">
-            <div class="Loai">Console</div>
-                <%--Chức năng sắp xếp theo giá tăng/giảm dần và mới nhất--%>
-            <form method="get" id="sortForm">
-            <div class="sort">
-                <i class="fa-solid fa-arrow-down-wide-short"></i></i>
-                <label>Sắp xếp:</label>
+            <div class="Loai">Sản phẩm</div>
+            <%--Chức năng sắp xếp theo giá tăng/giảm dần và mới nhất--%>
+            <form method="get" id="sortForm" action="${pageContext.request.contextPath}/product">
+                <!-- category -->
+                <input type="hidden" name="categoryId" value="${param.categoryId}">
 
-                <div class="sort-box" onclick="toggleSortMenu()">
+                <!-- price -->
+                <input type="hidden" name="priceRange" value="${param.priceRange}">
+
+                <!-- brand (multiple checkbox) -->
+                <c:forEach var="b" items="${paramValues.brandId}">
+                    <input type="hidden" name="brandId" value="${b}">
+                </c:forEach>
+
+                <!-- useTime -->
+                <c:forEach var="u" items="${paramValues.useTime}">
+                    <input type="hidden" name="useTime" value="${u}">
+                </c:forEach>
+                <div class="sort">
+                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                    <label>Sắp xếp:</label>
+
+                    <div class="sort-box" onclick="toggleSortMenu()">
                     <span class="sort-selected">
                         <c:choose>
                             <c:when test="${param.sort == 'price_asc'}">Giá tăng dần</c:when>
@@ -137,8 +148,8 @@
                             <c:otherwise>Mặc định</c:otherwise>
                         </c:choose>
                     </span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
                     <%--hidden input gui len servlet--%>
                     <input type="hidden" name="sort" id="sortInput" value="${param.sort}">
 
@@ -151,9 +162,6 @@
                 </div>
             </form>
         </div>
-
-
-
 
 
         <button id="filter-btn" class="filter-toggle">
@@ -186,17 +194,36 @@
         <!-- pagination-->
         <div class="pagination">
             <c:forEach begin="1" end="${totalPage}" var="i">
-                <a href="${pageContext.request.contextPath}/product?page=${i}&sort=${param.sort}"
-                   class="${i == currentPage ? 'active' : ''}">
+
+                <c:url var="pageUrl" value="/product">
+                    <c:param name="page" value="${i}"/>
+
+                    <c:if test="${not empty param.sort}">
+                        <c:param name="sort" value="${param.sort}"/>
+                    </c:if>
+
+                    <c:if test="${not empty selectedCategoryId}">
+                        <c:param name="categoryId" value="${selectedCategoryId}"/>
+                    </c:if>
+
+                    <c:if test="${not empty param.priceRange}">
+                        <c:param name="priceRange" value="${param.priceRange}"/>
+                    </c:if>
+
+                    <c:forEach var="b" items="${paramValues.brandId}">
+                        <c:param name="brandId" value="${b}"/>
+                    </c:forEach>
+
+                    <c:forEach var="u" items="${paramValues.useTime}">
+                        <c:param name="useTime" value="${u}"/>
+                    </c:forEach>
+                </c:url>
+
+                <a href="${pageUrl}" class="${i == currentPage ? 'active' : ''}">
                         ${i}
                 </a>
             </c:forEach>
 
-            <c:if test="${currentPage < totalPage}">
-                <a href="${pageContext.request.contextPath}/product?page=${currentPage + 1}&sort=${param.sort}">
-                    &raquo;
-                </a>
-            </c:if>
         </div>
 
         <div id="no-products-message" style="display:none; text-align: center; margin-top: 20px;">
@@ -210,18 +237,18 @@
 
 <%-- chức năng sắp xếp sản phẩm theo giá tăng, giảm dần--%>
 <script>
-    function toggleSortMenu(){
+    function toggleSortMenu() {
         document.getElementById("sortMenu").classList.toggle("active");
     }
 
-    function selectSort(value){
+    function selectSort(value) {
         document.getElementById("sortInput").value = value;
         document.getElementById("sortForm").submit();
     }
 
     // đóng menu khi click ra ngoài
-    document.addEventListener("click", function (e){
-        if (!e.target.closest(".sort")){
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".sort")) {
             document.getElementById("sortMenu").classList.remove("active");
 
         }

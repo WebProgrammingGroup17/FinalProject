@@ -115,11 +115,16 @@ ul li::before {
 
 /* Hàng 1: tăng/giảm số lượng */
 .quantity-control {
+    padding-top: 10px;
+    padding-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
+.btn{
+    padding: 10px 10px;
+    margin-bottom: 10px;
+}
 .quantity-control button {
     background-color: #E95221;
     color: #fff;
