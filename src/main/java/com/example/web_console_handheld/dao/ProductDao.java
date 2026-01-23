@@ -187,23 +187,6 @@ public class ProductDao extends BaseDao {
             sql.append(" AND brand_id IN (<brandIds>)");
         }
 
-        return get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind("limit", limit)
-                        .bind("offset", offset)
-                        .mapToBean(Product.class)
-                        .list()
-        );
-    }
-
-    public int countAllProduct() {
-        return get().withHandle(handle ->
-                handle.createQuery(
-                                "SELECT COUNT(*) FROM products WHERE active = 1"
-                        )
-                        .mapTo(Integer.class)
-                        .one()
-        );
         if (useTimes != null && !useTimes.isEmpty()) {
             sql.append(" AND useTime IN (<useTimes>)");
         }
@@ -349,6 +332,37 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+    public List<Product> searchByNamePage(String keyword, int offset, int limit) {
+        return get().withHandle(h ->
+                h.createQuery("""
+            SELECT *
+            FROM products
+            WHERE active = 1
+              AND name LIKE :kw
+            ORDER BY ispremium DESC, ID ASC
+            LIMIT :limit OFFSET :offset
+        """)
+                        .bind("kw", "%" + keyword + "%")
+                        .bind("limit", limit)
+                        .bind("offset", offset)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
 
-    
+    public int countSearchByName(String keyword) {
+        return get().withHandle(h ->
+                h.createQuery("""
+            SELECT COUNT(*)
+            FROM products
+            WHERE active = 1
+              AND name LIKE :kw
+        """)
+                        .bind("kw", "%" + keyword + "%")
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
+
 }

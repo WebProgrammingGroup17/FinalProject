@@ -23,7 +23,7 @@ public class SearchProductServlet extends HttpServlet {
 
         resp.sendRedirect(
                 req.getContextPath()
-                        + "/product?keyword="
+                        + "/product?q="
                         + URLEncoder.encode(keyword, "UTF-8")
         );
     }
