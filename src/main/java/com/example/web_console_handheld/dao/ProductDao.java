@@ -323,7 +323,17 @@ public class ProductDao extends BaseDao {
             return q.mapToBean(Product.class).list();
         });
     }
+    
+    }
 
+    // Tìm kiếm sản phẩm
+    public List<Product> searchByName(String keyword) {
+        return get().withHandle(handle ->
+                handle.createQuery("""
+                                    SELECT *
+                                    FROM products
+                                    WHERE active = 1
+                                      AND name LIKE :kw
     //Gợi ý tìm kiếm
     public List<Product> suggestByName(String keyword) {
         return get().withHandle(handle ->
@@ -340,18 +350,5 @@ public class ProductDao extends BaseDao {
         );
     }
 
-    // Tìm kiếm sản phẩm
-    public List<Product> searchByName(String keyword) {
-        return get().withHandle(handle ->
-                handle.createQuery("""
-                                    SELECT *
-                                    FROM products
-                                    WHERE active = 1
-                                      AND name LIKE :kw
-                                """)
-                        .bind("kw", "%" + keyword + "%")
-                        .mapToBean(Product.class)
-                        .list()
-        );
-    }
+    
 }
