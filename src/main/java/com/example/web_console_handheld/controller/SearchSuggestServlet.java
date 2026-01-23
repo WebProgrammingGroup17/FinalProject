@@ -58,3 +58,4 @@ public class SearchSuggestServlet extends HttpServlet {
         return s == null ? "" : s.replace("\"", "\\\"");
     }
 }
+

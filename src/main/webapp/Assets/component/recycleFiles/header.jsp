@@ -218,6 +218,7 @@
         </div>
     </div>
 </header>
+
 <script>
     const input = document.getElementById("searchInput");
     const box = document.getElementById("suggestBox");
@@ -246,6 +247,7 @@
             });
     });
 </script>
+
 </body>
 </html>
 

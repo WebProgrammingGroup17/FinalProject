@@ -104,6 +104,25 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPage", totalPage);
 
+
+        String keyword = request.getParameter("keyword");
+
+        List<Product> p;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            p = productDao.searchByName(keyword.trim());
+            request.setAttribute("keyword", keyword);
+        } else {
+            p = productDao.getProductList();
+        }
+
+        request.setAttribute("products", p);
+
+        // load thanh lọc
+        request.setAttribute("categories", productDao.getCategoryList());
+        request.setAttribute("brands", productDao.getBrandList());
+        request.setAttribute("energy", productDao.getEnergyProductList());
+
         request.setAttribute("categories", new CategoryDao().getCategory());
         request.setAttribute("brands", new BrandDao().getBrands());
         request.setAttribute("energy", productDao.getEnergyProductList());
