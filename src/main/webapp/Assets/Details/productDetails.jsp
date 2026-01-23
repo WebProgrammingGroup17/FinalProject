@@ -90,33 +90,35 @@
                     </div>
                 </div>
 
+                <!-- quantity control (dùng chung) -->
+                <div class="quantity-control">
+                    <button type="button" onclick="decrease()">−</button>
+                    <span id="qty-display">1</span>
+                    <button type="button" onclick="increase()">+</button>
+                </div>
 
-
+                <!-- ADD CART -->
                 <form action="${pageContext.request.contextPath}/AddCart" method="post">
+                    <input type="hidden" name="productId" value="${product.ID}"> <input type="hidden" name="name"
+                                                                                        value="${product.name}"> <input
+                        type="hidden" name="price" value="${product.price}"> <input type="hidden" name="image"
+                                                                                    value="${product.image}"> <input
+                        type="hidden" name="quantity" id="quantity-cart" value="1">
 
-                    <input type="hidden" name="productId" value="${product.ID}">
-                    <input type="hidden" name="name" value="${product.name}">
-                    <input type="hidden" name="price" value="${product.price}">
-                    <input type="hidden" name="image" value="${product.image}">
-                    <input type="hidden" name="quantity" id="quantity" value="1">
-
-                    <div class="quantity-control">
-                        <button type="button" onclick="decrease()">−</button>
-                        <span id="qty-display">1</span>
-                        <button type="button" onclick="increase()">+</button>
-                    </div>
-
-                    <div class="action-row">
-                        <button type="submit" class="btn-add">
-                            <i class="fa fa-cart-plus"></i> Thêm vào giỏ hàng
-                        </button>
-
-                        <button type="submit" formaction="${pageContext.request.contextPath}/buy-now">
-                            Mua ngay
-                        </button>
-                    </div>
-
+                    <button type="submit" class="btn-add btn">
+                        <i class="fa fa-cart-plus"></i> Thêm vào giỏ hàng
+                    </button>
                 </form>
+
+                <!-- BUY NOW -->
+                <form method="post" action="${pageContext.request.contextPath}/buy-now">
+                    <input type="hidden" name="productId" value="${product.ID}">
+                    <input type="hidden" name="quantity" id="quantity-buy" value="1">
+                    <button type="submit" class="btn-buy btn">
+                        Mua ngay
+                    </button>
+                </form>
+
 
 
 
@@ -316,21 +318,22 @@
 <script>
     let qty = 1;
 
+    function updateQuantity() {
+        document.getElementById("qty-display").innerText = qty;
+        document.getElementById("quantity-cart").value = qty;
+        document.getElementById("quantity-buy").value = qty;
+    }
+
     function increase() {
         qty++;
-        updateQty();
+        updateQuantity();
     }
 
     function decrease() {
         if (qty > 1) {
             qty--;
-            updateQty();
+            updateQuantity();
         }
-    }
-
-    function updateQty() {
-        document.getElementById("qty-display").innerText = qty;
-        document.getElementById("quantity").value = qty;
     }
 </script>
 

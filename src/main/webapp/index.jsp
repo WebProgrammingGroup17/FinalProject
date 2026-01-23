@@ -157,7 +157,7 @@
         <div class="category-grid">
             <c:forEach var="c" items="${categories}">
                 <div class="category-item"
-                     data-url="${pageContext.request.contextPath}/filter-products?categoryId=${c.ID}">
+                     data-url="${pageContext.request.contextPath}/product?categoryId=${c.ID}">
                     <img src="${c.imgLink}" alt="${c.name}">
                     <div class="category-info">
                         <h3>${c.name}</h3>

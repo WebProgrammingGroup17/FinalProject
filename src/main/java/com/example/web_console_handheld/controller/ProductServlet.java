@@ -12,48 +12,73 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
+
     private static final int PAGE_SIZE = 12;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         ProductDao productDao = new ProductDao();
 
+        // ===== page =====
         int page = 1;
-        String pageParam = request.getParameter("page");
-        if (pageParam != null) {
-            try {
-                page = Integer.parseInt(pageParam);
-            } catch (NumberFormatException ignored) {}
-        }
-
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch (Exception ignored) {}
         int offset = (page - 1) * PAGE_SIZE;
 
+        // ===== filter params =====
+        Integer categoryId = null;
+        try {
+            categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        } catch (Exception ignored) {}
+
+        String priceRange = request.getParameter("priceRange");
         String sort = request.getParameter("sort");
 
-        // ✅ DUY NHẤT 1 DÒNG LẤY PRODUCT
-        List<Product> products =
-                productDao.getProductByPageAndSort(offset, PAGE_SIZE, sort);
+        List<Integer> brandIds = null;
+        String[] brandArr = request.getParameterValues("brandId");
+        if (brandArr != null) {
+            brandIds = Arrays.stream(brandArr)
+                    .map(Integer::parseInt)
+                    .toList();
+        }
 
-        int totalProduct = productDao.countAllProduct();
+        List<Integer> useTimes = null;
+        String[] useArr = request.getParameterValues("useTime");
+        if (useArr != null) {
+            useTimes = Arrays.stream(useArr)
+                    .map(Integer::parseInt)
+                    .toList();
+        }
+
+        // ===== DATA =====
+        List<Product> products = productDao.filterSortPage(
+                categoryId,
+                priceRange,
+                brandIds,
+                useTimes,
+                sort,
+                offset,
+                PAGE_SIZE
+        );
+
+        int totalProduct = productDao.countFilter(
+                categoryId,
+                priceRange,
+                brandIds,
+                useTimes
+        );
+
         int totalPage = (int) Math.ceil((double) totalProduct / PAGE_SIZE);
 
-        // ==== dữ liệu phụ ====
-        CategoryDao categoryDao = new CategoryDao();
-        request.setAttribute("categories", categoryDao.getCategory());
-
-        BrandDao brandDao = new BrandDao();
-        request.setAttribute("brands", brandDao.getBrands());
-
-        request.setAttribute("energy", productDao.getEnergyProductList());
-        request.setAttribute("premium", productDao.getPremiumProductList());
-
-        // ==== pagination ====
+        // ===== attributes =====
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPage", totalPage);
@@ -77,8 +102,11 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("brands", productDao.getBrandList());
         request.setAttribute("energy", productDao.getEnergyProductList());
 
-
-        request.getRequestDispatcher("/products.jsp").forward(request, resp);
+        request.setAttribute("categories", new CategoryDao().getCategory());
+        request.setAttribute("brands", new BrandDao().getBrands());
+        request.setAttribute("energy", productDao.getEnergyProductList());
+        request.setAttribute("selectedCategoryId", categoryId);
+        request.getRequestDispatcher("/products.jsp").forward(request, response);
     }
 }
 
