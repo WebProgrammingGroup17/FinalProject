@@ -1,6 +1,5 @@
 package com.example.web_console_handheld.controller;
 
-
 import com.example.web_console_handheld.dao.BrandDao;
 import com.example.web_console_handheld.dao.CategoryDao;
 import com.example.web_console_handheld.dao.ProductDao;
@@ -26,14 +25,17 @@ public class ProductServlet extends HttpServlet {
 
         ProductDao productDao = new ProductDao();
 
-        // ===== PAGE =====
+        /* ================= PAGE ================= */
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (Exception ignored) {}
+
+        if (page < 1) page = 1;
+
         int offset = (page - 1) * PAGE_SIZE;
 
-        // ===== PARAMS =====
+        /* ================= PARAMS ================= */
         Integer categoryId = null;
         try {
             categoryId = Integer.parseInt(request.getParameter("categoryId"));
@@ -59,17 +61,34 @@ public class ProductServlet extends HttpServlet {
                     .toList();
         }
 
-        // ===== DATA =====
+        /* ================= DATA ================= */
         List<Product> products;
         int totalProduct;
 
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            products = productDao.searchByNamePage(
-                    keyword.trim(),
+        boolean hasKeyword = keyword != null && !keyword.trim().isEmpty();
+
+        if (hasKeyword) {
+            keyword = keyword.trim();
+
+            products = productDao.searchByNameFilterPage(
+                    keyword,
+                    categoryId,
+                    priceRange,
+                    brandIds,
+                    useTimes,
+                    sort,
                     offset,
                     PAGE_SIZE
             );
-            totalProduct = productDao.countSearchByName(keyword.trim());
+
+            totalProduct = productDao.countSearchByNameFilter(
+                    keyword,
+                    categoryId,
+                    priceRange,
+                    brandIds,
+                    useTimes
+            );
+
             request.setAttribute("keyword", keyword);
         } else {
             products = productDao.filterSortPage(
@@ -81,6 +100,7 @@ public class ProductServlet extends HttpServlet {
                     offset,
                     PAGE_SIZE
             );
+
             totalProduct = productDao.countFilter(
                     categoryId,
                     priceRange,
@@ -89,36 +109,22 @@ public class ProductServlet extends HttpServlet {
             );
         }
 
-
-        String keyword = request.getParameter("keyword");
-
-        List<Product> p;
-
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            p = productDao.searchByName(keyword.trim());
-            request.setAttribute("keyword", keyword);
-        } else {
-            p = productDao.getProductList();
-        }
-
-        request.setAttribute("products", p);
-
-        // load thanh lọc
-        request.setAttribute("categories", productDao.getCategoryList());
-        request.setAttribute("brands", productDao.getBrandList());
-        request.setAttribute("energy", productDao.getEnergyProductList());
-
-
-
         int totalPage = (int) Math.ceil((double) totalProduct / PAGE_SIZE);
+        if (page > totalPage && totalPage > 0) page = totalPage;
 
-        // ===== ATTRIBUTES =====
+        /* ================= ATTRIBUTES ================= */
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPage", totalPage);
-        request.setAttribute("selectedCategoryId", categoryId);
 
-        // ===== LOAD FILTER DATA =====
+        // giữ trạng thái filter
+        request.setAttribute("selectedCategoryId", categoryId);
+        request.setAttribute("selectedBrandIds", brandIds);
+        request.setAttribute("selectedUseTimes", useTimes);
+        request.setAttribute("selectedPriceRange", priceRange);
+        request.setAttribute("selectedSort", sort);
+
+        /* ================= LOAD FILTER DATA ================= */
         request.setAttribute("categories", new CategoryDao().getCategory());
         request.setAttribute("brands", new BrandDao().getBrands());
         request.setAttribute("energy", productDao.getEnergyProductList());
@@ -126,6 +132,3 @@ public class ProductServlet extends HttpServlet {
         request.getRequestDispatcher("/products.jsp").forward(request, response);
     }
 }
-
-
-
