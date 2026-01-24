@@ -89,20 +89,6 @@ public class ProductServlet extends HttpServlet {
             );
         }
 
-
-        String keyword = request.getParameter("keyword");
-
-        List<Product> p;
-
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            p = productDao.searchByName(keyword.trim());
-            request.setAttribute("keyword", keyword);
-        } else {
-            p = productDao.getProductList();
-        }
-
-        request.setAttribute("products", p);
-
         // load thanh lọc
         request.setAttribute("categories", productDao.getCategoryList());
         request.setAttribute("brands", productDao.getBrandList());

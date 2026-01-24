@@ -240,10 +240,10 @@ public class ProductDao extends BaseDao {
     ) {
 
         StringBuilder sql = new StringBuilder("""
-        SELECT *
-        FROM products
-        WHERE active = 1
-    """);
+                    SELECT *
+                    FROM products
+                    WHERE active = 1
+                """);
 
         // ===== FILTER =====
         if (categoryId != null) {
@@ -273,14 +273,10 @@ public class ProductDao extends BaseDao {
             sql.append(" ORDER BY ispremium DESC, ID ASC");
         } else {
             switch (sort) {
-                case "price_asc" ->
-                        sql.append(" ORDER BY ispremium DESC, price ASC");
-                case "price_desc" ->
-                        sql.append(" ORDER BY ispremium DESC, price DESC");
-                case "newest" ->
-                        sql.append(" ORDER BY ispremium DESC, createdAt DESC");
-                default ->
-                        sql.append(" ORDER BY ispremium DESC, ID ASC");
+                case "price_asc" -> sql.append(" ORDER BY ispremium DESC, price ASC");
+                case "price_desc" -> sql.append(" ORDER BY ispremium DESC, price DESC");
+                case "newest" -> sql.append(" ORDER BY ispremium DESC, createdAt DESC");
+                default -> sql.append(" ORDER BY ispremium DESC, ID ASC");
             }
         }
 
@@ -306,17 +302,23 @@ public class ProductDao extends BaseDao {
             return q.mapToBean(Product.class).list();
         });
     }
-    
-    }
 
     // Tìm kiếm sản phẩm
     public List<Product> searchByName(String keyword) {
-        return get().withHandle(handle ->
-                handle.createQuery("""
-                                    SELECT *
-                                    FROM products
-                                    WHERE active = 1
-                                      AND name LIKE :kw
+        return get().withHandle(h ->
+                h.createQuery("""
+                SELECT *
+                FROM products
+                WHERE active = 1
+                  AND name LIKE :kw
+                ORDER BY ispremium DESC, id ASC
+            """)
+                        .bind("kw", "%" + keyword + "%")
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
     //Gợi ý tìm kiếm
     public List<Product> suggestByName(String keyword) {
         return get().withHandle(handle ->
@@ -363,6 +365,4 @@ public class ProductDao extends BaseDao {
                         .one()
         );
     }
-
-
 }
