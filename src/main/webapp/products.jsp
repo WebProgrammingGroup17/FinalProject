@@ -123,7 +123,6 @@
                 <c:forEach var="u" items="${paramValues.useTime}">
                     <input type="hidden" name="useTime" value="${u}">
                 </c:forEach>
-                <input type="hidden" name="sort" id="sortInput" value="${param.sort}">
                 <div class="sort">
                     <i class="fa-solid fa-arrow-down-wide-short"></i>
                     <label>Sắp xếp:</label>
@@ -183,17 +182,39 @@
         <!-- pagination-->
         <div class="pagination">
             <c:forEach begin="1" end="${totalPage}" var="i">
-                <a class="${i == currentPage ? 'active' : ''}"
-                   href="${pageContext.request.contextPath}/product?page=${i}
-           <c:if test='${not empty keyword}'> &q=${fn:escapeXml(keyword)}</c:if>
-           <c:if test='${not empty param.categoryId}'> &categoryId=${param.categoryId}</c:if>
-           <c:if test='${not empty param.priceRange}'> &priceRange=${param.priceRange}</c:if>
-           <c:if test='${not empty param.sort}'> &sort=${param.sort}</c:if>
-           <c:forEach var='b' items='${paramValues.brandId}'> &brandId=${b}</c:forEach>
-           <c:forEach var='u' items='${paramValues.useTime}'> &useTime=${u}</c:forEach>
-           ">
+
+                <c:url var="pageUrl" value="/product">
+                    <c:param name="page" value="${i}" />
+
+                    <c:if test="${not empty keyword}">
+                        <c:param name="q" value="${keyword}" />
+                    </c:if>
+
+                    <c:if test="${not empty param.categoryId}">
+                        <c:param name="categoryId" value="${param.categoryId}" />
+                    </c:if>
+
+                    <c:if test="${not empty param.priceRange}">
+                        <c:param name="priceRange" value="${param.priceRange}" />
+                    </c:if>
+
+                    <c:if test="${not empty param.sort}">
+                        <c:param name="sort" value="${param.sort}" />
+                    </c:if>
+
+                    <c:forEach var="b" items="${paramValues.brandId}">
+                        <c:param name="brandId" value="${b}" />
+                    </c:forEach>
+
+                    <c:forEach var="u" items="${paramValues.useTime}">
+                        <c:param name="useTime" value="${u}" />
+                    </c:forEach>
+                </c:url>
+
+                <a class="${i == currentPage ? 'active' : ''}" href="${pageUrl}">
                         ${i}
                 </a>
+
             </c:forEach>
         </div>
 
