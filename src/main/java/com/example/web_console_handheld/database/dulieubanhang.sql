@@ -1316,3 +1316,15 @@ VALUES
     (null, 'https://izzygame.com/wp-content/uploads/2023/09/Retroid-pocket-2s-8-600x600.jpg'),
 
 
+-- Thêm bảng admin 24/01 Như
+CREATE TABLE admin (
+                       ID INT AUTO_INCREMENT PRIMARY KEY,
+                       username VARCHAR(50) UNIQUE NOT NULL,
+                       password VARCHAR(255) NOT NULL,
+                       fullname VARCHAR(100),
+                       status TINYINT DEFAULT 1
+);
+
+-- username = Admin, password = Admin@12345
+INSERT INTO admin(username, password, fullname) VALUES ('Admin', '$2a$10$EsoqYldgsgbopnxoOvxf7ujIcrjbb.BX5v86K9JCzC6s4PUtfC3hm', N'Administrator');
+
