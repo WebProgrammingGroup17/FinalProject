@@ -145,5 +145,17 @@ public class UserDao extends BaseDao{
                         .execute()
         );
     }
+    public void updateLocation(int userId, String location) {
+        String sql = "UPDATE users SET location = ? WHERE id = ?";
+        try (Connection c = DBConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, location);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
