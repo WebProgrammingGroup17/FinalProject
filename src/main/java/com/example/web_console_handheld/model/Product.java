@@ -258,4 +258,11 @@ public class Product {
     public long getPriceValue() {
         return this.price;
     }
+
+    public long getPriceOldValue() {
+        return this.priceOld;
+    }
+    public void setPriceOldValue(long priceOldValue) {
+        this.priceOld = priceOldValue;
+    }
 }

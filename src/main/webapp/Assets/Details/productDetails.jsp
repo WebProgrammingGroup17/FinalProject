@@ -39,10 +39,24 @@
 
             <!-- LEFT -->
             <div class="left">
-                <img src="${product.image}" alt="${product.name}" title="${product.name}"/>
+                <img id="mainImage"
+                     src="${product.image}"
+                     alt="${product.name}"
+                     title="${product.name}"
+                     class="main-img"/>
+
                 <div class="gallery">
+                        <%--Ảnh gốc--%>
+                    <img src="${product.image}"
+                    class="thumb-img active"
+                    onclick="changeImage(this)">
+
+                            <%--3 Ảnh phụ--%>
                     <c:forEach var="c" items="${gallary}">
-                        <img src="${c.img}" alt="${c.metatitle}">
+                        <img src="${c.img}"
+                             alt="${c.metatitle}"
+                             onclick="changeImage(this)"
+                             class="thumb-img">
                     </c:forEach>
                 </div>
             </div>
@@ -110,8 +124,19 @@
                     </button>
                 </form>
 
+                <!-- BUY NOW -->
+                <form method="post" action="${pageContext.request.contextPath}/buy-now">
+                    <input type="hidden" name="productId" value="${product.ID}">
+                    <input type="hidden" name="quantity" id="quantity-buy" value="1">
+                    <button type="submit" class="btn-buy btn">
+                        Mua ngay
+                    </button>
+                </form>
+
+
+
                 <div class="back-row">
-                    <a href="../../../products_afterupdate.html">
+                    <a href="${pageContext.request.contextPath}/product" class="btn-back">
                         <button>← Quay lại</button>
                     </a>
                 </div>
@@ -321,6 +346,17 @@
             qty--;
             updateQuantity();
         }
+    }
+</script>
+
+<script>
+    function changeImage(el) {
+        document.getElementById("mainImage").src = el.src;
+
+        document.querySelectorAll('.thumb-img')
+            .forEach(img => img.classList.remove('active'));
+
+        el.classList.add('active');
     }
 </script>
 

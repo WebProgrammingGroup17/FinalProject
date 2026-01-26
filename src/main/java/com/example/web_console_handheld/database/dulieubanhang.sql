@@ -708,3 +708,623 @@ INSERT INTO history VALUES
 -- username kiemcuongtim
 -- pass test R8@kQ!9Z^mP2#A$L
 
+
+
+
+-- Thêm 40 sản phẩm loại handheld  22/1/2026  Như --
+-- Sản phẩm --
+INSERT INTO products(categories_id, brand_id, name, short_description, full_description, information, price, priceOld, image, createdAt, energy, useTime, weight, active, metatitle, ispremium, suports, connect)
+VALUES
+-- BRAND:  ASUS
+-- 1--
+(2, 2, 'Asus ROG Ally – 512GB AMD Ryzen Z1 Extreme',
+ 'Asus đã cho trình làng chiếc máy chơi game cầm tay đầu tiên của hãng tại Việt Nam – Asus ROG Ally.',
+ 'Asus ROG Ally sẽ ra mắt với hai tùy chọn con chip CPU từ AMD. Tùy chọn cao cấp nhất là AMD Ryzen Z1 Extreme với 4 nhân và 16 luồng, có khả năng ép xung lên đến 5.1GHz, mang lại sức mạnh tối đa cho máy chơi game cầm tay Asus này.', 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi',
+ 12990000, 17990000, 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/s/asus_rog_ally_-11.png',
+ NOW(), 3000, 5, 608, 1, 'Asus ROG', 0, 'Windows 11 Home', 'Wi-Fi, Bluetooth'),
+
+-- 2--
+(2, 2, 'ROG Ally (2023) RC71L',
+ 'ROG Ally (2023) RC71L là máy chơi game cầm tay chạy Windows 11 Home với cấu hình mạnh nhờ AMD Ryzen™ Z1 Extreme / Z1, màn hình 7″ FHD 120 Hz, và thiết kế gamepad tích hợp',
+ 'ROG Ally mang trong mình Windows 11 Home nên bạn có thể chơi game từ Steam, Epic, Xbox Game Pass, GOG, …',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 15490000, 16290000,
+ 'https://laptopworld.vn/media/product/18489_13724_m__y_ch__i_game_asus_rog_ally_2023_1.jpg',
+ NOW(), 4310, 5, 608, 1, 'ROG Ally', 0, 'Steam/Steam Deck', 'Bluetooth, Wi-Fi'),
+
+-- 3--
+(2, 2, 'ROG Xbox Ally X (RC73XA)',
+ 'ROG Xbox Ally X (RC73XA) là máy chơi game cầm tay chạy Windows 11 Home, thuộc dòng ROG Xbox Ally X hợp tác giữa ASUS và Xbox',
+ 'Máy sở hữu CPU AMD Ryzen™ AI Z2 Extreme (lên đến 5.0 GHz, 8 nhân 16 luồng) và GPU Radeon tích hợp cho hiệu năng chơi game 1080p rất mạnh mẽ trong phân khúc handheld.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 24990000, 25790000,
+ 'https://cdn2.cellphones.com.vn/x/media/catalog/product/r/o/rog-xbox-ally-x.jpg',
+ NOW(), 4310, 5, 715, 1, 'ROG Xbox', 0, ' Steam / Epic / GOG / Xbox Game Pass / Cloud gaming',
+ 'Bluetooth, Wi-Fi'),
+
+-- 4--
+(2, 2, 'ROG Xbox Ally (RC73YA)',
+ 'ROG Xbox Ally (RC73YA) là một handheld gaming PC dạng console cầm tay chạy Windows 11 Home, hướng đến game thủ muốn trải nghiệm game',
+ 'ROG Xbox Ally RC73YA là phiên bản tối ưu giữa hiệu năng & pin trong dòng Xbox Ally',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 12990000, 14990000,
+ 'https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/asus_rog_xbox_ally_01_6fe17a60c8.png',
+ NOW(), 3600, 6, 670, 1, 'ROG Xbox', 0, ' Steam/Epic/GOG/Xbox Game Pass/Cloud gaming',
+ 'Bluetooth, Wi-Fi'),
+
+-- 5--
+(2, 2, 'Asus ROG Xbox Ally X – 1 TB (AMD RYZEN Z2 EXTREME)',
+ 'Được mệnh danh là “quái vật” trong phân khúc máy chơi game cầm tay (Handheld Gaming Console)',
+ 'ROG Ally mang sức mạnh PC vào lòng bàn tay bạn, cho phép bạn chơi mọi tựa game AAA từ các nền tảng Steam, Epic Games hay Xbox Game Pass (nhờ chạy Windows 11 bản quyền).',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 24900000, 25900000,
+ 'https://vn.store.asus.com/media/catalog/product/cache/74e490e088db727ef90851ac50e1fa20/r/o/rog_rc73_01_1.png',
+ NOW(), 3000, 7, 670, 1, 'ROG Xbox', 0, 'Steam, Epic Games', 'Wi-Fi & Bluetooth'),
+
+-- NINTENDO
+-- 6--
+(2, 1, 'Nintendo Switch 2',
+ 'Nintendo Switch 2 mang đến hàng loạt tính năng phần cứng và trải nghiệm mới, bắt đầu với chính chiếc máy console sở hữu màn hình LCD 7.9 inch hiển thị game ở độ phân giải 1080p.',
+ 'Nintendo Switch 2 thông qua cơ chế “snap” từ tính, trông khá giống với các mẫu trước đây nhưng được bổ sung nhiều tính năng mới, bao gồm cả chế độ điều khiển chuột.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 12350000, 13290000,
+ 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/123669-nintendo-switch-2-dock-joy-con-grip-2000x2000',
+ NOW(), 5220, 6, 534, 1, 'Nintendo Switch', 0, 'TV',  'WiFi & Bluetooth'),
+
+-- 7--
+(2, 1, 'Nintendo Switch - Gray + Gray Joy-Con',
+ 'Nintendo Switch là tên gọi chính thức cho thế hệ máy chơi game tiếp theo của Nintendo. ',
+ 'Một chiếc máy chơi game có thể gắn vào TV để dùng như một máy console và khi ra ngoài có thể mang theo để chơi trên một cái tablet cảm ứng cùng với bộ tay cầm không dây dạng module tháo ráp rất độc đáo.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 6890000, 6990000,
+ 'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1065/b_white/f_auto/q_auto/ncom/en_US/products/hardware/nintendo-switch-gray/110477-nintendo-switch-gray-gray-front-screen-on-1200x675',
+ NOW(), 5220, 6, 534, 1, 'Nintendo Switch', 0, 'TV',  'WiFi & Bluetooth'),
+
+-- 8--
+(2, 1, 'Nintendo Switch Lite – Turquoise',
+ 'Nintendo Switch Lite bất ngờ được Nintendo tung ra làm giới game thủ thích thú. ',
+ 'Mức giá công bố rẻ hơn so với phiên bản tiêu chuẩn, Nintendo Switch Lite tất nhiên sẽ bị lược bỏ một số tính năng như: không thể gắn vào dock với chơi trên TV, Joy-Con sẽ dính liền vào thân máy',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 4990000, 5190000,
+ 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-lite-turquoise/110663-nintendo-switch-lite-turquoise-front-screen-on-1200x675',
+ NOW(), 3570, 7, 275, 1, 'Nintendo Switch', 0, 'Game của Nintendo Switch',  'WiFi & Bluetooth'),
+
+-- 9--
+(2, 1, 'Nintendo Switch OLED model with Pastel Purple And Pastel Green Joy-Con',
+ 'Phiên bản Nintendo Switch với màn hình OLED cũng đã trình làng và làm dậy sóng cả cộng đồng game thủ sau nhiều ngày chờ đợi.',
+ 'Máy Switch mới năm nay cũng có sự thay đổi về màu sắc bên ngoài. Phần thân máy và dock sạc đã không còn mang màu đen truyền thống mà nay đã khoác lên chiếc áo trắng mới mang phong cách tương lai hơn.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 6500000, 6900000,
+ 'https://haloshop.vn/wp-content/uploads/2025/08/MAY-NINTENDO-SWITCH-OLED-PASTEL-PURPLE-AND-PASTEL-GREEN-JOY-CON_00.webp',
+ NOW(), 4310, 9, 420, 1, 'Nintendo Switch', 0, 'TV', 'WiFi & Bluetooth'),
+
+-- 10--
+(2, 1, 'Nintendo Switch - Neon Blue + Neon Red Joy-Con',
+ 'Máy Nintendo Switch Mod đã gắn Mod cho phép Máy chơi được hầu hết các game Switch hiện tại chỉ cần tải game về và chơi, giúp bạn tiết kiệm chi phí chơi game.',
+ 'Máy Mod ở Custom Firmware mới nhất nên sẽ hỗ trợ hầu hết tất cả các game mới ở thời điểm hiện tại.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 6890000, 7090000,
+ 'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1065/b_white/f_auto/q_auto/ncom/en_US/products/hardware/nintendo-switch-red-blue/110478-nintendo-switch-neon-blue-neon-red-front-screen-on-1200x675',
+ NOW(), 4310, 9, 420, 1, 'Nintendo Switch', 0, 'TV', 'WiFi & Bluetooth'),
+
+-- 11--
+(2, 1, 'Nintendo Switch™ 2 + Mario Kart™ World Bundle',
+ 'Nintendo Switch™ 2 + Mario Kart™ World Bundle là gói máy chơi game Nintendo Switch 2 đi kèm game Mario Kart World bản đầy đủ',
+ 'Máy Nintendo Switch 2 là thế hệ tiếp theo của dòng Switch với nhiều nâng cấp vượt trội bao gồm mã tải Mario Kart World — một tựa game đua kart mới nhất, tối ưu cho Switch 2.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 13200000, 13890000,
+ 'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1065/b_white/f_auto/q_auto/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/122179-nintendo-switch-2-hardware-with-mario-kart-world-full-game-download-package-front-angle-2000x2000',
+ NOW(), 5220, 6, 534, 1,'Nintendo Switch 2', 0, 'TV', 'WiFi & Bluetooth'),
+
+
+-- MIYOO --
+-- 12--
+(2, 3, 'Miyoo mini flip',
+ 'Máy chơi game gập nhỏ gọn',
+ 'Một sản phẩm đáng mong chờ của cộng đồng yêu thích game retro với mẫu máy gập cực kỳ nhỏ gọn mới từ loMiyoo mang tên miyoo mini flip.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 1490000, 1680000,
+ 'https://izzygame.com/wp-content/uploads/2026/01/miyoo-mini-flip-1-600x600.jpg',
+ NOW(), 2500, 5, 200, 1, 'Miyoo mini', 0, 'Emulation nhiều hệ retro', 'Wi-Fi'      ),
+
+-- 13--
+(2, 3, 'Miyoo A30',
+ 'Miyoo A30 nhỏ gọn nâng cấp cấu hình, bổ sung joystick.',
+ 'Miyoo A30 được miyoo giới thiệu là một thiết bị chơi game cầm tay nhỏ gọn, giá rẻ với thiết kê ngang kèm joystick được nhiều người quan tâm.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 1150000, 1780000,
+ 'https://izzygame.com/wp-content/uploads/2024/05/Miyoo-A30-5.jpg',
+ NOW(), 2600, 5, 270, 1, 'Miyoo', 0, 'Nhiều hệ máy retro khác nhau', 'Wi-Fi'),
+
+-- 14
+(2, 3, 'Máy chơi game Miyoo Mini Plus Miyoo Handheld',
+ 'Máy chơi game retro cầm tay',
+ 'Máy retro handheld nhỏ gọn, chạy hệ điều hành Linux (hoặc OnionOS), thiết kế để chơi game cổ điển từ nhiều hệ khác nhau (NES, SNES, Game Boy, PS1, arcade, ...)',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 1390000, 1480000,
+ 'https://izzygame.com/wp-content/uploads/2023/04/photo_2023-04-29_21-30-49-600x600.jpg',
+ NOW(), 3000, 6, 170, 1, 'Miyoo mini', 0, 'Hệ retro (NES → PS1)', 'Wi-Fi'),
+
+
+-- STEAM
+-- 15--
+(2, 4, 'Steam Deck 512GB (NVMe SSD)',
+ 'Steam Deck phiên bản mới được nâng cấp với Màn hình OLED sống động hơn',
+ 'Thiết kế công thái học đẳng cấp thế giới cùng trải nghiệm trực quan như máy console, mang đến trải nghiệm chơi game mãn nhãn nhất cho game thủ.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 17990000, 20090000,
+ 'https://haloshop.vn/wp-content/uploads/2025/02/steam-deck-64gb-emmc-00-700x700-1.jpg',
+ NOW(), 4000, 7, 640, 1, 'Steam Deck', 0, 'chơi trực tiếp từ thư viện Steam', 'Wi-Fi'),
+
+-- 16--
+(2, 4, 'Steam Deck OLED White Edition 1TB (NVMe SSD)',
+ 'Steam Deck phiên bản mới được nâng cấp với Màn hình OLED sống động hơn, thời lượng pin tốt hơn, WiFi nhanh hơn',
+ 'Thiết kế công thái học đẳng cấp thế giới cùng trải nghiệm trực quan như máy console, mang đến trải nghiệm chơi game mãn nhãn nhất cho game thủ.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 18800000, 19000000,
+ 'https://haloshop.vn/wp-content/uploads/2025/02/steam_deck_oled_1tb_white_edition_00-700x700-1.jpg',
+ NOW(), 4000, 7, 640, 1, 'Steam Deck', 0, 'chơi trực tiếp từ thư viện Steam', 'Wi-Fi'),
+
+-- 17--
+(2, 4, 'Valve Steam Deck OLED 1TB Handheld',
+ 'Chiếc máy chơi game đến từ gã khổng lồ Valve chính thức xuất hiện.',
+ ' Chiếc máy chơi game cầm tay này giúp người chơi trải nghiệm kho game đồ sộ trên nền tảng Steam nổi tiếng ở bất cứ đâu, đồng bộ hoàn hảo với thư viện Steam Library trên PC của bạn.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 19490000, 20790000,
+ 'https://bizweb.dktcdn.net/100/476/122/products/316282002-5677069459005263-5496119171875278767-n-1675087036737-1702023014787.jpg?v=1702023019493',
+ NOW(), 5000, 9, 640, 1, 'Steam Deck', 0, 'chạy trực tiếp game từ thư viện Steam', 'WiFi & Bluetooth'),
+
+
+-- MSI
+-- 18--
+(2, 5, 'Máy chơi game MSI Claw A1M',
+ 'Máy chơi game cầm tay',
+ 'Máy chơi game MSI Claw là chiếc máy PC Gaming Handheld đầu tiên của nhà sản xuất linh kiện vô cùng nổi tiếng – MSI.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 13990000, 19990000,
+ 'https://www.droidshop.vn/wp-content/uploads/2024/06/May-choi-game-MSI-Claw-1.jpg',
+ NOW(), 3000, 4, 675, 1, 'MSI', 0, 'Game PC (Steam/Epic/Uplay) trên Windows 11', 'WiFi & Bluetooth'),
+
+-- 19--
+(2, 5, 'MSI Claw A8 BZ2EM-025PL',
+ 'Máy chơi game cầm tay',
+ 'Máy được trang bị CPU AMD Ryzen™ Z2 Extreme mạnh mẽ cùng RAM 24GB LPDDR5X và màn hình 8 inch Full HD+ 120Hz sắc nét.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 24590000, 25990000,
+ 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11627/msi-claw-a8-bz2em-025pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-white-11746257_jpg.webp',
+ NOW(), 3000, 5, 765, 1, 'MSI', 0, 'Game Steam/Epic/Xbox Game Pass', 'WiFi & Bluetooth'),
+
+-- 20--
+(2, 5, 'MSI Claw 8 AI+ A2VM-037PL',
+ 'Máy chơi game cầm tay',
+ 'Thiết bị handheld AI thế hệ mới, mang phong cách đậm chất gaming cùng sức mạnh đến từ vi xử lý Intel Core Ultra 7 258V và đồ họa tích hợp Intel Arc. ',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 26900000, 27290000,
+ 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11431/msi-claw-8-ai-a2vm-037pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-beige-11550743_jpg.webp',
+ NOW(), 4500, 6, 300, 1, 'MSI', 0, 'Game Steam/Epic/Xbox Game Pass', 'WiFi & Bluetooth'),
+
+-- GPD--
+-- 21--
+(2, 6, 'GPD WIN 5 (Al Max 385/AI Max Plus 395)',
+ 'Máy chơi game cầm tay',
+ 'Thế hệ máy chơi game cầm tay cao cấp nhất của GPD tính đến năm 2025, mang trong mình sức mạnh vượt trội từ vi xử lý AMD Ryzen AI Max 385 và AI Max Plus 395.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 45980000, 50900000,
+ 'https://pcngon.vn/wp-content/uploads/2025/11/May-tinh-cam-tay-GPD-WIN-5-Al-Max-385-AI-Max-Plus-395.jpg',
+ NOW(), 5000, 6, 590, 1, 'GPD', 0, 'Steam, Epic, Xbox Game Pass', 'WiFi & Bluetooth' ),
+
+-- 22-
+(2, 6, 'GPD Win 4',
+ 'Máy chơi game cầm tay',
+ 'GPD Win 4 là dòng máy chơi game cầm tay (handheld PC) do GPD sản xuất, nổi bật ở hiệu năng PC mạnh mẽ trong kích thước nhỏ gọn',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 11000000, 12290000,
+ 'https://weirdstore.vn/wp-content/uploads/2024/03/n-2.jpg',
+ NOW(), 3000, 6, 598, 1, 'GPD', 0, 'Game PC AAA, Steam, Epic, emulation', 'WiFi & Bluetooth' ),
+
+-- 23--
+(2, 6, 'GPD Win 4 8840U',
+ 'Máy chơi game cầm tay',
+ 'Máy chơi game cầm tay PC handheld chạy Windows 11, dùng chip AMD Ryzen 7 8840U, hiệu năng mạnh trong form nhỏ gọn cho game PC',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 20500000, 20900000,
+ 'https://weirdstore.vn/wp-content/uploads/2024/03/n-2.jpg',
+ NOW(), 3000, 6, 598, 1, 'GPD', 0, 'Game PC AAA, Steam, Epic, emulation', 'WiFi & Bluetooth' ),
+
+
+
+-- AYANEO --
+-- 24--
+(2, 7, 'AYANEO 2',
+ 'Máy chơi game cầm tay',
+ 'Trên tay AYANEO 2, Handheld PC chạy AMD Ryzen 7 6800U đầu tiên của hãng AYANEO',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 12000000, 13290000,
+ 'https://weirdstore.vn/wp-content/uploads/2024/03/AYANEOAIR_20_cfc73e29-919e-4371-9dbe-9f5696e8e9af-1536x1536.webp',
+ NOW(), 12000, 5, 680, 1, 'Ayaneo', 0, 'Steam, Epic Games, Xbox Game Pass PC, GOG', 'WiFi & Bluetooth'),
+
+-- 25--
+(2, 7, 'AYANEO 2S – Order',
+ 'Máy chơi game cầm tay',
+ 'AYANEO 2S là handheld gaming PC chạy Windows 11, được hãng Ayaneo nâng cấp từ dòng AYANEO 2 với phần cứng mạnh mẽ',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 19900000, 20100000,
+ 'https://weirdstore.vn/wp-content/uploads/2024/03/n-3.png',
+ NOW(), 13000, 6, 680, 1, 'Ayaneo', 0, 'Steam, Epic Games, Xbox Game Pass PC, GOG', 'WiFi & Bluetooth'),
+
+-- 26--
+(2, 7, 'AYANEO 3 32Gb – 1Tb chip AI370',
+ 'Máy chơi game cầm tay',
+ 'AYANEO 3 là một handheld gaming PC cao cấp chạy Windows 11 — được đánh giá là một trong những thiết bị chơi game portables mạnh nhất hiện nay',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 32000000, 33090000,
+ 'https://weirdstore.vn/wp-content/uploads/2024/11/Untitled-1.jpg',
+ NOW(), 13000, 6, 680, 1 ,'Ayaneo', 0, 'Steam, Epic Games, Xbox Game Pass PC, GOG', 'WiFi & Bluetooth'),
+
+-- 27--
+(2, 7, 'AYANEO Geek',
+ 'Máy chơi game cầm tay',
+ 'AYANEO Geek là máy chơi game cầm tay dạng PC (Windows) của AYANEO, nhắm tới những người muốn hiệu năng gaming tốt nhưng giá mềm hơn so với AYANEO 2 / 2S.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 11000000, 12190000 ,
+ 'https://weirdstore.vn/wp-content/uploads/2024/03/image-61-935x800.png',
+ NOW(), 13000, 6, 680, 1 ,'Ayaneo', 0, 'Steam, Epic Games, Xbox Game Pass PC, GOG', 'WiFi & Bluetooth'),
+
+-- 28--
+(2, 7, 'Ayaneo Pocket Micro',
+ 'Máy chơi game cầm tay',
+ 'Là handheld gaming nhỏ gọn chạy Android 13, được thiết kế chủ yếu để chơi game retro và giả lập nhưng vẫn đủ sức xử lý nhiều thể loại game nhẹ và trung bình trên nền Android.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 7690000, 7800000,
+ 'https://weirdstore.vn/wp-content/uploads/2024/09/AYANEO-POCKET-MICRO-SOUL-RED-DONE-01.png',
+ NOW(), 2600, 6, 233, 1 ,'Ayaneo', 0, 'Android/Retro emulation', 'WiFi & Bluetooth'),
+
+-- 29--
+(2, 7, 'Ayaneo Pocket DS',
+ 'Máy chơi game cầm tay',
+ 'AYANEO Pocket DS là một má́y chơi game handheld chạy Android với thiết kế màn hình đôi dạng clamshell lấy cảm hứng từ các máy Nintendo Dual-Screen cổ điển nhưng nâng cấp hiện đại để chơi game Android',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 12800000, 13190000,
+ 'https://weirdstore.vn/wp-content/uploads/2025/08/ayaneo-pocket-ds-indiegogo-confirmation-kv-1067x800.jpg',
+ NOW(), 8000, 10, 1000, 1 ,'Ayaneo', 0, 'Retro emulation từ NES → DS/3DS → PSP', 'WiFi & Bluetooth'),
+
+
+
+-- Anbernic--
+-- 30--
+(2, 8, 'Anbernic – Retro Gamboy Flip RG35XXSP – 64GB – Green Transparent',
+ 'ANBERNIC RG35XXSP là một thiết bị chơi game retro cầm tay độc đáo',
+ 'kết hợp giữa thiết kế hoài cổ của Game Boy Advance SP với công nghệ hiện đại, màn hình IPS 3.5 inch sắc nét, hiệu năng mạnh mẽ và khả năng chơi nhiều hệ máy game cổ điển, RG35XXSP là một lựa chọn tuyệt vời cho những ai yêu thích game retro.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 1800000, 1990000,
+ 'https://herogame.vn/upload/images/img_02_01_2025/may-retro-game-cam-tay-rg35xxsp-nap-gap-nho-gon-hon-10000-games-anbernic-1_686716_67761b7012f4f1.05703435.jpg',
+ NOW(), 3300, 6, 200, 1, 'Anbernic', 0, 'NES / Famicom, SNES ,Game Boy / GBC / GBA',  'WiFi & Bluetooth'),
+
+-- 31--
+(2, 8, 'Anbernic – Retro Game Handheld RG406 – 256GB',
+ 'Anbernic RG406 – Retro Game Handheld (256GB) dành cho những tựa game kinh điển của thập niên 80, 90 và đầu 2000',
+ 'Thiết kế công thái học: Vừa vặn trong tay, giúp bạn chơi hàng giờ liền mà không bị mỏi.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 5000000, 6190000,
+ 'https://haloshop.vn/wp-content/uploads/2025/03/anbernic_retro_game_handheld_rg406v_256gb_41-700x700-1.jpg',
+ NOW(), 4500, 8, 260, 1, 'Anbernic', 0, 'NES / Famicom, SNES ,Game Boy / GBC / GBA', 'WiFi & Bluetooth'),
+
+-- 32--
+(2, 8, 'Anbernic Retro Game RG353P + 64GB Micro SD Card',
+ 'Máy chơi game Anbernic Retro Game là máy chơi game Retro của hãng Anbernic chuyên sản xuất các dòng máy game Retro',
+ 'Máy Anbernic Retro Game RG353P có thể chạy được giả lập các dòng máy Retro thịnh hành vào thời điểm 199x như Game Boy Advance, Game Boy Color, NES, SNES, SEGA MD, Neo Geo, Game Gear, Sega Master System Game Series,…',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 3850000, 3990000,
+ 'https://haloshop.vn/wp-content/uploads/2025/02/Anbernic-Retro-Game-RG353P-_-64GB-Micro-SD-C.jpg',
+ NOW(), 3500, 5, 422, 1, 'Anbernic', 0, 'NES → PSP/PS1/N64', 'WiFi & Bluetooth'
+),
+
+-- 33-
+(2, 8, 'Anbernic RG477V',
+ 'Máy chơi game cầm tay',
+ 'Đây là mẫu máy dọc mạnh nhất hiện tại của hãng, sau các đời 405v hay 406v thì mẫu này được cộng đồng đánh giá cao nhờ có thiết kế cải tiến gọn gàng hơn mà màn hình lại rất lớn',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 6789000, 6987000,
+ 'https://izzygame.com/wp-content/uploads/2026/01/anbernic-rg477v-8300-cuc-manh-2.jpg',
+ NOW(), 5500, 8, 334, 1, 'Anbernic', 0, 'Game Android + giả lập retro (PS2/Wii U…)', 'WiFi & Bluetooth'),
+
+-- 34--
+(2, 8, 'Anbernic RG DS',
+ 'Một handheld Android màn hình đôi',
+ 'Hai màn hình có thể dùng cho game dual-screen, chạy hai ứng dụng cùng lúc hoặc dùng màn dưới làm menu/touch input khi chơi game.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 2990000, 3299000,
+ 'https://izzygame.com/wp-content/uploads/2025/12/anbernic-rgds-4.jpg',
+ NOW(), 4000, 5, 321, 1, 'Anbernic', 0, 'Game Android & giả lập retro', 'WiFi & Bluetooth'),
+
+-- 35--
+(2, 8, 'Anbernic 476H',
+ 'Thiết kế gọn gàng, máy mạnh màn đẹp 120hz',
+ 'Anbernic 476h sử dụng màn hình có tần số quét cao đến 120hz phục vụ tốt cho nhu cầu chơi game android, màn hình hiển thị tỉ lệ 4:3',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 3790000, 3990000,
+ 'https://izzygame.com/wp-content/uploads/2025/09/anbernic-rg476h-120hz-9-1.jpg',
+ NOW(), 5000, 6, 290, 1, 'Anbernic', 0, 'Game Android & giả lập retro', 'WiFi & Bluetooth'),
+
+
+-- RETROID--
+-- 36 --
+(2, 9, 'Retroid Pocket G2',
+ 'Retroid Pocket G2 một phiên bản nâng cấp của retroid pocket 5',
+ 'Retroid Pocket G2 là mẫu máy chơi game cầm tay thuộc dòng “retro Android handheld” của hãng Retroid — được thiết kế để vừa chơi game Android hiện đại',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 6790000, 6980000,
+ 'https://izzygame.com/wp-content/uploads/2025/12/Retroid-pocket-g2-5.jpg',
+ NOW(),  5000, 6, 280, 1, 'Retroid', 0, 'Android games + emulation (retro & 3D)',  'WiFi & Bluetooth'),
+
+-- 37--
+(2, 9, 'Retroid Pocket Mini V2',
+ 'Retroid Pocket Mini V2 nâng cấp màn hình tràn viền siêu đẹp.',
+ 'Màn hình được nâng cấp viền màn hình siêu mỏng, giúp tổng thể máy đẹp hơn bản V1 nhiều, không bị viền quá dày ở trên và dưới cho cảm giác thị giác đã hơn phiên bản tiền nhiệm.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 4750000, 4980000,
+ 'https://izzygame.com/wp-content/uploads/2025/09/retroid-pocket-mini-v2-rpmini-1.jpg',
+ NOW(),  4000, 6, 215, 1, 'Retroid', 0, 'Game Android và nhiều hệ emulator (PS1, N64, PSP/GC...)', 'WiFi & Bluetooth'),
+
+
+-- 38--
+(2, 9, 'Retroid Pocket Mini',
+ 'Thiết bị cầm tay chạy Android',
+ 'Pocket Mini là 1 trong những cái tên đáng cân nhắc vì cấu hình rất mạnh mẽ trong phân khúc kèm với thiết kế công thái học trong 1 thân hình nhỏ gọn khá phù hợp để mang theo mọi lúc.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 3990000, 4199000,
+ 'https://izzygame.com/wp-content/uploads/2025/06/retroid-pocket-mini-snapdragon-865-1.jpg',
+ NOW(), 4000, 6, 215, 1, 'Retroid', 0, 'Game Android và nhiều hệ emulator (PS1, N64, PSP/GC...)', 'WiFi & Bluetooth'),
+
+-- 39--
+(2, 9, 'Retroid Pocket Flip 2',
+ 'Máy chơi game handheld Android thiết kế dạng clamshell',
+ 'Trang bị màn hình oled cực đẹp với thiết kế viền màn hình mỏng hơn',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 4590000, 4890000,
+ 'https://izzygame.com/wp-content/uploads/2025/04/Retroid-Pocket-Flip-2-cao-cap-1.jpg',
+ NOW(), 5000, 7, 300, 1, 'Retroid', 0, 'Game Android và nhiều hệ retro', 'WiFi & Bluetooth'),
+
+-- 40--
+(2, 9, 'Retroid Pocket 2S',
+ 'Retroid pocket 2s là bản nâng cấp cấu hình của dòng pcoket 2 ra mắt trước đó',
+ 'Bản nâng cấp được đánh giá cao vì cấu hình khỏe, nâng cấp phím cũng đáng giá hơn.',
+ 'Console và tay cầm chơi game mang đến trải nghiệm giải trí sống động, phản hồi nhanh và dễ điều khiển. Tay cầm hiện đại tích hợp nhiều tính năng giúp người chơi linh hoạt và tiện lợi.',
+ 2450000, 2890000,
+ 'https://izzygame.com/wp-content/uploads/2023/09/Retroid-pocket-2s-4.jpg',
+ NOW(), 4000, 6, 200, 1, 'Retroid', 0, 'Game Android và nhiều hệ retro', 'WiFi & Bluetooth')
+
+
+
+
+-- Hình ảnh của 40 sản phẩm loại handheld --
+    INSERT INTO gallary(product_id, img) VALUES
+-- ASUS --
+-- 1--
+    (null,'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/s/asus_rog_ally_-7.png'),
+    (null,'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/s/asus_rog_ally_-6.png'),
+    (null,'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/s/asus_rog_ally_-3.png'),
+
+-- 2--
+    (null, 'https://laptopworld.vn/media/product/18489_13724_m__y_ch__i_game_asus_rog_ally_2023_2.jpg'),
+    (null, 'https://laptopworld.vn/media/product/18489_13724_m__y_ch__i_game_asus_rog_ally_2023_3.jpg'),
+    (null, 'https://laptopworld.vn/media/product/18489_13724_m__y_ch__i_game_asus_rog_ally_2023_4.jpg'),
+
+-- 3--
+    (null, 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/r/o/rog-xbox-ally-x-2.jpg'),
+    (null,'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/r/o/rog-xbox-ally-x-1.jpg'),
+    (null, 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/r/o/rog-xbox-ally-x-3.jpg'),
+-- 4--
+    (null,'https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/asus_rog_xbox_ally_03_70444b6eec.png'),
+    (null,'https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/asus_rog_xbox_ally_05_a31641d377.png'),
+    (null,'https://cdn2.fptshop.com.vn/unsafe/750x0/filters:format(webp):quality(75)/asus_rog_xbox_ally_07_115c0d80ab.png'),
+
+-- 5--
+    (null, 'https://vn.store.asus.com/media/catalog/product/cache/74e490e088db727ef90851ac50e1fa20/r/o/rog_rc73_12_1.png'),
+    (null, 'https://vn.store.asus.com/media/catalog/product/cache/74e490e088db727ef90851ac50e1fa20/r/o/rog_rc73_11_1.png'),
+    (null, 'https://vn.store.asus.com/media/catalog/product/cache/74e490e088db727ef90851ac50e1fa20/r/o/rog_rc73_02_1.jpg'),
+
+
+-- NINTENDO
+-- 6--
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/123669-nintendo-switch-2-hand-pulling-right-joy-con-off-1200x675'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/123669-nintendo-switch-2-tabletop-2-2000x2000'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/123669-nintendo-switch-2-dock-system-joy-con-on-grip-1200x675'),
+
+-- 7--
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-gray/110477-nintendo-switch-gray-gray-console-joy-con-tabletop-mode-1200x675'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-gray/110477-nintendo-switch-gray-gray-console-docked-joy-con-grip-1200x675'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-gray/110477-nintendo-switch-gray-gray-front-screen-on-lifestyle-1200x675'),
+
+-- 8--
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-lite-turquoise/110663-nintendo-switch-lite-turquoise-lifestyle-1200x675'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1065/b_white/f_auto/q_auto/ncom/en_US/products/hardware/nintendo-switch-lite-turquoise/110663-nintendo-switch-lite-turquoise-package-1200x675'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-lite-turquoise/110663-nintendo-switch-lite-turquoise-front-screen-on-1200x675'),
+
+-- 9--
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/08/MAY-NINTENDO-SWITCH-OLED-PASTEL-PURPLE-AND-PASTEL-GREEN-JOY-CON_41.webp'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/08/MAY-NINTENDO-SWITCH-OLED-PASTEL-PURPLE-AND-PASTEL-GREEN-JOY-CON_42.webp'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/08/MAY-NINTENDO-SWITCH-OLED-PASTEL-PURPLE-AND-PASTEL-GREEN-JOY-CON_00.webp'),
+
+-- 10--
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-red-blue/110478-nintendo-switch-neon-blue-neon-red-front-screen-on-neon-red-disconnected-angle-1200x675'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-red-blue/110478-nintendo-switch-neon-blue-neon-red-console-docked-joy-con-grip-1200x675'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/en_US/products/hardware/nintendo-switch-red-blue/110478-nintendo-switch-neon-blue-neon-red-front-screen-on-lifestyle-1200x675'),
+
+-- 11--
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/123669-nintendo-switch-2-dock-joy-con-grip-2000x2000'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/123669-nintendo-switch-2-tabletop-2000x2000'),
+    (null, 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_700/ncom/My%20Nintendo%20Store/EN-US/Nintendo%20Switch%202/Hardware/123669-nintendo-switch-2-dock-system-joy-con-attached-1200x675'),
+
+
+-- MIYOO
+-- 12--
+    (null, 'https://izzygame.com/wp-content/uploads/2026/01/miyoo-mini-flip-3-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2026/01/miyoo-mini-flip-4-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2026/01/miyoo-mini-flip-5-600x600.jpg'),
+
+-- 13--
+    (null, 'https://izzygame.com/wp-content/uploads/2024/05/Miyoo-A30-2-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2024/05/Miyoo-A30-3-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2024/05/Miyoo-A30-6-600x600.jpg'),
+
+-- 14--
+    (null, 'https://izzygame.com/wp-content/uploads/2023/04/photo_2023-04-29_21-30-46-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2023/04/20230527_152623-600x800.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2023/04/Miyoo-mini-plus-den-600x600.jpg'),
+
+
+-- STEAM
+-- 15--
+    (null, 'https://product.hstatic.net/200000637319/product/78124_may_choi_game_cam_tay_steam_deck_oled_512gb_nvme_ssd_2_bbd3227eba0a48ac93876ba49f230da8_master.jpg'),
+    (null, 'https://product.hstatic.net/200000637319/product/78124_may_choi_game_cam_tay_steam_deck_oled_512gb_nvme_ssd_1_6d8d98db95004879ae016a3dd4c6400e_master.jpg'),
+    (null, 'https://product.hstatic.net/200000637319/product/78124_may_choi_game_cam_tay_steam_deck_oled_512gb_nvme_ssd_1_6d8d98db95004879ae016a3dd4c6400e_master.jpg'),
+
+-- 16--
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/02/steam_deck_oled_1tb_white_edition_41-700x700-1.jpg'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/02/steam_deck_oled_1tb_white_edition_42-700x700-1.jpg'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/02/steam_deck_oled_1tb_white_edition_45-700x700-1.jpg'),
+
+-- 17--
+    (null, 'https://bizweb.dktcdn.net/100/476/122/products/vh-installer-1-1702023014809.png?v=1702023021590'),
+    (null, 'https://bizweb.dktcdn.net/100/476/122/products/vh-installer-1702023014820.png?v=1702023022600'),
+    (null, 'https://bizweb.dktcdn.net/100/476/122/products/514pfkhblzl-ac-sx466-1675087036737-1702023014787.jpg?v=1702023020310'),
+
+-- MSI
+-- 18 --
+    (null, 'https://www.droidshop.vn/wp-content/uploads/2024/06/May-choi-game-MSI-Claw-3.jpg'),
+    (null, 'https://www.droidshop.vn/wp-content/uploads/2024/06/May-choi-game-MSI-Claw-2.jpg'),
+    (null, 'https://www.droidshop.vn/wp-content/uploads/2024/06/May-choi-game-MSI-Claw-1-1.jpg'),
+
+-- 19 --
+    (null, 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11627/msi-claw-a8-bz2em-025pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-white-11746258_jpg.webp'),
+    (null, 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11627/msi-claw-a8-bz2em-025pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-white-11746257_jpg.webp'),
+    (null, 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11627/msi-claw-a8-bz2em-025pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-white-11746261_jpg.webp'),
+
+-- 20--
+    (null, 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11431/msi-claw-8-ai-a2vm-037pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-beige-11550738_jpg.webp'),
+    (null, 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11431/msi-claw-8-ai-a2vm-037pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-beige-11550739_jpg.webp'),
+    (null, 'https://techbox.com.gr/images/ab__webp/thumbnails/570/570/detailed/11431/msi-claw-8-ai-a2vm-037pl-portable-game-console-20-3-cm-8-1-tb-touchscreen-wi-fi-beige-11550736_jpg.webp'),
+
+-- GPD
+-- 21--
+    (null, 'https://pcngon.vn/wp-content/uploads/2025/11/May-tinh-cam-tay-GPD-WIN-5-Al-Max-385-AI-Max-Plus-395-10.jpg'),
+    (null, 'https://pcngon.vn/wp-content/uploads/2025/11/May-tinh-cam-tay-GPD-WIN-5-Al-Max-385-AI-Max-Plus-395-2.jpg'),
+    (null, 'https://pcngon.vn/wp-content/uploads/2025/11/May-tinh-cam-tay-GPD-WIN-5-Al-Max-385-AI-Max-Plus-395-1.jpg'),
+
+-- 22--
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/20230226_101554-Copy.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/20230226_101543-Copy.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/20230226_101920-Copy-1-1067x800.jpg'),
+
+-- 23--
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/n-2.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/20230226_101543-Copy.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/20230226_101920-Copy-1-1067x800.jpg'),
+
+
+
+-- AYANEO
+-- 24-
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/AYANEOAIR_20_cfc73e29-919e-4371-9dbe-9f5696e8e9af-1536x1536.webp'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/AYANEOAIR_20_cfc73e29-919e-4371-9dbe-9f5696e8e9af-1536x1536.webp'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/20230110_085931-Copy-1.jpg'),
+
+-- 25--
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/n-3.png'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/n-3.png'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/n-3.png'),
+
+-- 26--
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/11/Untitled-1.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/11/Untitled-1.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/11/Untitled-1.jpg'),
+
+-- 27
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/image-61-935x800.png'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/image-61-935x800.png'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/03/image-61-935x800.png'),
+
+-- 28--
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/09/AYANEO-POCKET-MICRO-SOUL-RED-DONE-01.png'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/09/AYANEO-POCKET-MICRO-SOUL-RED-DONE-01.png'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2024/09/AYANEO-POCKET-MICRO-SOUL-RED-DONE-01.png'),
+
+-- 29--
+    (null, 'https://weirdstore.vn/wp-content/uploads/2025/08/ayaneo-pocket-ds-indiegogo-confirmation-kv-1067x800.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2025/08/ayaneo-pocket-ds-indiegogo-confirmation-kv-1067x800.jpg'),
+    (null, 'https://weirdstore.vn/wp-content/uploads/2025/08/ayaneo-pocket-ds-indiegogo-confirmation-kv-1067x800.jpg'),
+
+
+-- Anbernic---
+-- 30--
+    (null, 'https://herogame.vn/upload/images/img_02_01_2025/may-retro-game-cam-tay-rg35xxsp-nap-gap-nho-gon-hon-10000-games-anbernic-4_801428_67761b70133425.88983002.jpg'),
+    (null, 'https://herogame.vn/upload/images/img_02_01_2025/may-retro-game-cam-tay-rg35xxsp-nap-gap-nho-gon-hon-10000-games-anbernic-6_373158_67761b70135fb1.86248728.jpg'),
+    (null, 'https://herogame.vn/upload/images/img_02_01_2025/may-retro-game-cam-tay-rg35xxsp-nap-gap-nho-gon-hon-10000-games-anbernic-7_750418_67761b70137115.53368023.jpg'),
+
+-- 31--
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/03/anbernic_retro_game_handheld_rg406v_256gb_42-700x700-1.jpg'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/03/anbernic_retro_game_handheld_rg406v_256gb_47-700x700-1.jpg'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/03/anbernic_retro_game_handheld_rg406v_256gb_43-700x700-1.jpg'),
+
+-- 32--
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/02/anbernic-retro-game-rg353p-64gb-sd-card-46.jpg'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/02/Anbernic-Retro-Game-RG353P-_-64GB-Micro-SD-C-4.jpg'),
+    (null, 'https://haloshop.vn/wp-content/uploads/2025/02/Anbernic-Retro-Game-RG353P-_-64GB-Micro-SD-C-5.jpg'),
+
+-- 33--
+    (null, 'https://izzygame.com/wp-content/uploads/2026/01/anbernic-rg477v-8300-cuc-manh-5-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2026/01/anbernic-rg477v-8300-cuc-manh-4-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2026/01/anbernic-rg477v-8300-cuc-manh-6-600x600.jpg'),
+
+-- 34--
+    (null, 'https://izzygame.com/wp-content/uploads/2025/12/anbernic-rgds-3-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/12/anbernic-rgds-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/12/anbernic-rgds-4-600x600.jpg'),
+
+
+-- 35--
+    (null, 'https://izzygame.com/wp-content/uploads/2025/09/anbernic-rg476h-120hz-2-1-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/09/anbernic-rg476h-120hz-3-1-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/09/anbernic-rg476h-120hz-6-1-600x600.jpg'),
+
+
+-- Retroid---
+-- 36--
+    (null, 'https://izzygame.com/wp-content/uploads/2025/12/Retroid-pocket-g2-6-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/12/Retroid-pocket-g2-4-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/12/Retroid-pocket-g2-2-600x600.jpg'),
+
+-- 37--
+    (null, 'https://izzygame.com/wp-content/uploads/2025/09/retroid-pocket-mini-v2-rpmini-9-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/09/retroid-pocket-mini-v2-rpmini-2-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/09/retroid-pocket-mini-v2-rpmini-3-600x600.jpg'),
+
+-- 38--
+    (null, 'https://izzygame.com/wp-content/uploads/2025/06/retroid-pocket-mini-snapdragon-865-2-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/06/retroid-pocket-mini-snapdragon-865-7-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/06/retroid-pocket-mini-snapdragon-865-600x600.jpg'),
+
+-- 39--
+    (null, 'https://izzygame.com/wp-content/uploads/2025/04/Retroid-Pocket-Flip-2-cao-cap-4-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/04/Retroid-Pocket-Flip-2-cao-cap-10-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2025/04/Retroid-Pocket-Flip-2-cao-cap-6-600x600.jpg'),
+
+-- 40--
+    (null, 'https://izzygame.com/wp-content/uploads/2023/09/Retroid-pocket-2s-9-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2023/09/Retroid-pocket-2s-5-600x600.jpg'),
+    (null, 'https://izzygame.com/wp-content/uploads/2023/09/Retroid-pocket-2s-8-600x600.jpg'),
+
+
+-- Thêm bảng admin 24/01 Như
+CREATE TABLE admin (
+                       ID INT AUTO_INCREMENT PRIMARY KEY,
+                       username VARCHAR(50) UNIQUE NOT NULL,
+                       password VARCHAR(255) NOT NULL,
+                       fullname VARCHAR(100),
+                       status TINYINT DEFAULT 1
+);
+
+-- username = Admin, password = Admin@12345
+INSERT INTO admin(username, password, fullname) VALUES ('Admin', '$2a$10$EsoqYldgsgbopnxoOvxf7ujIcrjbb.BX5v86K9JCzC6s4PUtfC3hm', N'Administrator');
+
