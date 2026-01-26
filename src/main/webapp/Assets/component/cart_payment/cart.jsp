@@ -308,20 +308,8 @@
         </tr>
     </table>
 
-
-    <form id="mainForm"
-          action="${pageContext.request.contextPath}/cartAction"
-          method="post"
-            class="cart-action">
-
-        <input type="hidden" name="action" id="mainAction">
-
-        <button type="submit"
-                onclick="document.getElementById('mainAction').value='checkout'"
-                class="btn-order">
-            ĐẶT HÀNG
-        </button>
-
+    <form action="${pageContext.request.contextPath}/payment" method="get" class="cart-action">
+        <button type="submit" class="btn-order">Đặt hàng</button>
     </form>
 
 </div>

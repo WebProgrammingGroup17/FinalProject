@@ -110,19 +110,6 @@
                     </button>
                 </form>
 
-                <!-- BUY NOW -->
-                <form method="post" action="${pageContext.request.contextPath}/buy-now">
-                    <input type="hidden" name="productId" value="${product.ID}">
-                    <input type="hidden" name="quantity" id="quantity-buy" value="1">
-                    <button type="submit" class="btn-buy btn">
-                        Mua ngay
-                    </button>
-                </form>
-
-
-
-
-
                 <div class="back-row">
                     <a href="../../../products_afterupdate.html">
                         <button>← Quay lại</button>
