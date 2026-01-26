@@ -8,7 +8,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @WebServlet("/payment")
 public class PaymentServlet extends HttpServlet {
@@ -29,10 +33,23 @@ public class PaymentServlet extends HttpServlet {
             return;
         }
 
-        // Lấy danh sách sản phẩm từ cart
-        Collection<CartItem> cartItems = cart.getCartItems().values();
-        request.setAttribute("cartItems", cartItems);
+        String[] selectedIds = request.getParameterValues("selectedItems");
+        if (selectedIds == null || selectedIds.length == 0) {
+            response.sendRedirect(request.getContextPath() + "/cart");
+            return;
+        }
 
-        request.getRequestDispatcher("/Assets/component/cart_payment/payment.jsp").forward(request, response);
+        Set<Integer> selectedSet = Arrays.stream(selectedIds)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
+
+        // Lọc cart chỉ lấy item được chọn
+        List<CartItem> selectedItems = cart.getCartItems().values().stream()
+                .filter(item -> selectedSet.contains(item.getProduct().getID()))
+                .collect(Collectors.toList());
+        session.setAttribute("selectedCartItems", selectedItems);
+        request.setAttribute("cartItems", selectedItems);
+        request.getRequestDispatcher("/Assets/component/cart_payment/payment.jsp")
+                .forward(request, response);
     }
 }

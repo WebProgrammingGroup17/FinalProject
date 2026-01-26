@@ -20,6 +20,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -55,6 +57,7 @@
                                 <div class="parent">
                                     <input class="input11"
                                            type="text"
+                                           id="address"
                                            name="address"
                                            placeholder="Nhập địa chỉ"
                                            required />
@@ -62,6 +65,11 @@
                                         <p class="p3 p-same">Địa chỉ</p>
                                     </div>
                                 </div>
+                                <button type="button"
+                                        class="btn btn-primary btn-sm mt-2"
+                                        onclick="saveLocation()">
+                                    Lưu
+                                </button>
                             </div>
                         </c:when>
                         <c:otherwise>
@@ -140,6 +148,7 @@
                                 <input type="radio"
                                        name="paymentMethod"
                                        value="COD"
+                                       checked
                                        required />
                                 Thanh toán khi nhận hàng (COD)
                             </label>
@@ -158,12 +167,12 @@
                     <!-- buttons -->
                     <div class="update_and_order same grid-same">
                         <div>
-                            <button class="same-btn btn-green" type="button"
+                            <button class="same-btn btn-green" type="button" style="cursor: pointer"
                                     onclick="location.href='${pageContext.request.contextPath}/cart'">
                                 Sửa giỏ hàng
                             </button>
 
-                            <button class="same-btn btn-green" type="button"
+                            <button class="same-btn btn-green" type="button" style="cursor: pointer"
                                     onclick="location.href='${pageContext.request.contextPath}/profile'">
                                 Sửa địa chỉ
                             </button>
@@ -238,6 +247,24 @@
         }
     }
 </style>
+<script>
+    function saveLocation() {
+        const address = document.getElementById("address").value.trim();
+        if (!address) return;
+
+        fetch("save-location", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "address=" + encodeURIComponent(address)
+        })
+            .then(res => res.text())
+            .then(() => {
+                location.reload(); // reload nhẹ để đổi UI
+            });
+    }
+</script>
 
 </body>
 </html>

@@ -28,6 +28,7 @@ public class ConfirmOrderServlet extends HttpServlet {
         Order order = (Order) session.getAttribute("pendingOrder");
         List<OrderItem> items =
                 (List<OrderItem>) session.getAttribute("pendingOrderItems");
+        Cart cart = (Cart) session.getAttribute("cart");
 
         if (order == null || items == null || items.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/cart");
@@ -35,34 +36,44 @@ public class ConfirmOrderServlet extends HttpServlet {
         }
 
         try {
-
             OrderDao dao = new OrderDao();
 
-            // Lưu order
+            // 1️⃣ LƯU ORDER
             int orderId = dao.saveOrder(order);
+            if (orderId <= 0) {
+                response.sendRedirect(request.getContextPath() + "/cart");
+                return;
+            }
 
-            // lưu order items
+            // 2️⃣ LƯU ORDER ITEMS
             dao.saveOrderItems(orderId, items);
 
-            // clear cart
-            Cart cart = (Cart) session.getAttribute("cart");
-            if (cart != null) cart.clear();
+            // 3️⃣ TRỪ ĐÚNG SẢN PHẨM ĐÃ MUA KHỎI CART
+            if (cart != null) {
+                for (OrderItem item : items) {
+                    cart.remove(item.getProduct_id());
+                }
+                session.setAttribute("cart", cart);
+            }
 
-            // flag đã xác nhận
-            session.setAttribute("orderConfirmed", true);
-            session.setAttribute("confirmedOrderId", orderId);
+            // 4️⃣ CLEAR SESSION TẠM
+            session.removeAttribute("pendingOrder");
+            session.removeAttribute("pendingOrderItems");
+            session.removeAttribute("selectedCartItems");
 
-            // message
-            session.setAttribute(
-                    "orderSuccessMessage",
-                    "Đặt hàng thành công! Cảm ơn bạn đã mua hàng."
-            );
+            // 5️⃣ FLAG CHO JSP
+            request.setAttribute("confirmed", true);
+            request.setAttribute("order", order);
+            request.setAttribute("orderItems", items);
+
+            request.getRequestDispatcher(
+                    "/Assets/component/cart_payment/Order.jsp"
+            ).forward(request, response);
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/cart");
-            return;
         }
-
-        response.sendRedirect(request.getContextPath() + "/order-detail");
     }
 }
+

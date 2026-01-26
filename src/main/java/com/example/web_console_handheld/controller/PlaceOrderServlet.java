@@ -19,59 +19,74 @@ public class PlaceOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            response.sendRedirect(request.getContextPath() + "/cart");
-            return;
-        }
+        HttpSession session = request.getSession();
 
         User auth = (User) session.getAttribute("auth");
-        Cart cart = (Cart) session.getAttribute("cart");
-
         if (auth == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        if (cart == null || cart.getCartItems().isEmpty()) {
+        // ✅ LẤY ĐÚNG SẢN PHẨM ĐÃ CHỌN
+        List<CartItem> selectedItems =
+                (List<CartItem>) session.getAttribute("selectedCartItems");
+
+        if (selectedItems == null || selectedItems.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/cart");
             return;
         }
 
-        // tạo order tạm
+        // ===== TẠO ORDER =====
         Order order = new Order();
-        order.setUserId(auth.getId());
-        order.setUsername(auth.getUsername());
-        order.setPhone(auth.getPhoneNum());
+        order.setUser_Id(auth.getId());
+        order.setCreateAt(new Timestamp(System.currentTimeMillis()));
+        order.setStatus("PENDING");
 
-        // lấy địa chỉ: nếu form nhập thì lấy từ form, không thì dùng địa chỉ user
+        // thông tin người nhận
+        order.setReceiver_name(auth.getUsername());
+        order.setReceiver_phone(auth.getPhoneNum());
+        order.setReceiver_email(auth.getEmail());
+
         String address = request.getParameter("address");
-        order.setAddress((address != null && !address.isBlank()) ? address : auth.getLocation());
+        order.setReceiver_address(
+                (address != null && !address.isBlank())
+                        ? address
+                        : auth.getLocation()
+        );
 
-        order.setOrderDate(new Timestamp(System.currentTimeMillis()));
+        // payment_method: false = COD, true = BANK
+        order.setPayment_method(
+                "BANK".equals(request.getParameter("paymentMethod"))
+        );
 
-        // tạo danh sách OrderItem từ cart
-        List<OrderItem> items = new ArrayList<>();
-        BigDecimal total = BigDecimal.ZERO;
-        for (CartItem ci : cart.getCartItems().values()) {
-            OrderItem item = new OrderItem(ci);
-            items.add(item);
-            total = total.add(item.getThanhtien());
+        // ===== ORDER ITEMS =====
+        List<OrderItem> orderItems = new ArrayList<>();
+        long totalPrice = 0;
+
+        for (CartItem ci : selectedItems) {
+            OrderItem item = new OrderItem();
+            item.setProduct_id(ci.getProduct().getID());
+            item.setProduct_name(ci.getProduct().getName());
+            item.setProduct_price(ci.getProduct().getPriceValue());
+            item.setQuantity(ci.getQuantity());
+
+            totalPrice += item.getProduct_price() * item.getQuantity();
+            orderItems.add(item);
         }
-        order.setTotalPrice(total);
 
-        // ghi chú
-        String note = request.getParameter("note");
-        order.setGhiChu(note != null ? note : "");
+        order.setPrice(totalPrice);
 
-        // lưu session tạm
+        // ===== LƯU SESSION =====
         session.setAttribute("pendingOrder", order);
-        session.setAttribute("pendingOrderItems", items);
+        session.setAttribute("pendingOrderItems", orderItems);
 
-        // xóa flag cũ
-        session.removeAttribute("orderConfirmed");
+        // ===== ĐẨY SANG JSP =====
+        request.setAttribute("order", order);
+        request.setAttribute("orderItems", orderItems);
+        request.setAttribute("confirmed", false);
 
-        // redirect sang Order Detail
-        response.sendRedirect(request.getContextPath() + "/order-detail");
+        request.getRequestDispatcher(
+                "/Assets/component/cart_payment/Order.jsp"
+        ).forward(request, response);
     }
 }

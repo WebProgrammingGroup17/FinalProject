@@ -5,80 +5,108 @@ import java.sql.Timestamp;
 
 public class Order {
 
-    private int id;
-    private int userId;
-    private Timestamp orderDate;
-    private String ghiChu;
-
-    private String username;
-    private String phone;
-    private String address;
-
-    private BigDecimal totalPrice;
-
+    private int ID;
+    private int user_Id;
+    private Timestamp createAt;
+    private String status;
+private long price;
+    private String receiver_name;
+    private String receiver_phone;
+    private String receiver_address;
+    private String receiver_email;
+    private boolean payment_method;
     public Order() {}
 
-    public int getId() {
-        return id;
+    public Order(int ID, int user_Id, Timestamp createAt, String status, long price, String receiver_name, String receiver_phone, String receiver_address, String receiver_email, boolean payment_method) {
+        this.ID = ID;
+        this.user_Id = user_Id;
+        this.createAt = createAt;
+        this.status = status;
+        this.price = price;
+        this.receiver_name = receiver_name;
+        this.receiver_phone = receiver_phone;
+        this.receiver_address = receiver_address;
+        this.receiver_email = receiver_email;
+        this.payment_method = payment_method;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getID() {
+        return ID;
     }
 
-    public int getUserId() {
-        return userId;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public int getUser_Id() {
+        return user_Id;
     }
 
-    public Timestamp getOrderDate() {
-        return orderDate;
+    public void setUser_Id(int user_Id) {
+        this.user_Id = user_Id;
     }
 
-    public void setOrderDate(Timestamp orderDate) {
-        this.orderDate = orderDate;
+    public Timestamp getCreateAt() {
+        return createAt;
     }
 
-    public String getGhiChu() {
-        return ghiChu;
+    public void setCreateAt(Timestamp createAt) {
+        this.createAt = createAt;
     }
 
-    public void setGhiChu(String ghiChu) {
-        this.ghiChu = ghiChu;
+    public String getStatus() {
+        return status;
     }
 
-    public String getUsername() {
-        return username;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public long getPrice() {
+        return price;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setPrice(long price) {
+        this.price = price;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getReceiver_name() {
+        return receiver_name;
     }
 
-    public String getAddress() {
-        return address;
+    public void setReceiver_name(String receiver_name) {
+        this.receiver_name = receiver_name;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getReceiver_phone() {
+        return receiver_phone;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public void setReceiver_phone(String receiver_phone) {
+        this.receiver_phone = receiver_phone;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public String getReceiver_address() {
+        return receiver_address;
+    }
+
+    public void setReceiver_address(String receiver_address) {
+        this.receiver_address = receiver_address;
+    }
+
+    public String getReceiver_email() {
+        return receiver_email;
+    }
+
+    public void setReceiver_email(String receiver_email) {
+        this.receiver_email = receiver_email;
+    }
+
+    public boolean isPayment_method() {
+        return payment_method;
+    }
+
+    public void setPayment_method(boolean payment_method) {
+        this.payment_method = payment_method;
     }
 }

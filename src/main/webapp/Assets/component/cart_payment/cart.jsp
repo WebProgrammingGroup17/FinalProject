@@ -203,6 +203,9 @@
     </div>
 
     <c:set var="cart" value="${sessionScope.cart}" />
+    <form id="mainForm"
+          action="${pageContext.request.contextPath}/payment"
+          method="get">
 
     <table class="cart-table">
         <tbody id="cart-items">
@@ -243,7 +246,6 @@
                         <td class="select-col">
                             <input type="checkbox"
                                    name="selectedItems"
-                                   form="mainForm"
                                     value="${item.product.ID}"
                                     class="select-item"
                                     data-price="${item.product.priceValue}"
@@ -308,7 +310,7 @@
         </tr>
     </table>
 
-    <form action="${pageContext.request.contextPath}/payment" method="get" class="cart-action">
+
         <button type="submit" class="btn-order">Đặt hàng</button>
     </form>
 
