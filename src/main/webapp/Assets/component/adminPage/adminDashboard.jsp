@@ -18,14 +18,13 @@
 
         <ul class="menu">
             <li><a href="#">🏠 Dashboard</a></li>
-            <li><a href="#">📦 Quản lý sản phẩm</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/products">📦 Quản lý sản phẩm</a></li>
             <li><a href="#">🧾 Quản lý đơn hàng</a></li>
             <li><a href="#">👤 Quản lý user</a></li>
             <li><a href="${pageContext.request.contextPath}/admin-logout">🚪 Đăng xuất</a></li>
         </ul>
     </div>
 
-    <!-- CONTENT -->
     <div class="content">
         <div class="header">
             <h1>Xin chào ${sessionScope.admin.username} 👋</h1>

@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet({"/admin", "/admin-login"})
+@WebServlet({"/admin/login", "/admin-login"})
 public class AdminLoginServlet extends HttpServlet {
 
     @Override
