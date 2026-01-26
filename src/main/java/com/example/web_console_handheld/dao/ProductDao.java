@@ -3,7 +3,12 @@ package com.example.web_console_handheld.dao;
 import com.example.web_console_handheld.model.Brand;
 import com.example.web_console_handheld.model.Category;
 import com.example.web_console_handheld.model.Product;
+import com.example.web_console_handheld.utils.DBConnection;
+import com.sun.jdi.connect.spi.Connection;
 
+import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao extends BaseDao {
@@ -164,10 +169,10 @@ public class ProductDao extends BaseDao {
     ) {
 
         StringBuilder sql = new StringBuilder("""
-        SELECT COUNT(*)
-        FROM products
-        WHERE active = 1
-    """);
+                    SELECT COUNT(*)
+                    FROM products
+                    WHERE active = 1
+                """);
 
         if (categoryId != null) {
             sql.append(" AND categories_id = :categoryId");
@@ -334,6 +339,7 @@ public class ProductDao extends BaseDao {
                         .list()
         );
     }
+
     public List<Product> searchByNamePage(String keyword, int offset, int limit) {
         return get().withHandle(h ->
                 h.createQuery("""
@@ -365,6 +371,7 @@ public class ProductDao extends BaseDao {
                         .one()
         );
     }
+
     // ================= SEARCH + FILTER + SORT + PAGINATION =================
     public List<Product> searchByNameFilterPage(
             String keyword,
@@ -378,11 +385,11 @@ public class ProductDao extends BaseDao {
     ) {
 
         StringBuilder sql = new StringBuilder("""
-        SELECT *
-        FROM products
-        WHERE active = 1
-          AND name LIKE :kw
-    """);
+                    SELECT *
+                    FROM products
+                    WHERE active = 1
+                      AND name LIKE :kw
+                """);
 
         // ===== FILTER =====
         if (categoryId != null) {
@@ -445,11 +452,11 @@ public class ProductDao extends BaseDao {
     ) {
 
         StringBuilder sql = new StringBuilder("""
-        SELECT COUNT(*)
-        FROM products
-        WHERE active = 1
-          AND name LIKE :kw
-    """);
+                    SELECT COUNT(*)
+                    FROM products
+                    WHERE active = 1
+                      AND name LIKE :kw
+                """);
 
         if (categoryId != null) {
             sql.append(" AND categories_id = :categoryId");
@@ -485,4 +492,156 @@ public class ProductDao extends BaseDao {
         });
     }
 
+    public List<Product> getAll() {
+        return get().withHandle(handle ->
+                handle.createQuery("""
+                SELECT *
+                FROM products
+                ORDER BY ID 
+            """)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    public void insert(Product p) {
+        get().useHandle(handle ->
+                handle.createUpdate("""
+            INSERT INTO products (
+                categories_id,
+                brand_id,
+                name,
+                short_description,
+                full_description,
+                information,
+                price,
+                priceOld,
+                image,
+                createdAt,
+                energy,
+                useTime,
+                weight,
+                active,
+                metatitle,
+                ispremium,
+                suports,
+                connect,
+                endow
+            )
+            VALUES (
+                :categories_id,
+                :brand_id,
+                :name,
+                :short_description,
+                :full_description,
+                :information,
+                :price,
+                :priceOld,
+                :image,
+                :createdAt,
+                :energy,
+                :useTime,
+                :weight,
+                :active,
+                :metatitle,
+                :ispremium,
+                :suports,
+                :connect,
+                :endow
+            )
+        """)
+                        .bind("categories_id", p.getCategories_id())
+                        .bind("brand_id", p.getBrand_id())
+                        .bind("name", p.getName())
+                        .bind("short_description", p.getShort_description())
+                        .bind("full_description", p.getFull_description())
+                        .bind("information", p.getInformation())
+                        .bind("price", p.getPriceValue())
+                        .bind("priceOld", p.getPriceOldValue())
+                        .bind("image", p.getImage())
+                        .bind("createdAt", p.getCreatedAt() == null ? LocalDateTime.now() : p.getCreatedAt())
+                        .bind("energy", p.getEnergy())
+                        .bind("useTime", p.getUseTime())
+                        .bind("weight", p.getWeight())
+                        .bind("active", p.isActive())
+                        .bind("metatitle", p.getMetatitle())
+                        .bind("ispremium", p.isIspremium())
+                        .bind("suports", p.getSuports())
+                        .bind("connect", p.getConnect())
+                        .bind("endow", p.getEndow())
+
+                        .execute()
+        );
 }
+
+    public void deleteById(int id) {
+        get().useHandle(handle ->
+                handle.createUpdate("""
+            DELETE FROM products
+            WHERE ID = :id
+        """)
+                        .bind("id", id)
+                        .execute()
+        );
+    }
+    /*Edit products*/
+    public Product findById(int id) {
+        return get().withHandle(handle ->
+                handle.createQuery("""
+                SELECT * FROM products WHERE ID = :id
+            """)
+                        .bind("id", id)
+                        .mapToBean(Product.class)
+                        .one()
+        );
+    }
+    public void update(Product p) {
+        get().useHandle(handle ->
+                handle.createUpdate("""
+                UPDATE products SET
+                    categories_id = :categories_id,
+                    brand_id = :brand_id,
+                    name = :name,
+                    short_description = :short_description,
+                    full_description = :full_description,
+                    information = :information,
+                    price = :price,
+                    priceOld = :priceOld,
+                    image = :image,
+                    energy = :energy,
+                    useTime = :useTime,
+                    weight = :weight,
+                    active = :active,
+                    metatitle = :metatitle,
+                    ispremium = :ispremium,
+                    suports = :suports,
+                    connect = :connect,
+                    endow = :endow
+                WHERE ID = :id
+            """)
+                        .bind("id", p.getID())
+                        .bind("categories_id", p.getCategories_id())
+                        .bind("brand_id", p.getBrand_id())
+                        .bind("name", p.getName())
+                        .bind("short_description", p.getShort_description())
+                        .bind("full_description", p.getFull_description())
+                        .bind("information", p.getInformation())
+                        .bind("price", p.getPriceValue())
+                        .bind("priceOld", p.getPriceOld() == null ? 0 : Long.parseLong(p.getPriceOld().replace(".", "")))
+                        .bind("image", p.getImage())
+                        .bind("energy", p.getEnergy())
+                        .bind("useTime", p.getUseTime())
+                        .bind("weight", p.getWeight())
+                        .bind("active", p.isActive())
+                        .bind("metatitle", p.getMetatitle())
+                        .bind("ispremium", p.isIspremium())
+                        .bind("suports", p.getSuports())
+                        .bind("connect", p.getConnect())
+                        .bind("endow", p.getEndow())
+                        .execute()
+        );
+    }
+
+
+}
+
