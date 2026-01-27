@@ -4,6 +4,8 @@ import com.example.web_console_handheld.model.User;
 import com.example.web_console_handheld.utils.DBConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao extends BaseDao{
 
@@ -157,5 +159,87 @@ public class UserDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
+    public int countAll() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) FROM users";
 
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+    /* ================= ĐỔI QUYỀN ================= */
+    public void updateRole(int userId, String role) {
+        String sql = "UPDATE users SET role=? WHERE id=?";
+
+        try (Connection c = DBConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, role);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    /* ================= KHOÁ / MỞ ================= */
+    public void toggleActive(int userId) {
+        String sql = "UPDATE users SET active = NOT active WHERE id=?";
+
+        try (Connection c = DBConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    /* ================= XOÁ USER ================= */
+    public void delete(int userId) {
+        String sql = "DELETE FROM users WHERE id=?";
+
+        try (Connection c = DBConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public List<User> getAll() {
+        List<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM users";
+
+        try (Connection c = DBConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setFullname(rs.getString("fullname"));
+                u.setEmail(rs.getString("email"));
+                u.setRole(rs.getString("role"));
+                u.setActive(rs.getBoolean("active"));
+                list.add(u);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

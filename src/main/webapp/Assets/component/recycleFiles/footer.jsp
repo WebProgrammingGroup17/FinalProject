@@ -35,7 +35,6 @@
             <form action="${pageContext.request.contextPath}/contact" method="post">
                 <div class="subscribe">
                     <input type="email" name="email" placeholder="Nhập email của bạn" required />
-                    <textarea name="message" placeholder="Nội dung thắc mắc..." required></textarea>
                     <button type="submit">
                         <i class="fa-solid fa-paper-plane"></i> Gửi
                     </button>

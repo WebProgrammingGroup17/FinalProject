@@ -46,7 +46,7 @@ public class OrderDetailServlet extends HttpServlet {
 
                 // ấy từ db
                 order = dao.getOrderById(orderId);
-                items = dao.getOrderItems(orderId);
+                items = dao.getOrderItemsByOrderId(orderId);
 
             } catch (Exception e) {
                 e.printStackTrace();

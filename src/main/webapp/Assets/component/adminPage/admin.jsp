@@ -13,16 +13,7 @@
 
 <div class="admin-wrapper">
 
-    <div class="sidebar">
-        <div class="logo">Admin</div>
-        <ul class="menu">
-            <li><a href="${pageContext.request.contextPath}/admin">🏠 Dashboard</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin?page=products">📦 Quản lý sản phẩm</a></li>
-            <li><a href="#">🧾 Quản lý đơn hàng</a></li>
-            <li><a href="#">👤 Quản lý user</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin-logout">🚪 Đăng xuất</a></li>
-        </ul>
-    </div>
+    <jsp:include page="/Assets/component/adminPage/layout/sidebar.jsp"/>
 
 
     <div class="content">

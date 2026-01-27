@@ -129,27 +129,35 @@ public class OrderDao {
     }
 
 
-    // get order items
-    public List<OrderItem> getOrderItems(int orderId) {
+    // ================= DANH SÁCH ĐƠN HÀNG =================
+    public List<Order> getAllOrders() {
 
-        List<OrderItem> list = new ArrayList<>();
+        List<Order> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM order_items WHERE order_id = ?";
+        String sql = "SELECT * FROM orders ORDER BY createAt DESC";
 
         try (
                 Connection conn = DBConnection.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
         ) {
-            ps.setInt(1, orderId);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    OrderItem item = new OrderItem();
-                    item.setProduct_name(rs.getString("product_name"));
-                    item.setQuantity(rs.getInt("quantity"));
-                    item.setProduct_price(rs.getLong("price"));
-                    list.add(item);
-                }
+            while (rs.next()) {
+                Order order = new Order();
+
+                order.setID(rs.getInt("ID"));
+                order.setUser_Id(rs.getInt("user_id"));
+                order.setCreateAt(rs.getTimestamp("createAt"));
+                order.setStatus(rs.getString("status"));
+                order.setPrice(rs.getLong("price"));
+
+                order.setReceiver_name(rs.getString("receiver_name"));
+                order.setReceiver_phone(rs.getString("receiver_phone"));
+                order.setReceiver_address(rs.getString("receiver_address"));
+                order.setReceiver_email(rs.getString("receiver_email"));
+                order.setPayment_method(rs.getBoolean("payment_method"));
+
+                list.add(order);
             }
 
         } catch (Exception e) {
@@ -158,4 +166,200 @@ public class OrderDao {
 
         return list;
     }
+
+
+    // ================= CHI TIẾT ĐƠN HÀNG =================
+    public Order getOrderByIdAdmin(int id) {
+
+        Order order = null;
+        String sql = "SELECT * FROM orders WHERE ID = ?";
+
+        try (
+                Connection conn = DBConnection.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                order = new Order();
+
+                order.setID(rs.getInt("ID"));
+                order.setUser_Id(rs.getInt("user_id"));
+                order.setCreateAt(rs.getTimestamp("createAt"));
+                order.setStatus(rs.getString("status"));
+                order.setPrice(rs.getLong("price"));
+
+                order.setReceiver_name(rs.getString("receiver_name"));
+                order.setReceiver_phone(rs.getString("receiver_phone"));
+                order.setReceiver_address(rs.getString("receiver_address"));
+                order.setReceiver_email(rs.getString("receiver_email"));
+                order.setPayment_method(rs.getBoolean("payment_method"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return order;
+    }
+
+
+    // ================= SẢN PHẨM TRONG ĐƠN =================
+    public List<OrderItem> getOrderItemsByOrderId(int orderId) {
+
+        List<OrderItem> list = new ArrayList<>();
+
+        String sql = """
+        SELECT 
+            oi.ID,
+            oi.order_id,
+            oi.product_id,
+            p.name AS product_name,
+            oi.product_price,
+            oi.quantity
+        FROM order_items oi
+        JOIN products p ON oi.product_id = p.ID
+        WHERE oi.order_id = ?
+    """;
+
+        try (
+                Connection conn = DBConnection.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                OrderItem item = new OrderItem();
+                item.setProduct_id(rs.getInt("product_id"));
+                item.setProduct_name(rs.getString("product_name"));
+                item.setProduct_price(rs.getLong("product_price"));
+                item.setQuantity(rs.getInt("quantity"));
+                list.add(item);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
+    // ================= UPDATE TRẠNG THÁI =================
+    public void updateStatus(int orderId, String status) {
+
+        String sql = "UPDATE orders SET status = ? WHERE ID = ?";
+
+        try (
+                Connection conn = DBConnection.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, status);
+            ps.setInt(2, orderId);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public double getTotalRevenue() {
+        double total = 0;
+        String sql = "SELECT COALESCE(SUM(total_price),0) FROM orders WHERE status = 'COMPLETED'";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                total = rs.getDouble(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+    public List<Order> getRecentOrders(int limit) {
+        List<Order> list = new ArrayList<>();
+
+        String sql = """
+        SELECT o.id, u.fullname, o.status
+        FROM orders o
+        JOIN users u ON o.user_id = u.id
+        ORDER BY o.created_at DESC
+        LIMIT ?
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, limit);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Order o = new Order();
+                o.setID(rs.getInt("id"));
+                o.setReceiver_email(rs.getString("fullname"));
+                o.setStatus(rs.getString("status"));
+                list.add(o);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+    public List<Order> getOrdersByUserId(int userId) {
+
+        List<Order> list = new ArrayList<>();
+
+        String sql = """
+        SELECT *
+        FROM orders
+        WHERE user_id = ?
+        ORDER BY createAt DESC
+    """;
+
+        try (
+                Connection conn = DBConnection.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+            ps.setInt(1, userId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Order order = new Order();
+
+                order.setID(rs.getInt("ID"));
+                order.setUser_Id(rs.getInt("user_id"));
+                order.setCreateAt(rs.getTimestamp("createAt"));
+                order.setStatus(rs.getString("status"));
+                order.setPrice(rs.getLong("price"));
+
+                order.setReceiver_name(rs.getString("receiver_name"));
+                order.setReceiver_phone(rs.getString("receiver_phone"));
+                order.setReceiver_address(rs.getString("receiver_address"));
+                order.setReceiver_email(rs.getString("receiver_email"));
+
+                order.setPayment_method(rs.getBoolean("payment_method"));
+
+                list.add(order);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }

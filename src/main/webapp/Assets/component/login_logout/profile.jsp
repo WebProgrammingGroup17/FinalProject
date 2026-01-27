@@ -59,40 +59,52 @@
     <c:choose>
 
 <%--   order--%>
-      <c:when test="${tab == 'orders'}">
-        <div class = "order-history">
-        <h2>Lịch sử mua hàng</h2>
-        </div>
+        <%-- order --%>
+        <c:when test="${tab == 'orders'}">
+            <div class="order-history">
+                <h2>Lịch sử mua hàng</h2>
 
-        <c:if test="${empty orders}">
-          <p>Chưa có đơn hàng nào.</p>
-          </div>
-        </c:if>
+                <c:if test="${empty orders}">
+                    <p>Chưa có đơn hàng nào.</p>
+                </c:if>
 
-        <c:if test="${not empty orders}">
-          <table border="1" width="100%" cellpadding="10">
-            <tr>
-              <th>Đơn hàng</th>
-              <th>Ngày</th>
-              <th>Địa chỉ</th>
-              <th>Giá trị</th>
-              <th>Tình trạng</th>
-            </tr>
+                <c:if test="${not empty orders}">
+                    <table class="order-table" width="100%" cellpadding="10">
+                        <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Ngày đặt</th>
+                            <th>Địa chỉ nhận</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th></th>
+                        </tr>
+                        </thead>
 
-            <c:forEach var="o" items="${orders}">
-              <tr>
-                <td>${o.productName}</td>
-                <td>${o.orderDate}</td>
-                <td>${o.address}</td>
-                <td>${o.totalPrice}đ</td>
-                <td>${o.status}</td>
-              </tr>
-            </c:forEach>
-          </table>
-        </c:if>
-      </c:when>
+                        <tbody>
+                        <c:forEach var="o" items="${orders}">
+                            <tr>
+                                <td>#${o.ID}</td>
+                                <td>${o.createAt}</td>
+                                <td>${o.receiver_address}</td>
+                                <td>${o.price} đ</td>
+                                <td>${o.status}</td>
+                                <td>
+                                    <a class="detail-link"
+                                       href="${pageContext.request.contextPath}/order-detail?id=${o.ID}">
+                                        Xem chi tiết
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:if>
+            </div>
+        </c:when>
 
-      <%-- reviews --%>
+
+        <%-- reviews --%>
       <c:when test="${tab == 'reviews'}">
         <div class = "review-history">
         <h2>Lịch sử đánh giá</h2>
