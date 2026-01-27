@@ -43,7 +43,7 @@ public class AdminLoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("admin", admin);
 
-            response.sendRedirect(request.getContextPath() +"/Assets/component/adminPage/adminDashboard.jsp");
+            response.sendRedirect(request.getContextPath() +"/admin/dashboard");
 
         }else {
             request.setAttribute("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng");

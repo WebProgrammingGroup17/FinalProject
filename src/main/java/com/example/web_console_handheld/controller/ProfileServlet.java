@@ -1,6 +1,8 @@
 package com.example.web_console_handheld.controller;
 
+import com.example.web_console_handheld.dao.OrderDao;
 import com.example.web_console_handheld.dao.UserDao;
+import com.example.web_console_handheld.model.Order;
 import com.example.web_console_handheld.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,10 +10,12 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
+    private OrderDao dao = new OrderDao();
 
     private static final Pattern GMAIL_PATTERN =
             Pattern.compile("^[a-zA-Z0-9._%+-]+@gmail\\.com$");
@@ -46,6 +50,12 @@ public class ProfileServlet extends HttpServlet {
         if (tab == null || tab.isEmpty()) {
             tab = "orders";
         }
+        if ("orders".equals(tab)) {
+            List<Order> orders =
+                    dao.getOrdersByUserId(user.getId());
+            request.setAttribute("orders", orders);
+        }
+
 
         request.setAttribute("orders", Collections.emptyList());
         request.setAttribute("reviews", Collections.emptyList());

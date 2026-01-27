@@ -12,11 +12,6 @@
 
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
         h2 {
             margin-bottom: 16px;
         }
