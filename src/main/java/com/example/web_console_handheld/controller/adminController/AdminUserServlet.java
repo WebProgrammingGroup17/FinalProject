@@ -1,8 +1,7 @@
-package com.example.web_console_handheld.controller;
+package com.example.web_console_handheld.controller.adminController;
 
 import com.example.web_console_handheld.dao.UserDao;
 import com.example.web_console_handheld.model.Admin;
-import com.example.web_console_handheld.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

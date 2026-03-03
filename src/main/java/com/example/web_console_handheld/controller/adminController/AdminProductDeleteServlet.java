@@ -1,4 +1,4 @@
-package com.example.web_console_handheld.controller;
+package com.example.web_console_handheld.controller.adminController;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

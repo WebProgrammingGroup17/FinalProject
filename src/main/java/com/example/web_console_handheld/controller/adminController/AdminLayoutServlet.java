@@ -1,7 +1,5 @@
-package com.example.web_console_handheld.controller;
+package com.example.web_console_handheld.controller.adminController;
 
-import com.example.web_console_handheld.dao.ProductDao;
-import com.example.web_console_handheld.model.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/admin")
 public class AdminLayoutServlet extends HttpServlet {
